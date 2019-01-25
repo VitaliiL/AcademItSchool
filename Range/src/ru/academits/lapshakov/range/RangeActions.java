@@ -13,22 +13,18 @@ class RangeActions {
 
 
     ArrayList<Double> getUnionRangeResult() {
-        ArrayList<Double> unionResult = new ArrayList<>(list1.size() + list2.size());
-
         list1.removeAll(list2);
-        unionResult.addAll(list1);
-        unionResult.addAll(list2);
+        list1.addAll(list2);
 
-        return unionResult;
+        return list1;
     }
 
 
     ArrayList<Double> getIntersectionRangeResult() {
-        ArrayList<Double> list = new ArrayList<>();
-
         for (Double element : list1) {
             if (list2.contains(element)) {
                 list1.retainAll(list2);
+
                 return list1;
             }
         }
