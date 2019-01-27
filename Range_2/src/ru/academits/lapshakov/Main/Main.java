@@ -1,6 +1,7 @@
 package ru.academits.lapshakov.Main;
 
 import ru.academits.lapshakov.RangeTaskOnceMore.Range;
+
 import java.util.Scanner;
 
 public class Main {
@@ -46,7 +47,7 @@ public class Main {
         if (unionRange.length == 1) {
             System.out.printf("The range union array result: {%s%s%s}%n", unionRange[0].getFrom(), ",...,", unionRange[0].getTo());
         } else {
-            System.out.printf("The range union1 array result: {%s%s%s%s%s%s}%n%n", unionRange[0].getFrom(), ",...,", unionRange[0].getTo(), unionRange[1].getFrom(), ",...,", unionRange[1].getTo());
+            System.out.printf("The range union1 array result: {%s%s%s%s%s%s}%n", unionRange[0].getFrom(), ",...,", unionRange[0].getTo(), unionRange[1].getFrom(), ",...,", unionRange[1].getTo());
         }
 
         //Range difference:
@@ -55,7 +56,7 @@ public class Main {
         if (unionRange.length == 1) {
             System.out.printf("The range difference array result: {%s%s%s}%n", differenceRange[0].getFrom(), ",...,", differenceRange[0].getTo());
         } else {
-            System.out.printf("The range difference array result: {%s%s%s%s%s%s}%n", differenceRange[0].getFrom(),",...,", differenceRange[0].getTo(), differenceRange[1].getFrom(), ",...,", differenceRange[1].getTo());
+            System.out.printf("The range difference array result: {%s%s%s%s%s%s}%n", differenceRange[0].getFrom(), ",...,", differenceRange[0].getTo(), differenceRange[1].getFrom(), ",...,", differenceRange[1].getTo());
         }
     }
 }
