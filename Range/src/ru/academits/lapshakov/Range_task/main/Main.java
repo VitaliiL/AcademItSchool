@@ -1,4 +1,7 @@
-package ru.academits.lapshakov.range;
+package ru.academits.lapshakov.Range_task.main;
+
+import ru.academits.lapshakov.Range_task.range.RangeActions;
+import ru.academits.lapshakov.Range_task.range.RangeToArrayList;
 
 import java.util.*;
 
@@ -19,7 +22,7 @@ public class Main {
         RangeToArrayList firstInterval = new RangeToArrayList(from, to);
         RangeToArrayList secondInterval = new RangeToArrayList(from2, to2);
 
-        //Range length:
+        //Range lengths:
         System.out.printf("The first interval length %.2f%n", firstInterval.getIntervalLength());
         System.out.printf("The second interval length %.2f%n%n", secondInterval.getIntervalLength());
 

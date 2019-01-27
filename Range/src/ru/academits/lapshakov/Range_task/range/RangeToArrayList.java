@@ -1,21 +1,21 @@
-package ru.academits.lapshakov.range;
+package ru.academits.lapshakov.Range_task.range;
 
 import java.util.*;
 
-class RangeToArrayList {
+public class RangeToArrayList {
     private double from;
     private double to;
 
-    RangeToArrayList(double from, double to) {
+    public RangeToArrayList(double from, double to) {
         this.from = from;
         this.to = to;
     }
 
-    double getIntervalLength() {
+    public double getIntervalLength() {
         return to - from;
     }
 
-    ArrayList<Double> getArrayList(double from, double to) {
+    public ArrayList<Double> getArrayList(double from, double to) {
         double[] array = new double[(int) (to - from + 1)];
 
         for (int i = 0; i < array.length; i++) {

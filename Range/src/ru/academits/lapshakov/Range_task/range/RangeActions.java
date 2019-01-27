@@ -1,18 +1,18 @@
-package ru.academits.lapshakov.range;
+package ru.academits.lapshakov.Range_task.range;
 
 import java.util.*;
 
-class RangeActions {
+public class RangeActions {
     private ArrayList<Double> list1;
     private ArrayList<Double> list2;
 
-    RangeActions(ArrayList<Double> list1, ArrayList<Double> list2) {
+    public RangeActions(ArrayList<Double> list1, ArrayList<Double> list2) {
         this.list1 = list1;
         this.list2 = list2;
     }
 
 
-    ArrayList<Double> getUnionRangeResult() {
+    public ArrayList<Double> getUnionRangeResult() {
         list1.removeAll(list2);
         list1.addAll(list2);
 
@@ -20,7 +20,7 @@ class RangeActions {
     }
 
 
-    ArrayList<Double> getIntersectionRangeResult() {
+    public ArrayList<Double> getIntersectionRangeResult() {
         for (Double element : list1) {
             if (list2.contains(element)) {
                 list1.retainAll(list2);
@@ -33,7 +33,7 @@ class RangeActions {
     }
 
 
-    ArrayList<Double> getDifferenceRangeResult() {
+    public ArrayList<Double> getDifferenceRangeResult() {
         list1.removeAll(list2);
 
         return list1;
