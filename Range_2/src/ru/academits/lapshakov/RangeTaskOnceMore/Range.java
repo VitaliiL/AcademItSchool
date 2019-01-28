@@ -34,7 +34,7 @@ public class Range {
     }
 
     public Range getIntersectionRangeResult(Range secondInterval) {
-        if ((secondInterval.from >= this.from && secondInterval.from < this.to) || (secondInterval.from <= this.from && secondInterval.from > this.to)) {
+        if ((secondInterval.to >= this.from && secondInterval.to <= this.to) || (this.to >= secondInterval.from && this.to <= secondInterval.to)) {
             return new Range(Math.max(this.from, secondInterval.from), Math.min(this.to, secondInterval.to));
         } else {
             return null;
@@ -52,23 +52,18 @@ public class Range {
     }
 
     public Range[] getDifferenceRangeResult(Range secondInterval) {
-        //if intervals have intersections:
-        if ((secondInterval.from >= this.from && secondInterval.from < this.to)) {
-            return new Range[]{new Range(this.from, secondInterval.from), new Range(this.to, secondInterval.to)};
-        } else if (secondInterval.from <= this.from && secondInterval.from > this.to) {
-            return new Range[]{new Range(secondInterval.from, this.from), new Range(secondInterval.to, this.to)};
-        }//if intervals don't have intersections:
-        else if ((this.to < secondInterval.from)) {
-            return new Range[]{new Range(this.to, this.from)};
-        } else if (this.from > secondInterval.to) {
-            return new Range[]{new Range(secondInterval.from, secondInterval.to)};
-        }//if intervals belongs each other:
-        else if (this.from >= secondInterval.from && this.to >= secondInterval.to) {
-            return new Range[]{new Range(secondInterval.from, this.from), new Range(secondInterval.to, this.to)};
-        } else if (secondInterval.from >= this.from && secondInterval.to >= this.to) {
-            return new Range[]{new Range(this.from, secondInterval.from), new Range(this.to, secondInterval.to)};
-        } else {
-            return null;
+        //if belongs each other:
+        if ((secondInterval.to >= this.from && secondInterval.to <= this.to && secondInterval.from < this.from) || (this.to >= secondInterval.from && this.to <= secondInterval.to && this.from < secondInterval.from)) {
+            return new Range[]{new Range(Math.min(this.from, secondInterval.from), Math.max(this.from, secondInterval.from))};
+        } //if there is any intersection:
+        else if (this.to < secondInterval.from || this.from > secondInterval.to) {
+            return new Range[]{new Range(this.from, this.to)};
+        }//there is intersection:
+        else if ((this.from < secondInterval.from && secondInterval.to < this.to) || (secondInterval.from < this.from && this.to < secondInterval.to)) {
+            return new Range[]{new Range((Math.min(this.from, secondInterval.from)), Math.max(this.from, secondInterval.from)), new Range((Math.min(this.to, secondInterval.to)), Math.max(this.to, secondInterval.to))};
+        }//equal:
+        else {
+            return new Range[0];
         }
     }
 }

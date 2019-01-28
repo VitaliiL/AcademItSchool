@@ -38,7 +38,7 @@ public class Main {
         if (intersectionRange != null) {
             System.out.printf("The range intersection array result: {%s%s%s}%n", intersectionRange.getFrom(), ",...,", intersectionRange.getTo());
         } else {
-            System.out.println("There are no any intersection.");
+            System.out.println("There is no intersection.");
         }
 
         //Range union:
@@ -47,16 +47,18 @@ public class Main {
         if (unionRange.length == 1) {
             System.out.printf("The range union array result: {%s%s%s}%n", unionRange[0].getFrom(), ",...,", unionRange[0].getTo());
         } else {
-            System.out.printf("The range union1 array result: {%s%s%s%s%s%s}%n", unionRange[0].getFrom(), ",...,", unionRange[0].getTo(), unionRange[1].getFrom(), ",...,", unionRange[1].getTo());
+            System.out.printf("The range union1 array result: {%s%s%s%s%s%s%s}%n", unionRange[0].getFrom(), ",...,", unionRange[0].getTo(), "} and {", unionRange[1].getFrom(), ",...,", unionRange[1].getTo());
         }
 
         //Range difference:
-        Range[] differenceRange = firstInterval.getUnionRangeResult(secondInterval);
+        Range[] differenceRange = firstInterval.getDifferenceRangeResult(secondInterval);
 
-        if (unionRange.length == 1) {
+        if (differenceRange.length == 1) {
             System.out.printf("The range difference array result: {%s%s%s}%n", differenceRange[0].getFrom(), ",...,", differenceRange[0].getTo());
+        } else if (differenceRange.length == 2) {
+            System.out.printf("The range difference array result: {%s%s%s%s%s%s%s}%n", differenceRange[0].getFrom(), ",...,", differenceRange[0].getTo(), "} and {", differenceRange[1].getFrom(), ",...,", differenceRange[1].getTo());
         } else {
-            System.out.printf("The range difference array result: {%s%s%s%s%s%s}%n", differenceRange[0].getFrom(), ",...,", differenceRange[0].getTo(), differenceRange[1].getFrom(), ",...,", differenceRange[1].getTo());
+            System.out.println("Difference result is null.");
         }
     }
 }
