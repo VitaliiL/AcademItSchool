@@ -1,4 +1,4 @@
-package ru.academits.lapshakov.Range;
+package ru.academits.LV.Range;
 
 public class Range {
     private double from;
