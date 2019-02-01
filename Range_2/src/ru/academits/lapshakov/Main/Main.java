@@ -1,6 +1,6 @@
 package ru.academits.lapshakov.Main;
 
-import ru.academits.lapshakov.RangeTaskOnceMore.Range;
+import ru.academits.lapshakov.Range.Range;
 
 import java.util.Scanner;
 
@@ -21,28 +21,28 @@ public class Main {
         System.out.println("Input to check value:");
         double value = scanner.nextDouble();
 
-        Range firstInterval = new Range(from, to);
-        Range secondInterval = new Range(from2, to2);
+        Range first = new Range(from, to);
+        Range second = new Range(from2, to2);
 
         //Range lengths:
-        System.out.printf("The first interval length: %.2f%n", firstInterval.getIntervalLength());
-        System.out.printf("The second interval length: %.2f%n%n", secondInterval.getIntervalLength());
+        System.out.printf("The first interval length: %.2f%n", first.getLength());
+        System.out.printf("The second interval length: %.2f%n%n", second.getLength());
 
         //isInside:
-        System.out.printf("The value belongs the first interval: %b%n", firstInterval.isInsideInterval(value));
-        System.out.printf("The value belongs the second interval: %b%n%n", secondInterval.isInsideInterval(value));
+        System.out.printf("The value belongs the first interval: %b%n", first.isInside(value));
+        System.out.printf("The value belongs the second interval: %b%n%n", second.isInside(value));
 
         //Range intersection:
-        Range intersectionRange = firstInterval.getIntersectionRangeResult(secondInterval);
+        Range intersection = first.getIntersection(second);
 
-        if (intersectionRange != null) {
-            System.out.printf("The range intersection array result: {%s%s%s}%n", intersectionRange.getFrom(), ",...,", intersectionRange.getTo());
+        if (intersection != null) {
+            System.out.printf("The range intersection array result: {%s%s%s}%n", intersection.getFrom(), ",...,", intersection.getTo());
         } else {
             System.out.println("There is no intersection.");
         }
 
         //Range union:
-        Range[] unionRange = firstInterval.getUnionRangeResult(secondInterval);
+        Range[] unionRange = first.getUnion(second);
 
         if (unionRange.length == 1) {
             System.out.printf("The range union array result: {%s%s%s}%n", unionRange[0].getFrom(), ",...,", unionRange[0].getTo());
@@ -51,12 +51,12 @@ public class Main {
         }
 
         //Range difference:
-        Range[] differenceRange = firstInterval.getDifferenceRangeResult(secondInterval);
+        Range[] difference = first.getDifference(second);
 
-        if (differenceRange.length == 1) {
-            System.out.printf("The range difference array result: {%s%s%s}%n", differenceRange[0].getFrom(), ",...,", differenceRange[0].getTo());
-        } else if (differenceRange.length == 2) {
-            System.out.printf("The range difference array result: {%s%s%s%s%s%s%s}%n", differenceRange[0].getFrom(), ",...,", differenceRange[0].getTo(), "} and {", differenceRange[1].getFrom(), ",...,", differenceRange[1].getTo());
+        if (difference.length == 1) {
+            System.out.printf("The range difference array result: {%s%s%s}%n", difference[0].getFrom(), ",...,", difference[0].getTo());
+        } else if (difference.length == 2) {
+            System.out.printf("The range difference array result: {%s%s%s%s%s%s%s}%n", difference[0].getFrom(), ",...,", difference[0].getTo(), "} and {", difference[1].getFrom(), ",...,", difference[1].getTo());
         } else {
             System.out.println("Difference result is null.");
         }
