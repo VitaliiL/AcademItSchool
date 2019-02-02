@@ -41,6 +41,7 @@ public class Main {
             System.out.println("There is no intersection.");
         }
 
+
         //Range union:
         Range[] unionRange = first.getUnion(second);
 
