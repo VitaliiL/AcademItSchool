@@ -4,7 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AcademItSchool_2.iml" filepath="$PROJECT_DIR$/AcademItSchool_2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Range_2/Range.iml" filepath="$PROJECT_DIR$/Range_2/Range.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Range_2/Range_2.iml" filepath="$PROJECT_DIR$/Range_2/Range_2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Range_2/Range.iml" filepath="$PROJECT_DIR$/Range_2/Range.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Shapes/Shapes.iml" filepath="$PROJECT_DIR$/Shapes/Shapes.iml" />
     </modules>
   </component>
 </project>
