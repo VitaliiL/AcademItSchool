@@ -1,4 +1,4 @@
-package ru.academits.LV.Range;
+package ru.academits.Range.LV.Range;
 
 public class Range {
     private double from;
@@ -66,12 +66,10 @@ public class Range {
                 return new Range[]{new Range(this.from, this.to)};
             }
 
-        } else if (this.from >= second.from) {
+        } else {
             if (second.to > this.from) {
                 if (second.to < this.to) {
                     return new Range[]{new Range(second.to, this.to)};
-                } else {
-                    return new Range[0];
                 }
             } else {
                 return new Range[]{new Range(this.from, this.to)};

@@ -1,6 +1,6 @@
-package ru.academits.LV.Main;
+package ru.academits.Range.LV.Main;
 
-import ru.academits.LV.Range.Range;
+import ru.academits.Range.LV.Range.Range;
 
 import java.util.Scanner;
 
