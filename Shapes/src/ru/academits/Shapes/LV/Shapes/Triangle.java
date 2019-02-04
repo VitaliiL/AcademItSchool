@@ -44,18 +44,35 @@ public class Triangle implements Shape {
     }
 
     @Override
-    public boolean equals(Object s){
-        if(s == this){
+    public boolean equals(Object s) {
+        if (s == this) {
             return true;
         }
-        if(s == null || getClass() != s.getClass()){
+        if (s == null || getClass() != s.getClass()) {
             return false;
         }
 
         Triangle triangle = (Triangle) s;
 
-        return x1 == triangle.x1 && x2 == triangle.x2 && x3 == triangle.x3 && y1 == triangle.y1 && y2 == triangle.y2 && y3 == triangle.y3 ;
+        return x1 == triangle.x1 && x2 == triangle.x2 && x3 == triangle.x3 && y1 == triangle.y1 && y2 == triangle.y2 && y3 == triangle.y3;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 37;
+        int hash = 1;
+        hash = prime * hash + Double.hashCode(x1);
+        hash = prime * hash + Double.hashCode(x2);
+        hash = prime * hash + Double.hashCode(x3);
+        hash = prime * hash + Double.hashCode(y1);
+        hash = prime * hash + Double.hashCode(y2);
+        hash = prime * hash + Double.hashCode(y3);
 
+        return hash;
+    }
+
+    @Override
+    public String toString() {
+        return "x1 = " + x1 + "x2 = " + x2 + "x3 = " + x3 + "y1 = " + y1 + "y2 = " + y2 + "y3 = " + y3;
+    }
 }

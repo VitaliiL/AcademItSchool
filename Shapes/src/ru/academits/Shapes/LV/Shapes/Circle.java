@@ -30,16 +30,26 @@ public class Circle implements Shape {
     }
 
     @Override
-    public boolean equals(Object s){
-        if(s == this){
+    public boolean equals(Object s) {
+        if (s == this) {
             return true;
         }
-        if(s == null || getClass() != s.getClass()){
+        if (s == null || getClass() != s.getClass()) {
             return false;
         }
 
         Circle circle = (Circle) s;
 
         return radius == circle.radius;
+    }
+
+    @Override
+    public int hashCode() {
+        return Double.hashCode(radius);
+    }
+
+    @Override
+    public String toString() {
+        return "radius = " + radius;
     }
 }

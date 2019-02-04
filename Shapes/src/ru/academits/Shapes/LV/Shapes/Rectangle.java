@@ -32,16 +32,31 @@ public class Rectangle implements Shape {
     }
 
     @Override
-    public boolean equals(Object s){
-        if(s == this){
+    public boolean equals(Object s) {
+        if (s == this) {
             return true;
         }
-        if(s == null || getClass() != s.getClass()){
+        if (s == null || getClass() != s.getClass()) {
             return false;
         }
 
         Rectangle rectangle = (Rectangle) s;
 
         return side1 == rectangle.side1 && side2 == rectangle.side2;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 37;
+        int hash = 1;
+        hash = prime * hash + Double.hashCode(side1);
+        hash = prime * hash + Double.hashCode(side2);
+
+        return hash;
+    }
+
+    @Override
+    public String toString() {
+        return "side1 = " + side1 + "side2 = " + side2;
     }
 }

@@ -31,16 +31,26 @@ public class Square implements Shape {
     }
 
     @Override
-    public boolean equals(Object s){
-        if(s == this){
+    public boolean equals(Object s) {
+        if (s == this) {
             return true;
         }
-        if(s == null || getClass() != s.getClass()){
+        if (s == null || getClass() != s.getClass()) {
             return false;
         }
 
         Square square = (Square) s;
 
         return side == square.side;
+    }
+
+    @Override
+    public int hashCode() {
+        return Double.hashCode(side);
+    }
+
+    @Override
+    public String toString() {
+        return "side = " + side;
     }
 }
