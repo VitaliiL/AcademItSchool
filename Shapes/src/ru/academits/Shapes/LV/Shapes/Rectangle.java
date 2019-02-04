@@ -30,4 +30,18 @@ public class Rectangle implements Shape {
     public double getPerimeter() {
         return 2 * (side1 + side2);
     }
+
+    @Override
+    public boolean equals(Object s){
+        if(s == this){
+            return true;
+        }
+        if(s == null || getClass() != s.getClass()){
+            return false;
+        }
+
+        Rectangle rectangle = (Rectangle) s;
+
+        return side1 == rectangle.side1 && side2 == rectangle.side2;
+    }
 }

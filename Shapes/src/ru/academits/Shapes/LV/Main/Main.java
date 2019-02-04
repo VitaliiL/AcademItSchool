@@ -1,7 +1,7 @@
 package ru.academits.Shapes.LV.Main;
 
-import ru.academits.Shapes.LV.Functions.SortByArea;
-import ru.academits.Shapes.LV.Functions.SortByPerimeter;
+import ru.academits.Shapes.LV.Functions.ShapeAreaSort;
+import ru.academits.Shapes.LV.Functions.ShapePerimeterSort;
 import ru.academits.Shapes.LV.Interfaces.Shape;
 import ru.academits.Shapes.LV.Shapes.Circle;
 import ru.academits.Shapes.LV.Shapes.Rectangle;
@@ -32,13 +32,13 @@ public class Main {
 
 
     private static Shape getMaxArea(List<Shape> shapes) {
-        shapes.sort(new SortByArea());
+        shapes.sort(new ShapeAreaSort());
 
         return shapes.get(shapes.size() - 1);
     }
 
     private static Shape getSecondMaxPerimeter(List<Shape> shapes) {
-        shapes.sort(new SortByPerimeter());
+        shapes.sort(new ShapePerimeterSort());
 
         return shapes.get(shapes.size() - 2);
     }

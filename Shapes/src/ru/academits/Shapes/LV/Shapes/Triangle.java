@@ -42,4 +42,20 @@ public class Triangle implements Shape {
 
         return sideAB + sideAC + sideBC;
     }
+
+    @Override
+    public boolean equals(Object s){
+        if(s == this){
+            return true;
+        }
+        if(s == null || getClass() != s.getClass()){
+            return false;
+        }
+
+        Triangle triangle = (Triangle) s;
+
+        return x1 == triangle.x1 && x2 == triangle.x2 && x3 == triangle.x3 && y1 == triangle.y1 && y2 == triangle.y2 && y3 == triangle.y3 ;
+    }
+
+
 }

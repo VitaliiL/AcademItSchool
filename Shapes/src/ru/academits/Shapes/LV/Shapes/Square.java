@@ -29,4 +29,18 @@ public class Square implements Shape {
     public double getPerimeter() {
         return 4 * side;
     }
+
+    @Override
+    public boolean equals(Object s){
+        if(s == this){
+            return true;
+        }
+        if(s == null || getClass() != s.getClass()){
+            return false;
+        }
+
+        Square square = (Square) s;
+
+        return side == square.side;
+    }
 }
