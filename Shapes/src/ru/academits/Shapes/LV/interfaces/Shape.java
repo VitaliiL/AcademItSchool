@@ -1,4 +1,4 @@
-package ru.academits.Shapes.LV.Interfaces;
+package ru.academits.Shapes.LV.interfaces;
 
 public interface Shape {
     double getWidth();

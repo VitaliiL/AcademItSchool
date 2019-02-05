@@ -1,6 +1,6 @@
-package ru.academits.Shapes.LV.Shapes;
+package ru.academits.Shapes.LV.shapes;
 
-import ru.academits.Shapes.LV.Interfaces.Shape;
+import ru.academits.Shapes.LV.interfaces.Shape;
 
 public class Rectangle implements Shape {
     private double side1;

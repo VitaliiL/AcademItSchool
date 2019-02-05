@@ -1,6 +1,6 @@
-package ru.academits.Shapes.LV.Shapes;
+package ru.academits.Shapes.LV.shapes;
 
-import ru.academits.Shapes.LV.Interfaces.Shape;
+import ru.academits.Shapes.LV.interfaces.Shape;
 
 public class Triangle implements Shape {
     private double x1;
@@ -19,26 +19,30 @@ public class Triangle implements Shape {
         this.y3 = y3;
     }
 
+    private double getTriangleSideLength(double a, double b, double c, double d) {
+        return Math.sqrt(Math.pow((b - a), 2) + Math.pow((d - c), 2));
+    }
+
     @Override
     public double getWidth() {
-        return Math.max(this.x1, Math.max(this.x2, this.x3)) - Math.min(this.x1, Math.min(this.x2, this.x3));
+        return Math.max(x1, Math.max(x2, x3)) - Math.min(x1, Math.min(x2, x3));
     }
 
     @Override
     public double getHeight() {
-        return Math.max(this.y1, Math.max(this.y2, this.y3)) - Math.min(this.y1, Math.min(this.y2, this.y3));
+        return Math.max(y1, Math.max(y2, y3)) - Math.min(y1, Math.min(y2, y3));
     }
 
     @Override
     public double getArea() {
-        return Math.abs(((this.x1 - this.x3) * (this.y2 - this.y3) - (this.x2 - this.x3) * (this.y1 - this.y3)) / 2);
+        return Math.abs(((x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3)) / 2);
     }
 
     @Override
     public double getPerimeter() {
-        double sideAB = Math.sqrt(Math.pow((this.x2 - this.x1), 2) + Math.pow((this.y2 - this.y1), 2));
-        double sideAC = Math.sqrt(Math.pow((this.x3 - this.x1), 2) + Math.pow((this.y3 - this.y1), 2));
-        double sideBC = Math.sqrt(Math.pow((this.x3 - this.x2), 2) + Math.pow((this.y3 - this.y2), 2));
+        double sideAB = getTriangleSideLength(x1, x2, y1, y2);
+        double sideAC = getTriangleSideLength(x1, x3, y1, y3);
+        double sideBC = getTriangleSideLength(x2, x3, y2, y3);
 
         return sideAB + sideAC + sideBC;
     }

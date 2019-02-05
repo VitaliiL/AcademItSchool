@@ -1,6 +1,6 @@
-package ru.academits.Shapes.LV.Shapes;
+package ru.academits.Shapes.LV.shapes;
 
-import ru.academits.Shapes.LV.Interfaces.Shape;
+import ru.academits.Shapes.LV.interfaces.Shape;
 
 public class Square implements Shape {
     private double side;
@@ -8,7 +8,6 @@ public class Square implements Shape {
     public Square(double side) {
         this.side = side;
     }
-
 
     @Override
     public double getWidth() {

@@ -1,6 +1,6 @@
-package ru.academits.Shapes.LV.Shapes;
+package ru.academits.Shapes.LV.shapes;
 
-import ru.academits.Shapes.LV.Interfaces.Shape;
+import ru.academits.Shapes.LV.interfaces.Shape;
 
 public class Circle implements Shape {
     private double radius;
@@ -11,12 +11,12 @@ public class Circle implements Shape {
 
     @Override
     public double getWidth() {
-        return 2 * this.radius;
+        return 2 * radius;
     }
 
     @Override
     public double getHeight() {
-        return 2 * this.radius;
+        return 2 * radius;
     }
 
     @Override
