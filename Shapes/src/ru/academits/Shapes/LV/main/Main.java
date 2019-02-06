@@ -22,22 +22,22 @@ public class Main {
         shapes.add(new Square(9.8));
         shapes.add(new Triangle(-1, -3.4, 10, 1.2, 1, 1.9));
 
-        Shape maxAreaShape = getMaxShapeArea(shapes);
+        Shape maxAreaShape = getMaxAreaShape(shapes);
         System.out.printf("Shape with max area is in the %s and its area is %.4s (inputted data: width is %s and height is %s.)%n",
                 maxAreaShape.getClass().toString(), maxAreaShape.getArea(), maxAreaShape.getWidth(), maxAreaShape.getHeight());
 
-        Shape secondMaxPerimeterShape = getSecondMaxShapePerimeter(shapes);
+        Shape secondMaxPerimeterShape = getSecondMaxPerimeterShape(shapes);
         System.out.printf("Shape with max area is in the %s and its area is %.4s (inputted data: width is %s and height is %s.)",
                 secondMaxPerimeterShape.getClass().toString(), secondMaxPerimeterShape.getArea(), secondMaxPerimeterShape.getWidth(), secondMaxPerimeterShape.getHeight());
     }
 
-    private static Shape getMaxShapeArea(List<Shape> shapes) {
+    private static Shape getMaxAreaShape(List<Shape> shapes) {
         shapes.sort(new ShapeAreaSortComparator());
 
         return shapes.get(shapes.size() - 1);
     }
 
-    private static Shape getSecondMaxShapePerimeter(List<Shape> shapes) {
+    private static Shape getSecondMaxPerimeterShape(List<Shape> shapes) {
         shapes.sort(new ShapePerimeterSortComparator());
 
         return shapes.get(shapes.size() - 2);

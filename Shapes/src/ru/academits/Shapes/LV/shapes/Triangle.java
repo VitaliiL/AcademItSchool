@@ -19,8 +19,8 @@ public class Triangle implements Shape {
         this.y3 = y3;
     }
 
-    private double getTriangleSideLength(double a, double b, double c, double d) {
-        return Math.sqrt(Math.pow((b - a), 2) + Math.pow((d - c), 2));
+    private static double getTriangleSideLength(double coordinate1, double coordinate2, double coordinate3, double coordinate4) {
+        return Math.sqrt(Math.pow((coordinate2 - coordinate1), 2) + Math.pow((coordinate4 - coordinate3), 2));
     }
 
     @Override
