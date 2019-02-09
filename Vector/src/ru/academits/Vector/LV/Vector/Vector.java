@@ -1,5 +1,6 @@
 package ru.academits.Vector.LV.Vector;
 
+
 import java.util.Arrays;
 
 public class Vector {
@@ -9,12 +10,12 @@ public class Vector {
         if (vectorSize <= 0) {
             throw new IllegalArgumentException("It isn't correct vector's size.");
         } else {
-            this.vectorValues = new double[vectorSize];
+            vectorValues = new double[vectorSize];
         }
     }
 
     public Vector(Vector vector) {
-        this.vectorValues = Arrays.copyOf(vector.vectorValues, vector.vectorValues.length);
+        vectorValues = Arrays.copyOf(vector.vectorValues, vector.vectorValues.length);
     }
 
     public Vector(double[] vectorValues) {
@@ -37,6 +38,132 @@ public class Vector {
         return vectorValues.length;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append("{");
 
+        for (int i = 0; i < vectorValues.length; i++) {
+            s.append(vectorValues[i]);
+
+            if (i < vectorValues.length - 1) {
+                s.append(",");
+            }
+        }
+
+        s.append("}");
+
+        return s.toString();
+    }
+
+    public Vector addToVector(Vector vector) {
+        if (vectorValues.length < vector.vectorValues.length) {
+            vectorValues = Arrays.copyOf(vectorValues, vector.vectorValues.length);
+        }
+
+        for (int i = 0; i < vector.vectorValues.length; i++) {
+            vectorValues[i] += vector.vectorValues[i];
+        }
+
+        return this;
+    }
+
+    public Vector getSubtractionFromVector(Vector vector) {
+        if (vectorValues.length < vector.vectorValues.length) {
+            vectorValues = Arrays.copyOf(vectorValues, vector.vectorValues.length);
+        }
+
+        for (int i = 0; i < vector.vectorValues.length; i++) {
+            vectorValues[i] -= vector.vectorValues[i];
+        }
+
+        return this;
+    }
+
+    public Vector getMultiplicationScalar(Vector vector, int scalar) {
+        for (int i = 0; i < vector.vectorValues.length; i++) {
+            vector.vectorValues[i] *= scalar;
+        }
+
+        return this;
+    }
+
+    public Vector getVectorReverse(Vector vector) {
+        getMultiplicationScalar(vector, -1);
+
+        return this;
+    }
+
+    public int getVectorLength(Vector vector) {
+        return vector.getSize();
+    }
+
+    public double getComponentVector(Vector vector, int index, double value) {
+        if (index >= this.vectorValues.length || index < 0) {
+            throw new IndexOutOfBoundsException("Value with this index isn't existing in the vector.");
+        }
+
+        vector.vectorValues[index] = value;
+
+        return vector.vectorValues[index];
+    }
+
+    @Override
+    public boolean equals(Object v) {
+        if (this == v) {
+            return true;
+
+        }
+
+        if (v == null || getClass() != v.getClass()) {
+            return false;
+        }
+
+        Vector vector = (Vector) v;
+
+        if (this.getSize() != vector.getSize()) {
+            return false;
+        }
+
+        for (int i = 0; i < this.vectorValues.length; i++) {
+            if (this.vectorValues[i] != vector.vectorValues[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 37;
+        int hash = 1;
+        hash = prime * hash + Arrays.hashCode(vectorValues);
+
+        return hash;
+    }
+
+    public static Vector getSumVectors(Vector vector1, Vector vector2) {
+        Vector vectorSumResult = new Vector(vector1);
+
+        return vectorSumResult.addToVector(vector2);
+    }
+
+    public static Vector getSubtractionVectors(Vector vector1, Vector vector2) {
+        Vector vectorSumResult = new Vector(vector1);
+
+        return vectorSumResult.getSubtractionFromVector(vector2);
+    }
+
+    public static double getScalarMultiplication(Vector vector1, Vector vector2) {
+        double vectorScalarMultiplicationResult = 0;
+
+        for (int i = 0; i < Math.min(vector1.getSize(), vector2.getSize()); i++) {
+            vectorScalarMultiplicationResult += vector1.vectorValues[i] * vector2.vectorValues[i];
+        }
+
+        return vectorScalarMultiplicationResult;
+
+    }
 
 }
