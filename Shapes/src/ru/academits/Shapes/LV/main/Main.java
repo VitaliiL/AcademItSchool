@@ -28,7 +28,7 @@ public class Main {
 
         Shape secondMaxPerimeterShape = getSecondMaxPerimeterShape(shapes);
         System.out.printf("Shape with max area is in the %s and its area is %.4s (inputted data: width is %s and height is %s.)",
-                secondMaxPerimeterShape.getClass().toString(), secondMaxPerimeterShape.getArea(), secondMaxPerimeterShape.getWidth(), secondMaxPerimeterShape.getHeight());
+                secondMaxPerimeterShape.getClass().toString(), secondMaxPerimeterShape.getPerimeter(), secondMaxPerimeterShape.getWidth(), secondMaxPerimeterShape.getHeight());
     }
 
     private static Shape getMaxAreaShape(List<Shape> shapes) {
