@@ -14,7 +14,7 @@ public class Vector {
         }
     }
 
-    public Vector(Vector vector) {
+    private Vector(Vector vector) {
         vectorValues = Arrays.copyOf(vector.vectorValues, vector.vectorValues.length);
     }
 
@@ -28,7 +28,7 @@ public class Vector {
 
     public Vector(int n, double[] vectorValues) {
         if (n <= 0 || vectorValues.length == 0) {
-            throw new IllegalArgumentException("It isn't correct values.");
+            throw new IllegalArgumentException("It isn't correct value.");
         } else {
             this.vectorValues = Arrays.copyOf(vectorValues, n);
         }
@@ -80,32 +80,32 @@ public class Vector {
         return this;
     }
 
-    public Vector getMultiplicationScalar(Vector vector, int scalar) {
-        for (int i = 0; i < vector.vectorValues.length; i++) {
-            vector.vectorValues[i] *= scalar;
+    public Vector getMultiplicationScalar(int scalar) {
+        for (int i = 0; i < vectorValues.length; i++) {
+            vectorValues[i] *= scalar;
         }
 
         return this;
     }
 
-    public Vector getVectorReverse(Vector vector) {
-        getMultiplicationScalar(vector, -1);
+    public Vector getVectorReverse() {
+        getMultiplicationScalar(-1);
 
         return this;
     }
 
-    public int getVectorLength(Vector vector) {
-        return vector.getSize();
+    public int getVectorLength() {
+        return getSize();
     }
 
-    public double getComponentVector(Vector vector, int index, double value) {
-        if (index >= this.vectorValues.length || index < 0) {
+    public double getComponentVector(int index, double value) {
+        if (index >= vectorValues.length || index < 0) {
             throw new IndexOutOfBoundsException("Value with this index isn't existing in the vector.");
         }
 
-        vector.vectorValues[index] = value;
+        vectorValues[index] = value;
 
-        return vector.vectorValues[index];
+        return vectorValues[index];
     }
 
     @Override
@@ -125,7 +125,7 @@ public class Vector {
             return false;
         }
 
-        for (int i = 0; i < this.vectorValues.length; i++) {
+        for (int i = 0; i < vectorValues.length; i++) {
             if (this.vectorValues[i] != vector.vectorValues[i]) {
                 return false;
             }
