@@ -3,8 +3,8 @@ package ru.academits.Vector.LV.Main;
 import ru.academits.Vector.LV.Vector.Vector;
 
 import static ru.academits.Vector.LV.Vector.Vector.getScalarMultiplication;
-import static ru.academits.Vector.LV.Vector.Vector.getSubtractionVectors;
-import static ru.academits.Vector.LV.Vector.Vector.getSumVectors;
+import static ru.academits.Vector.LV.Vector.Vector.getSubtraction;
+import static ru.academits.Vector.LV.Vector.Vector.getSum;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,34 +23,35 @@ public class Main {
             System.out.printf("Sum res is %26s%n", additionVector.addToVector(vector2));
 
             Vector subtractionVector = new Vector(array1);
-            System.out.printf("Sub res is %27s%n", subtractionVector.getSubtractionFromVector(vector2));
+            System.out.printf("Sub res is %27s%n", subtractionVector.subtractFromVector(vector2));
 
             Vector multiplicationScalar = new Vector(array1);
-            System.out.printf("Scalar res is %s%n%n", multiplicationScalar.getMultiplicationScalar(5));
+            System.out.printf("Scalar res is %s%n%n", multiplicationScalar.multiplyByScalar(5));
 
             Vector vectorReverse = new Vector(array1);
-            System.out.printf("Reverse res is %40s%n", vectorReverse.getVectorReverse());
+            System.out.printf("Reverse res is %40s%n", vectorReverse.reverseVector());
 
             System.out.printf("Length res are %15s and %s%n", vector1.getVectorLength(), vector2.getVectorLength());
 
             Vector componentChange = new Vector(array1);
-            System.out.printf("Component change by index is %s%n", componentChange.getComponentVector(3, 100));
+            componentChange.setComponentByIndex(3, 100);
+
+            System.out.printf("Component change by index is %s%n", componentChange.getComponentByIndex(3));
             System.out.printf("Change checking is %33s%n%n", componentChange.toString());
 
             System.out.println("Static methods checking:");
-            System.out.printf("Sum is %s %n", getSumVectors(vector1, vector2));
-            System.out.printf("Sub is %s %n", getSubtractionVectors(vector1, vector2));
+            System.out.printf("Sum is %s %n", getSum(vector1, vector2));
+            System.out.printf("Sub is %s %n", getSubtraction(vector1, vector2));
             System.out.printf("Mul is %s %n%n", getScalarMultiplication(vector1, vector2));
 
             //to check not used constructors during checking of methods:
-            Vector vector3 = new Vector(1);
+            Vector vector3 = new Vector(3);
             System.out.printf("Constructor checking: %s%n", vector3.toString());
             Vector vector4 = new Vector(0, array3);
             System.out.printf("Constructor checking: %s%n", vector4.toString());
 
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             System.out.println("Error during the program executing: " + e.getMessage());
-
         }
     }
 }
