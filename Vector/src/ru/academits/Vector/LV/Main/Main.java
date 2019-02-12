@@ -31,7 +31,7 @@ public class Main {
             Vector vectorReverse = new Vector(array1);
             System.out.printf("Reverse res is %40s%n", vectorReverse.reverseVector());
 
-            System.out.printf("Length res are %15s and %s%n", vector1.getVectorLength(), vector2.getVectorLength());
+            System.out.printf("Length res are %15s and %s%n", vector1.getLength(), vector2.getLength());
 
             Vector componentChange = new Vector(array1);
             componentChange.setComponentByIndex(3, 100);

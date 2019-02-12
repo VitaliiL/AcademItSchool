@@ -45,10 +45,10 @@ public class Vector {
 
         for (double component : components) {
             s.append(component);
-            s.append(",");
+            s.append(", ");
         }
 
-        s.deleteCharAt(s.length() - 1);
+        s.delete(s.length() - 2, s.length());
         s.append("}");
 
         return s.toString();
@@ -92,7 +92,7 @@ public class Vector {
         return this;
     }
 
-    public int getVectorLength() {
+    public int getLength() {
         return getSize();
     }
 
