@@ -97,15 +97,21 @@ public class Vector {
     }
 
     public void setComponentByIndex(int index, double value) {
-        if (index >= components.length || index < 0) {
-            throw new IndexOutOfBoundsException("Value with this index isn't existing in the vector.");
-        }
+        checkIndex(index);
 
         components[index] = value;
     }
 
     public double getComponentByIndex(int index) {
+        checkIndex(index);
+
         return components[index];
+    }
+
+    private void checkIndex(int index) {
+        if (index >= components.length || index < 0) {
+            throw new IndexOutOfBoundsException("Value with this index isn't existing in the vector.");
+        }
     }
 
     @Override
@@ -159,7 +165,5 @@ public class Vector {
         }
 
         return multiplicationResult;
-
     }
-
 }
