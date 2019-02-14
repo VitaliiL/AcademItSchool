@@ -86,14 +86,20 @@ public class Vector {
         return this;
     }
 
-    public Vector reverseVector() {
+    public Vector reverse() {
         multiplyByScalar(-1);
 
         return this;
     }
 
-    public int getLength() {
-        return getSize();
+    public double getLength() {
+        int length = 0;
+
+        for (Double element : components) {
+            length += Math.pow(element, 2);
+        }
+
+        return Math.sqrt(length);
     }
 
     public void setComponentByIndex(int index, double value) {

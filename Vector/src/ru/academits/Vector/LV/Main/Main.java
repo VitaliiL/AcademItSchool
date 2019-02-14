@@ -29,9 +29,9 @@ public class Main {
             System.out.printf("Scalar res is %s%n%n", multiplicationScalar.multiplyByScalar(5));
 
             Vector vectorReverse = new Vector(array1);
-            System.out.printf("Reverse res is %44s%n", vectorReverse.reverseVector());
+            System.out.printf("Reverse res is %44s%n", vectorReverse.reverse());
 
-            System.out.printf("Length res are %15s and %s%n", vector1.getLength(), vector2.getLength());
+            System.out.printf("Length res are %18.2f and %.2f%n", vector1.getLength(), vector2.getLength());
 
             Vector componentChange = new Vector(array1);
             componentChange.setComponentByIndex(3, 100);
