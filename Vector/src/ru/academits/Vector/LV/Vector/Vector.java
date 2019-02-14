@@ -93,13 +93,13 @@ public class Vector {
     }
 
     public double getLength() {
-        int length = 0;
+        double componentSum = 0;
 
-        for (Double element : components) {
-            length += Math.pow(element, 2);
+        for (double element : components) {
+            componentSum += Math.pow(element, 2);
         }
 
-        return Math.sqrt(length);
+        return Math.sqrt(componentSum);
     }
 
     public void setComponentByIndex(int index, double value) {
