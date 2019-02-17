@@ -5,13 +5,15 @@ import ru.academits.ArrayListHome.LV.deleteDuplicate.CheckDuplicate;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            ArrayList<Integer> arrayListHome = new ArrayList<>();
-            ArrayList<Integer> arrayListHome2 = new ArrayList<>();
+            List<Integer> arrayListHome = new ArrayList<>();
+            List<Integer> arrayListHome2 = new ArrayList<>();
 
             Scanner scanner = new Scanner(new File("ForArrayListHome.txt"));
 
@@ -27,10 +29,11 @@ public class Main {
 
             System.out.println(arrayListHome);
 
+            arrayListHome = new LinkedList<>();
             arrayListHome.removeIf(element -> element % 2 == 0);
             System.out.println(arrayListHome);
 
-            ArrayList<Integer> arrayListHome3 = new CheckDuplicate().removeDuplicate(arrayListHome2);
+            List<Integer> arrayListHome3 = new CheckDuplicate().removeDuplicate(arrayListHome2);
             System.out.println(arrayListHome3);
 
             scanner.close();
