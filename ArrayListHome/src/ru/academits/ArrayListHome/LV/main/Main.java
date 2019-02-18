@@ -1,49 +1,51 @@
 package ru.academits.ArrayListHome.LV.main;
 
-import ru.academits.ArrayListHome.LV.deleteDuplicate.CheckDuplicate;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            List<Integer> arrayListHome = new ArrayList<>();
-            List<Integer> arrayListHome2 = new ArrayList<>();
+        List<String> arrayListHome = new ArrayList<>();
 
-            Scanner scanner = new Scanner(new File("ForArrayListHome.txt"));
-
+        try (Scanner scanner = new Scanner(new File("C:\\Users\\vlaps\\IdeaProjects\\academits\\ArrayListHome\\src\\ForArrayListHome"))) {
             while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] values = line.split(",");
-
-                for (String element : values) {
-                    arrayListHome.add(Integer.parseInt(element));
-                    arrayListHome2.add(Integer.parseInt(element));
-                }
+                arrayListHome.add(scanner.nextLine());
             }
 
-            System.out.println(arrayListHome);
-
-            arrayListHome = new LinkedList<>();
-            arrayListHome.removeIf(element -> element % 2 == 0);
-            System.out.println(arrayListHome);
-
-            List<Integer> arrayListHome3 = new CheckDuplicate().removeDuplicate(arrayListHome2);
-            System.out.println(arrayListHome3);
-
-            scanner.close();
-
-        } catch (FileNotFoundException e) {
+        } catch (
+                FileNotFoundException e) {
             System.out.println("Your file not found.");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Please check: " + e.getMessage());
         }
+
+        ArrayList<Integer> arrayListHome2 = new ArrayList<>(Arrays.asList(1, 3, 1, 5, 7, 2, 9, 4, 7, 2));
+        ArrayList<Integer> arrayListHome3 = new ArrayList<>(Arrays.asList(1, 3, 1, 5, 7, 2, 9, 4, 7, 2));
+
+        System.out.println(arrayListHome);
+        System.out.println(removeEven(arrayListHome2));
+        System.out.println(removeDuplicate(arrayListHome3));
+    }
+
+    private static ArrayList removeEven(ArrayList<Integer> list) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) % 2 == 0) {
+                list.remove(i);
+                i--;
+            }
+        }
+
+        return list;
+    }
+
+    private static ArrayList removeDuplicate(ArrayList<Integer> list) {
+        ArrayList<Integer> newList = new ArrayList<>();
+
+        for (Integer element : list) {
+            if (!newList.contains(element)) {
+                newList.add(element);
+            }
+        }
+
+        return newList;
     }
 }
-
-
