@@ -12,9 +12,7 @@ public class Main {
             while (scanner.hasNextLine()) {
                 arrayListHome.add(scanner.nextLine());
             }
-
-        } catch (
-                FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Your file not found.");
         }
 
