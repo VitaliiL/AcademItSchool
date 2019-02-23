@@ -21,6 +21,48 @@ public class Matrix {
         row = matrix.row;
     }
 
+    public Matrix(double[][] array) {
+        int maxLength = 0;
+
+        for (double[] element : array) {
+            if (element.length > maxLength) {
+                maxLength = element.length;
+            }
+        }
+
+        if (array.length == 0 || maxLength == 0) {
+            throw new IndexOutOfBoundsException("Length is 0.");
+        }
+
+        row = new Vector[array.length];
+
+        for (int i = 0; i < array.length; i++) {
+            row[i] = new Vector(maxLength, array[i]);
+        }
+    }
+
+    public Matrix(Vector[] vectorArray) {
+        if (vectorArray.length == 0) {
+            throw new IndexOutOfBoundsException("Length is 0.");
+        }
+
+        int numColumns = 0;
+
+        for (Vector element : vectorArray) {
+            if (numColumns < element.getSize()) {
+                numColumns = element.getSize();
+            }
+        }
+
+        row = new Vector[vectorArray.length];
+
+        for (int i = 0; i < vectorArray.length; i++) {
+            row[i] = new Vector(numColumns, vectorArray[i]); //Constructor was added in the Vector class as Vector(int n, Vector vector)
+        }
+    }
+
+
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
