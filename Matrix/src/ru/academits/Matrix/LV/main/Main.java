@@ -26,5 +26,9 @@ public class Main {
         System.out.println();
 
         //to check methods:
+        System.out.println("Matrix rows amount: " + matrix5.getRowsAmount());
+        System.out.println("Matrix columns amount: " + matrix5.getColumnsAmount());
+
+
     }
 }

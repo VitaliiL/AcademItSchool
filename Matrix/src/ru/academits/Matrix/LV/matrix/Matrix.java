@@ -61,15 +61,13 @@ public class Matrix {
         }
     }
 
-
-
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("{");
 
         for (Vector component : row) {
-            s.append(component.toString()).append(", ");
+            s.append(component.toString()).append(",");
         }
 
         s.setLength(s.length() - 2);
@@ -77,5 +75,31 @@ public class Matrix {
 
         return s.toString();
     }
+
+    public int getRowsAmount(){
+        return row.length;
+    }
+
+    public int getColumnsAmount(){
+        return row[0].getSize();
+    }
+
+    public void setRowByIndex(int index, Vector vector) {
+        checkIndex(index);
+
+
+    }
+
+  //  public Vector getRowByIndex(int index) {
+  //      checkIndex(index);
+
+//
+    private void checkIndex(int index) {
+        if (index >= getRowsAmount() || index >= getColumnsAmount() || index < 0) {
+            throw new IndexOutOfBoundsException("Value with this index isn't existing in the matrix.");
+        }
+    }
+
+
 
 }
