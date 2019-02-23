@@ -34,6 +34,14 @@ public class Vector {
         components = Arrays.copyOf(vectorValues, n);
     }
 
+    public Vector(int n, Vector vector) {
+        if (n <= 0) {
+            throw new IllegalArgumentException("It isn't correct value.");
+        }
+
+        components = Arrays.copyOf(vector.components, n);
+    }
+
     public int getSize() {
         return components.length;
     }
@@ -48,7 +56,7 @@ public class Vector {
             s.append(", ");
         }
 
-        s.delete(s.length() - 2, s.length());
+        s.setLength(s.length() - 2);
         s.append("}");
 
         return s.toString();

@@ -2,9 +2,7 @@ package ru.academits.Vector.LV.Main;
 
 import ru.academits.Vector.LV.Vector.Vector;
 
-import static ru.academits.Vector.LV.Vector.Vector.getScalarMultiplication;
-import static ru.academits.Vector.LV.Vector.Vector.getSubtraction;
-import static ru.academits.Vector.LV.Vector.Vector.getSum;
+import static ru.academits.Vector.LV.Vector.Vector.*;
 
 public class Main {
     public static void main(String[] args) {
