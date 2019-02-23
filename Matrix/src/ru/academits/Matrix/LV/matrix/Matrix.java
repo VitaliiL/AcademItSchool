@@ -93,6 +93,7 @@ public class Matrix {
   //  public Vector getRowByIndex(int index) {
   //      checkIndex(index);
 
+
 //
     private void checkIndex(int index) {
         if (index >= getRowsAmount() || index >= getColumnsAmount() || index < 0) {
