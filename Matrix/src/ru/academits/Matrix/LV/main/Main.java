@@ -6,6 +6,7 @@ import ru.academits.Vector.LV.Vector.Vector;
 public class Main {
     public static void main(String[] args) {
 
+        //to check constructors:
         Matrix matrix = new Matrix(2, 2);
         System.out.println(matrix.toString());
 
@@ -22,7 +23,8 @@ public class Main {
         Vector[] vector = {vector1, vector2};
         Matrix matrix5 = new Matrix(vector);
         System.out.println(matrix5);
+        System.out.println();
 
-
+        //to check methods:
     }
 }
