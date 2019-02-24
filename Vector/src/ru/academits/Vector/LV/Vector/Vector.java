@@ -14,7 +14,7 @@ public class Vector {
         components = new double[vectorSize];
     }
 
-    private Vector(Vector vector) {
+    public Vector(Vector vector) {
         components = Arrays.copyOf(vector.components, vector.components.length);
     }
 
