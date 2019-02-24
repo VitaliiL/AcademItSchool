@@ -87,6 +87,8 @@ public class Matrix {
     public void setRowByIndex(int index, Vector vector) {
         if (index >= getRowsAmount() || index < 0) {
             throw new IndexOutOfBoundsException("Value with this index isn't existing in the matrix.");
+        } else if (vector.getSize() != getColumnsAmount()) {
+            throw new IndexOutOfBoundsException("Vector size isn't correct.");
         }
 
         row[index] = new Vector(vector);
@@ -113,4 +115,24 @@ public class Matrix {
 
         return vector;
     }
+
+    public Matrix transpose() {
+        Vector[] vectors = new Vector[getColumnsAmount()];
+        for (int i = 0; i < getColumnsAmount(); i++) {
+            vectors[i] = this.getColumnByIndex(i);
+        }
+
+        row = vectors;
+
+        return this;
+    }
+
+    public Matrix multiplyByScalar(int scalar) {
+        for (Vector v : row) {
+            v.multiplyByScalar(scalar);
+        }
+
+        return this;
+    }
+
 }

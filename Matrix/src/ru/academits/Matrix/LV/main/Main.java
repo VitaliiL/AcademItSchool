@@ -29,12 +29,17 @@ public class Main {
         System.out.println("Matrix rows amount: " + matrix5.getRowsAmount());
         System.out.println("Matrix columns amount: " + matrix5.getColumnsAmount());
 
-        Vector vector3 = new Vector(new double[]{1, 2, 3, 4});
+        Vector vector3 = new Vector(new double[]{1, 2, 3, 4, 10});
         Matrix matrix6 = new Matrix(vector);
         matrix6.setRowByIndex(1, vector3);
         System.out.println(matrix6);
         System.out.println(matrix6.getRowByIndex(1));
         System.out.println(matrix6.getColumnByIndex(3));
+
+        Matrix matrix7 = matrix6.transpose();
+        System.out.println(matrix7);
+        System.out.println(matrix7.multiplyByScalar(2));
+
 
     }
 }
