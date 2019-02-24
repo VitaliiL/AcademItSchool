@@ -76,31 +76,43 @@ public class Matrix {
         return s.toString();
     }
 
-    public int getRowsAmount(){
+    public int getRowsAmount() {
         return row.length;
     }
 
-    public int getColumnsAmount(){
+    public int getColumnsAmount() {
         return row[0].getSize();
     }
 
     public void setRowByIndex(int index, Vector vector) {
-        checkIndex(index);
-
-
-    }
-
-  //  public Vector getRowByIndex(int index) {
-  //      checkIndex(index);
-
-
-//
-    private void checkIndex(int index) {
-        if (index >= getRowsAmount() || index >= getColumnsAmount() || index < 0) {
+        if (index >= getRowsAmount() || index < 0) {
             throw new IndexOutOfBoundsException("Value with this index isn't existing in the matrix.");
         }
+
+        row[index] = new Vector(vector);
     }
 
+    public Vector getRowByIndex(int index) {
+        if (index >= getRowsAmount() || index < 0) {
+            throw new IndexOutOfBoundsException("Value with this index isn't existing in the matrix.");
+        }
+
+        return new Vector(row[index]);
+    }
+
+    public Vector getColumnByIndex(int index) {
+        if (index >= getColumnsAmount() || index < 0) {
+            throw new IndexOutOfBoundsException("Value with this index isn't existing in the matrix.");
+        }
+
+        Vector vector = new Vector(getColumnsAmount());
+
+        for (int i = 0; i < getColumnsAmount(); i++) {
+            vector.setComponentByIndex(i, row[i].getComponentByIndex(index));
+        }
+
+        return vector;
+    }
 
 
 }
