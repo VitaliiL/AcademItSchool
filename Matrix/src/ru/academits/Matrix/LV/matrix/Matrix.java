@@ -105,14 +105,12 @@ public class Matrix {
             throw new IndexOutOfBoundsException("Value with this index isn't existing in the matrix.");
         }
 
-        Vector vector = new Vector(getColumnsAmount());
+        Vector vector = new Vector(row.length);
 
-        for (int i = 0; i < getColumnsAmount(); i++) {
+        for (int i = 0; i < row.length; i++) {
             vector.setComponentByIndex(i, row[i].getComponentByIndex(index));
         }
 
         return vector;
     }
-
-
 }

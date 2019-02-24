@@ -34,7 +34,7 @@ public class Main {
         matrix6.setRowByIndex(1, vector3);
         System.out.println(matrix6);
         System.out.println(matrix6.getRowByIndex(1));
-        System.out.println(matrix6.getColumnByIndex(0));
+        System.out.println(matrix6.getColumnByIndex(3));
 
     }
 }
