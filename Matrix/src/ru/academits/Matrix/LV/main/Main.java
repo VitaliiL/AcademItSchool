@@ -5,8 +5,7 @@ import ru.academits.Vector.LV.Vector.Vector;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            //to check constructors:
+        try {//to check constructors:
             Matrix matrix = new Matrix(2, 2);
             System.out.println(matrix);
 
@@ -37,25 +36,29 @@ public class Main {
             System.out.println(matrix6.getColumnByIndex(3));
 
             Matrix matrix7 = matrix6.transpose();
-            System.out.println(matrix7);
-            System.out.println(matrix7.multiplyByScalar(2));
+            System.out.println("Transpose:" + matrix7);
+            System.out.println("Multiplication by scalar: " + matrix7.multiplyByScalar(2));
 
             double[][] array1 = new double[][]{{1, 2, 3}, {4, 5, 6, 7, 8}};
             Matrix matrix8 = new Matrix(array1);
             double[][] array2 = new double[][]{{2, 3, 4}, {5, 6, 7, 8, 9}};
             Matrix matrix9 = new Matrix(array2);
 
-            Matrix sumResult = matrix9.sumRowMatrix(matrix8);
-            System.out.println(sumResult);
-            Matrix subResult = matrix9.subRowMatrix(matrix8);
-            System.out.println(subResult);
+            Matrix sumResult = matrix9.sumMatrix(matrix8);
+            System.out.println("Sum result: " + sumResult);
+            Matrix subResult = matrix9.subMatrix(matrix8);
+            System.out.println("Sub result: " + subResult);
+
+            double[][] array3 = new double[][]{{2, 3, 4}, {5, 6, 7, 8, 9}};
+            Matrix matrix10 = new Matrix(array3);
+            Vector vector4 = new Vector(new double[]{1, 2, 3, 4, 10});
+            /// need correct: System.out.println("Multiplication by vector: " + matrix10.multiplyByVector(vector4));
 
             System.out.println();
 
-
             //to check static methods:
-            System.out.println(Matrix.sum(matrix8, matrix9));
-            System.out.println(Matrix.sub(matrix8, matrix9));
+            System.out.println("Sum result from static method: " + Matrix.sum(matrix8, matrix9));
+            System.out.println("Sub result from static method: " + Matrix.sub(matrix8, matrix9));
 
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             System.out.println("Error during the program executing: " + e.getMessage());

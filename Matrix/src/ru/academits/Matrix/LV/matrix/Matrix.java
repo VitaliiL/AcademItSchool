@@ -71,7 +71,7 @@ public class Matrix {
         }
 
         s.setLength(s.length() - 2);
-        s.append("}");
+        s.append("}}");
 
         return s.toString();
     }
@@ -140,7 +140,7 @@ public class Matrix {
         }
     }
 
-    public Matrix sumRowMatrix(Matrix matrix) {
+    public Matrix sumMatrix(Matrix matrix) {
         verifyMatrix(this, matrix);
 
         for (int i = 0; i < matrix.getRowsAmount(); ++i) {
@@ -150,7 +150,7 @@ public class Matrix {
         return this;
     }
 
-    public Matrix subRowMatrix(Matrix matrix) {
+    public Matrix subMatrix(Matrix matrix) {
         verifyMatrix(this, matrix);
 
         for (int i = 0; i < matrix.getRowsAmount(); ++i) {
@@ -160,21 +160,35 @@ public class Matrix {
         return this;
     }
 
-    //need add methods (2)
+    public Matrix multiplyByVector(Vector vector) {
+        if (getColumnsAmount() != vector.getSize()) {
+            throw new IllegalArgumentException("Matrix column numbers must equals the vector size.");
+        }
+
+        for (int i = 0; i < row.length; i++) {
+            for (int j = 0; j < row.length; j++) {
+                row[i].setComponentByIndex(j, row[i].getComponentByIndex(0) * vector.getComponentByIndex(i));
+            }
+        }
+
+        return this;
+    }
+
+    //need add method determinate
 
 
     public static Matrix sum(Matrix matrix1, Matrix matrix2) {
         Matrix matrix = new Matrix(matrix1);
 
-        return matrix.sumRowMatrix(matrix2);
+        return matrix.sumMatrix(matrix2);
     }
 
     public static Matrix sub(Matrix matrix1, Matrix matrix2) {
         Matrix matrix = new Matrix(matrix1);
 
-        return matrix.subRowMatrix(matrix2);
+        return matrix.subMatrix(matrix2);
     }
 
-    //need add method (1)
+    //need add method matrix multiply
 
 }
