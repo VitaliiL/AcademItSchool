@@ -31,7 +31,7 @@ public class Matrix {
         }
 
         if (array.length == 0 || maxLength == 0) {
-            throw new IndexOutOfBoundsException("Length is 0.");
+            throw new IllegalArgumentException("Length is 0.");
         }
 
         row = new Vector[array.length];
@@ -43,7 +43,7 @@ public class Matrix {
 
     public Matrix(Vector[] vectorArray) {
         if (vectorArray.length == 0) {
-            throw new IndexOutOfBoundsException("Length is 0.");
+            throw new IllegalArgumentException("Length is 0.");
         }
 
         int numColumns = 0;
@@ -117,22 +117,64 @@ public class Matrix {
     }
 
     public Matrix transpose() {
-        Vector[] vectors = new Vector[getColumnsAmount()];
+        Vector[] vector = new Vector[getColumnsAmount()];
         for (int i = 0; i < getColumnsAmount(); i++) {
-            vectors[i] = this.getColumnByIndex(i);
+            vector[i] = getColumnByIndex(i);
         }
 
-        row = vectors;
-
+        row = vector;
         return this;
     }
 
     public Matrix multiplyByScalar(int scalar) {
-        for (Vector v : row) {
-            v.multiplyByScalar(scalar);
+        for (Vector element : row) {
+            element.multiplyByScalar(scalar);
         }
 
         return this;
     }
+
+    private static void verifyMatrix(Matrix matrix1, Matrix matrix2) {
+        if (matrix1.getColumnsAmount() != matrix2.getColumnsAmount() || matrix1.getRowsAmount() != matrix2.getRowsAmount()) {
+            throw new IllegalArgumentException("The matrices are different.");
+        }
+    }
+
+    public Matrix sumRowMatrix(Matrix matrix) {
+        verifyMatrix(this, matrix);
+
+        for (int i = 0; i < matrix.getRowsAmount(); ++i) {
+            row[i].addToVector(matrix.row[i]);
+        }
+
+        return this;
+    }
+
+    public Matrix subRowMatrix(Matrix matrix) {
+        verifyMatrix(this, matrix);
+
+        for (int i = 0; i < matrix.getRowsAmount(); ++i) {
+            row[i].subtractFromVector(matrix.row[i]);
+        }
+
+        return this;
+    }
+
+    //need add methods (2)
+
+
+    public static Matrix sum(Matrix matrix1, Matrix matrix2) {
+        Matrix matrix = new Matrix(matrix1);
+
+        return matrix.sumRowMatrix(matrix2);
+    }
+
+    public static Matrix sub(Matrix matrix1, Matrix matrix2) {
+        Matrix matrix = new Matrix(matrix1);
+
+        return matrix.subRowMatrix(matrix2);
+    }
+
+    //need add method (1)
 
 }

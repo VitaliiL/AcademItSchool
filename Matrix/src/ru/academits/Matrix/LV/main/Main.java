@@ -5,41 +5,61 @@ import ru.academits.Vector.LV.Vector.Vector;
 
 public class Main {
     public static void main(String[] args) {
+        try {
+            //to check constructors:
+            Matrix matrix = new Matrix(2, 2);
+            System.out.println(matrix);
 
-        //to check constructors:
-        Matrix matrix = new Matrix(2, 2);
-        System.out.println(matrix);
+            Matrix matrix2 = new Matrix(3, 4);
+            Matrix matrix3 = new Matrix(matrix2);
+            System.out.println(matrix3);
 
-        Matrix matrix2 = new Matrix(3, 4);
-        Matrix matrix3 = new Matrix(matrix2);
-        System.out.println(matrix3);
+            double[][] array = new double[][]{{0, 1, 2}, {2, 3, 4, 5, 6}};
+            Matrix matrix4 = new Matrix(array);
+            System.out.println(matrix4);
 
-        double[][] array = new double[][]{{0, 1, 2}, {2, 3, 4, 5, 6}};
-        Matrix matrix4 = new Matrix(array);
-        System.out.println(matrix4);
+            Vector vector1 = new Vector(new double[]{1, 6, 10});
+            Vector vector2 = new Vector(new double[]{1, 6, 10, 15, 17});
+            Vector[] vector = {vector1, vector2};
+            Matrix matrix5 = new Matrix(vector);
+            System.out.println(matrix5);
+            System.out.println();
 
-        Vector vector1 = new Vector(new double[]{1, 6, 10});
-        Vector vector2 = new Vector(new double[]{1, 6, 10, 15, 17});
-        Vector[] vector = {vector1, vector2};
-        Matrix matrix5 = new Matrix(vector);
-        System.out.println(matrix5);
-        System.out.println();
+            //to check methods:
+            System.out.println("Matrix rows amount: " + matrix5.getRowsAmount());
+            System.out.println("Matrix columns amount: " + matrix5.getColumnsAmount());
 
-        //to check methods:
-        System.out.println("Matrix rows amount: " + matrix5.getRowsAmount());
-        System.out.println("Matrix columns amount: " + matrix5.getColumnsAmount());
+            Vector vector3 = new Vector(new double[]{1, 2, 3, 4, 10});
+            Matrix matrix6 = new Matrix(vector);
+            matrix6.setRowByIndex(1, vector3);
+            System.out.println(matrix6);
+            System.out.println(matrix6.getRowByIndex(1));
+            System.out.println(matrix6.getColumnByIndex(3));
 
-        Vector vector3 = new Vector(new double[]{1, 2, 3, 4, 10});
-        Matrix matrix6 = new Matrix(vector);
-        matrix6.setRowByIndex(1, vector3);
-        System.out.println(matrix6);
-        System.out.println(matrix6.getRowByIndex(1));
-        System.out.println(matrix6.getColumnByIndex(3));
+            Matrix matrix7 = matrix6.transpose();
+            System.out.println(matrix7);
+            System.out.println(matrix7.multiplyByScalar(2));
 
-        Matrix matrix7 = matrix6.transpose();
-        System.out.println(matrix7);
-        System.out.println(matrix7.multiplyByScalar(2));
+            double[][] array1 = new double[][]{{1, 2, 3}, {4, 5, 6, 7, 8}};
+            Matrix matrix8 = new Matrix(array1);
+            double[][] array2 = new double[][]{{2, 3, 4}, {5, 6, 7, 8, 9}};
+            Matrix matrix9 = new Matrix(array2);
 
+            Matrix sumResult = matrix9.sumRowMatrix(matrix8);
+            System.out.println(sumResult);
+            Matrix subResult = matrix9.subRowMatrix(matrix8);
+            System.out.println(subResult);
+
+            System.out.println();
+
+
+            //to check static methods:
+            System.out.println(Matrix.sum(matrix8, matrix9));
+            System.out.println(Matrix.sub(matrix8, matrix9));
+
+        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+            System.out.println("Error during the program executing: " + e.getMessage());
+        }
 
     }
 }
