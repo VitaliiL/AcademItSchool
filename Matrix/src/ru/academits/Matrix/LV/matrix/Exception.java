@@ -38,5 +38,11 @@ class Exception {
             throw new IllegalArgumentException("The values aren't correct.");
         }
     }
+
+    static void checkMatrixForMult(Matrix matrix1, Matrix matrix2) {
+        if (matrix1.getColumnsAmount() != matrix2.getRowsAmount()) {
+            throw new IllegalArgumentException("Amount columns of the first matrix must be equal amount rows of the second matrix.");
+        }
+    }
 }
 

@@ -60,6 +60,10 @@ public class Main {
             System.out.println("Sum result from static method: " + Matrix.sum(matrix8, matrix9));
             System.out.println("Sub result from static method: " + Matrix.sub(matrix8, matrix9));
 
+            Matrix matrix11 = new Matrix(new double[][]{{1, 2, 3}, {4, 5, 6}});
+            Matrix matrix12 = new Matrix(new double[][]{{1, 2}, {4, 5}, {7, 8}});
+            System.out.println("Matrix's multiplication: " + Matrix.mult(matrix11, matrix12));
+
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             System.out.println("Error during the program executing by cause: " + e.getMessage());
         }

@@ -150,11 +150,11 @@ public class Matrix {
         for (int i = 0; i < this.getRowsAmount(); i++) {
             vectorResult.setComponentByIndex(i, Vector.getScalarMultiplication(this.row[i], vector));
         }
+
         return vectorResult;
     }
 
     //need add method determinate
-
 
     public static Matrix sum(Matrix matrix1, Matrix matrix2) {
         Matrix matrix = new Matrix(matrix1);
@@ -168,9 +168,18 @@ public class Matrix {
         return matrix.subMatrix(matrix2);
     }
 
-    //need add method matrix multiply
-    public static Matrix mult(Matrix matrix1, Matrix matrix2){
-        //col.one == row.two
+    public static Matrix mult(Matrix matrix1, Matrix matrix2) {
+        Exception.checkMatrixForMult(matrix1, matrix2);
 
+        double[][] elements = new double[matrix1.getRowsAmount()][matrix2.getColumnsAmount()];
+
+        for (int i = 0; i < matrix1.getRowsAmount(); i++) {
+            for (int j = 0; j < matrix2.getColumnsAmount(); j++) {
+                elements[i][j] = Vector.getScalarMultiplication(matrix1.getRowByIndex(i), matrix2.getColumnByIndex(j));
+            }
+        }
+
+        return new Matrix(elements);
     }
 }
+
