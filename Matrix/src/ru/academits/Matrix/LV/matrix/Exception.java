@@ -1,6 +1,6 @@
 package ru.academits.Matrix.LV.matrix;
 
-import ru.academits.Vector.LV.Vector.Vector;
+import ru.academits.Vector.LV.vector.Vector;
 
 class Exception {
     static void checkIndex(Matrix matrix, int index) {

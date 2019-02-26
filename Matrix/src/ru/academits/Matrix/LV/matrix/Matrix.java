@@ -1,6 +1,6 @@
 package ru.academits.Matrix.LV.matrix;
 
-import ru.academits.Vector.LV.Vector.Vector;
+import ru.academits.Vector.LV.vector.Vector;
 
 public class Matrix {
     private Vector[] row;
@@ -51,7 +51,7 @@ public class Matrix {
         row = new Vector[vectorArray.length];
 
         for (int i = 0; i < vectorArray.length; i++) {
-            row[i] = new Vector(numColumns, vectorArray[i]); //Constructor was added in the Vector class as Vector(int n, Vector vector)
+            row[i] = new Vector(numColumns, vectorArray[i]); //Constructor was added in the vector class as vector(int n, vector vector)
         }
     }
 

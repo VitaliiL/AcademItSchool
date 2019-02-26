@@ -1,7 +1,7 @@
 package ru.academits.Matrix.LV.main;
 
 import ru.academits.Matrix.LV.matrix.Matrix;
-import ru.academits.Vector.LV.Vector.Vector;
+import ru.academits.Vector.LV.vector.Vector;
 
 public class Main {
     public static void main(String[] args) {
