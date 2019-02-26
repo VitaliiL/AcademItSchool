@@ -1,8 +1,8 @@
-package ru.academits.Vector.LV.Main;
+package ru.academits.Vector.LV.main;
 
-import ru.academits.Vector.LV.Vector.Vector;
+import ru.academits.Vector.LV.vector.Vector;
 
-import static ru.academits.Vector.LV.Vector.Vector.*;
+import static ru.academits.Vector.LV.vector.Vector.*;
 
 public class Main {
     public static void main(String[] args) {

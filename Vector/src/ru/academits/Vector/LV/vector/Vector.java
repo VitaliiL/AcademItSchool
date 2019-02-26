@@ -1,4 +1,4 @@
-package ru.academits.Vector.LV.Vector;
+package ru.academits.Vector.LV.vector;
 
 
 import java.util.Arrays;
@@ -20,7 +20,7 @@ public class Vector {
 
     public Vector(double[] vectorValues) {
         if (vectorValues.length == 0) {
-            throw new IllegalArgumentException("Vector size length is zero.");
+            throw new IllegalArgumentException("vector size length is zero.");
         }
 
         components = Arrays.copyOf(vectorValues, vectorValues.length);
