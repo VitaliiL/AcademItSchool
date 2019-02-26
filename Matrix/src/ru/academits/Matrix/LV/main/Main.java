@@ -51,8 +51,8 @@ public class Main {
 
             double[][] array3 = new double[][]{{2, 3, 4}, {5, 6, 7, 8, 9}};
             Matrix matrix10 = new Matrix(array3);
-            Vector vector4 = new Vector(new double[]{1, 2, 3, 4, 10});
-            /// need correct: System.out.println("Multiplication by vector: " + matrix10.multiplyByVector(vector4));
+            Vector vector4 = new Vector(new double[]{1, 1, 1, 1, 1});
+            System.out.println("Multiplication by vector: " + matrix10.multiplyByVector(vector4));
 
             System.out.println();
 
@@ -61,8 +61,7 @@ public class Main {
             System.out.println("Sub result from static method: " + Matrix.sub(matrix8, matrix9));
 
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
-            System.out.println("Error during the program executing: " + e.getMessage());
+            System.out.println("Error during the program executing by cause: " + e.getMessage());
         }
-
     }
 }

@@ -6,9 +6,7 @@ public class Matrix {
     private Vector[] row;
 
     public Matrix(int rowAmount, int columnAmount) {
-        if (rowAmount <= 0 || columnAmount <= 0) {
-            throw new IllegalArgumentException("The values aren't correct.");
-        }
+        Exception.checkRowAndColumns(rowAmount, columnAmount);
 
         row = new Vector[rowAmount];
 
@@ -30,9 +28,7 @@ public class Matrix {
             }
         }
 
-        if (array.length == 0 || maxLength == 0) {
-            throw new IllegalArgumentException("Length is 0.");
-        }
+        Exception.checkDoubleArrayLength(array, maxLength);
 
         row = new Vector[array.length];
 
@@ -42,9 +38,7 @@ public class Matrix {
     }
 
     public Matrix(Vector[] vectorArray) {
-        if (vectorArray.length == 0) {
-            throw new IllegalArgumentException("Length is 0.");
-        }
+        Exception.checkVectorArrayLength(vectorArray);
 
         int numColumns = 0;
 
@@ -85,27 +79,19 @@ public class Matrix {
     }
 
     public void setRowByIndex(int index, Vector vector) {
-        if (index >= getRowsAmount() || index < 0) {
-            throw new IndexOutOfBoundsException("Value with this index isn't existing in the matrix.");
-        } else if (vector.getSize() != getColumnsAmount()) {
-            throw new IndexOutOfBoundsException("Vector size isn't correct.");
-        }
+        Exception.checkIndex(this, index);
 
         row[index] = new Vector(vector);
     }
 
     public Vector getRowByIndex(int index) {
-        if (index >= getRowsAmount() || index < 0) {
-            throw new IndexOutOfBoundsException("Value with this index isn't existing in the matrix.");
-        }
+        Exception.checkIndex(this, index);
 
         return new Vector(row[index]);
     }
 
     public Vector getColumnByIndex(int index) {
-        if (index >= getColumnsAmount() || index < 0) {
-            throw new IndexOutOfBoundsException("Value with this index isn't existing in the matrix.");
-        }
+        Exception.checkIndex(this, index);
 
         Vector vector = new Vector(row.length);
 
@@ -118,11 +104,13 @@ public class Matrix {
 
     public Matrix transpose() {
         Vector[] vector = new Vector[getColumnsAmount()];
+
         for (int i = 0; i < getColumnsAmount(); i++) {
             vector[i] = getColumnByIndex(i);
         }
 
         row = vector;
+
         return this;
     }
 
@@ -134,14 +122,8 @@ public class Matrix {
         return this;
     }
 
-    private static void verifyMatrix(Matrix matrix1, Matrix matrix2) {
-        if (matrix1.getColumnsAmount() != matrix2.getColumnsAmount() || matrix1.getRowsAmount() != matrix2.getRowsAmount()) {
-            throw new IllegalArgumentException("The matrices are different.");
-        }
-    }
-
     public Matrix sumMatrix(Matrix matrix) {
-        verifyMatrix(this, matrix);
+        Exception.verifyMatrix(this, matrix);
 
         for (int i = 0; i < matrix.getRowsAmount(); ++i) {
             row[i].addToVector(matrix.row[i]);
@@ -151,7 +133,7 @@ public class Matrix {
     }
 
     public Matrix subMatrix(Matrix matrix) {
-        verifyMatrix(this, matrix);
+        Exception.verifyMatrix(this, matrix);
 
         for (int i = 0; i < matrix.getRowsAmount(); ++i) {
             row[i].subtractFromVector(matrix.row[i]);
@@ -160,18 +142,15 @@ public class Matrix {
         return this;
     }
 
-    public Matrix multiplyByVector(Vector vector) {
-        if (getColumnsAmount() != vector.getSize()) {
-            throw new IllegalArgumentException("Matrix column numbers must equals the vector size.");
-        }
+    public Vector multiplyByVector(Vector vector) {
+        Exception.checkSize(this, vector);
 
-        for (int i = 0; i < row.length; i++) {
-            for (int j = 0; j < row.length; j++) {
-                row[i].setComponentByIndex(j, row[i].getComponentByIndex(0) * vector.getComponentByIndex(i));
-            }
-        }
+        Vector vectorResult = new Vector(this.getRowsAmount());
 
-        return this;
+        for (int i = 0; i < this.getRowsAmount(); i++) {
+            vectorResult.setComponentByIndex(i, Vector.getScalarMultiplication(this.row[i], vector));
+        }
+        return vectorResult;
     }
 
     //need add method determinate
@@ -190,5 +169,8 @@ public class Matrix {
     }
 
     //need add method matrix multiply
+    public static Matrix mult(Matrix matrix1, Matrix matrix2){
+        //col.one == row.two
 
+    }
 }
