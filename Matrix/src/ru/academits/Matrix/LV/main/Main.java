@@ -25,8 +25,8 @@ public class Main {
             System.out.println();
 
             //to check methods:
-            System.out.println("Matrix rows amount: " + matrix5.getRowsAmount());
-            System.out.println("Matrix columns amount: " + matrix5.getColumnsAmount());
+            System.out.println("Matrix rows amount: " + matrix5.getRowsCount());
+            System.out.println("Matrix columns amount: " + matrix5.getColumnsCount());
 
             Vector vector3 = new Vector(new double[]{1, 2, 3, 4, 10});
             Matrix matrix6 = new Matrix(vector);

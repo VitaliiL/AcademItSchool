@@ -2,21 +2,23 @@ package ru.academits.Matrix.LV.matrix;
 
 import ru.academits.Vector.LV.vector.Vector;
 
+import static ru.academits.Matrix.LV.matrix.Verification.*;
+
 public class Matrix {
-    private Vector[] row;
+    private Vector[] rows;
 
-    public Matrix(int rowAmount, int columnAmount) {
-        Exception.checkRowAndColumns(rowAmount, columnAmount);
+    public Matrix(int rowsCount, int columnsCount) {
+        verifyRowAndColumns(rowsCount, columnsCount);
 
-        row = new Vector[rowAmount];
+        rows = new Vector[rowsCount];
 
-        for (int i = 0; i < rowAmount; i++) {
-            row[i] = new Vector(columnAmount);
+        for (int i = 0; i < rowsCount; i++) {
+            rows[i] = new Vector(columnsCount);
         }
     }
 
     public Matrix(Matrix matrix) {
-        row = matrix.row;
+        this(matrix.rows);
     }
 
     public Matrix(double[][] array) {
@@ -28,17 +30,17 @@ public class Matrix {
             }
         }
 
-        Exception.checkDoubleArrayLength(array, maxLength);
+        verifyDoubleArrayLength(array, maxLength);
 
-        row = new Vector[array.length];
+        rows = new Vector[array.length];
 
         for (int i = 0; i < array.length; i++) {
-            row[i] = new Vector(maxLength, array[i]);
+            rows[i] = new Vector(maxLength, array[i]);
         }
     }
 
     public Matrix(Vector[] vectorArray) {
-        Exception.checkVectorArrayLength(vectorArray);
+        verifyVectorArrayLength(vectorArray);
 
         int numColumns = 0;
 
@@ -48,10 +50,10 @@ public class Matrix {
             }
         }
 
-        row = new Vector[vectorArray.length];
+        rows = new Vector[vectorArray.length];
 
         for (int i = 0; i < vectorArray.length; i++) {
-            row[i] = new Vector(numColumns, vectorArray[i]); //Constructor was added in the vector class as vector(int n, vector vector)
+            rows[i] = new Vector(numColumns, vectorArray[i]); //Constructor was added in the vector class as vector(int n, vector vector)
         }
     }
 
@@ -60,62 +62,70 @@ public class Matrix {
         StringBuilder s = new StringBuilder();
         s.append("{");
 
-        for (Vector component : row) {
-            s.append(component.toString()).append(",");
+        for (Vector component : rows) {
+            s.append(component.toString()).append(", ");
         }
 
         s.setLength(s.length() - 2);
-        s.append("}}");
+        s.append("}");
 
         return s.toString();
     }
 
-    public int getRowsAmount() {
-        return row.length;
+    public int getRowsCount() {
+        return rows.length;
     }
 
-    public int getColumnsAmount() {
-        return row[0].getSize();
+    public int getColumnsCount() {
+        return rows[0].getSize();
     }
 
     public void setRowByIndex(int index, Vector vector) {
-        Exception.checkIndex(this, index);
+        if (index >= getColumnsCount() || index < 0) {
+            verifyIndex();
+        } else if (getColumnsCount() != vector.getSize()) {
+            verifySize();
+        }
 
-        row[index] = new Vector(vector);
+        rows[index] = new Vector(vector);
     }
 
     public Vector getRowByIndex(int index) {
-        Exception.checkIndex(this, index);
+        if (index >= getColumnsCount() || index < 0) {
+            verifyIndex();
+        }
 
-        return new Vector(row[index]);
+        return new Vector(rows[index]);
     }
 
     public Vector getColumnByIndex(int index) {
-        Exception.checkIndex(this, index);
+        if (index >= getColumnsCount() || index < 0) {
+            verifyIndex();
+        }
 
-        Vector vector = new Vector(row.length);
+        Vector vector = new Vector(rows.length);
 
-        for (int i = 0; i < row.length; i++) {
-            vector.setComponentByIndex(i, row[i].getComponentByIndex(index));
+        for (int i = 0; i < rows.length; i++) {
+            vector.setComponentByIndex(i, rows[i].getComponentByIndex(index));
         }
 
         return vector;
     }
 
     public Matrix transpose() {
-        Vector[] vector = new Vector[getColumnsAmount()];
+        Vector[] vector = new Vector[getColumnsCount()];
 
-        for (int i = 0; i < getColumnsAmount(); i++) {
+        for (int i = 0; i < getColumnsCount(); i++) {
             vector[i] = getColumnByIndex(i);
         }
 
-        row = vector;
+        rows = vector;
 
         return this;
     }
 
     public Matrix multiplyByScalar(int scalar) {
-        for (Vector element : row) {
+        for (Vector element : rows) {
             element.multiplyByScalar(scalar);
         }
 
@@ -123,32 +133,34 @@ public class Matrix {
     }
 
     public Matrix sumMatrix(Matrix matrix) {
-        Exception.verifyMatrix(this, matrix);
+        verifyMatrix(this, matrix);
 
-        for (int i = 0; i < matrix.getRowsAmount(); ++i) {
-            row[i].addToVector(matrix.row[i]);
+        for (int i = 0; i < matrix.getRowsCount(); ++i) {
+            rows[i].addToVector(matrix.rows[i]);
         }
 
         return this;
     }
 
     public Matrix subMatrix(Matrix matrix) {
-        Exception.verifyMatrix(this, matrix);
+        verifyMatrix(this, matrix);
 
-        for (int i = 0; i < matrix.getRowsAmount(); ++i) {
-            row[i].subtractFromVector(matrix.row[i]);
+        for (int i = 0; i < matrix.getRowsCount(); ++i) {
+            rows[i].subtractFromVector(matrix.rows[i]);
         }
 
         return this;
     }
 
     public Vector multiplyByVector(Vector vector) {
-        Exception.checkSize(this, vector);
+        if (getColumnsCount() != vector.getSize()) {
+            verifySize();
+        }
 
-        Vector vectorResult = new Vector(this.getRowsAmount());
+        Vector vectorResult = new Vector(this.getRowsCount());
 
-        for (int i = 0; i < this.getRowsAmount(); i++) {
-            vectorResult.setComponentByIndex(i, Vector.getScalarMultiplication(this.row[i], vector));
+        for (int i = 0; i < this.getRowsCount(); i++) {
+            vectorResult.setComponentByIndex(i, Vector.getScalarMultiplication(this.rows[i], vector));
         }
 
         return vectorResult;
@@ -157,25 +169,27 @@ public class Matrix {
     //need add method determinate
 
     public static Matrix sum(Matrix matrix1, Matrix matrix2) {
+        verifyMatrixForSubAndSum(matrix1, matrix2);
         Matrix matrix = new Matrix(matrix1);
 
         return matrix.sumMatrix(matrix2);
     }
 
     public static Matrix sub(Matrix matrix1, Matrix matrix2) {
+        verifyMatrixForSubAndSum(matrix1, matrix2);
         Matrix matrix = new Matrix(matrix1);
 
         return matrix.subMatrix(matrix2);
     }
 
     public static Matrix mult(Matrix matrix1, Matrix matrix2) {
-        Exception.checkMatrixForMult(matrix1, matrix2);
+        verifyMatrixForMult(matrix1, matrix2);
 
-        double[][] elements = new double[matrix1.getRowsAmount()][matrix2.getColumnsAmount()];
+        double[][] elements = new double[matrix1.getRowsCount()][matrix2.getColumnsCount()];
 
-        for (int i = 0; i < matrix1.getRowsAmount(); i++) {
-            for (int j = 0; j < matrix2.getColumnsAmount(); j++) {
-                elements[i][j] = Vector.getScalarMultiplication(matrix1.getRowByIndex(i), matrix2.getColumnByIndex(j));
+        for (int i = 0; i < matrix1.getRowsCount(); i++) {
+            for (int j = 0; j < matrix2.getColumnsCount(); j++) {
+                elements[i][j] = Vector.getScalarMultiplication(matrix1.rows[i], matrix2.getColumnByIndex(j));
             }
         }
 
