@@ -166,8 +166,6 @@ public class Matrix {
         return vectorResult;
     }
 
-    //need add method determinate
-
     public static Matrix sum(Matrix matrix1, Matrix matrix2) {
         verifyMatrixForSubAndSum(matrix1, matrix2);
         Matrix matrix = new Matrix(matrix1);
@@ -194,6 +192,60 @@ public class Matrix {
         }
 
         return new Matrix(elements);
+    }
+
+    //determinant:
+    public double getDeterminant() {
+        return getDeterminant(this);
+    }
+
+    private double getDeterminant(Matrix matrix) {
+        verifyQuadraticMatrix(matrix);
+
+        double result = 0;
+
+        if (matrix.rows.length == 2) {
+            result = matrix.rows[0].getComponentByIndex(0) * matrix.rows[1].getComponentByIndex(1) - matrix.rows[1].getComponentByIndex(0) * matrix.rows[0].getComponentByIndex(1);
+        } else {
+            int element;
+
+            for (int i = 0; i < matrix.rows.length; i++) {
+                if (i % 2 == 1) {
+                    element = -1;
+                } else {
+                    element = 1;
+                }
+
+                result += element * matrix.rows[0].getComponentByIndex(i) * getDeterminant(getMinor(matrix, i));
+            }
+        }
+
+        return result;
+    }
+
+    private Matrix getMinor(Matrix matrix, int column) {
+        int minorLength = matrix.rows.length - 1;
+
+        double[][] minor = new double[minorLength][minorLength];
+        int skipRow = 0;
+
+        for (int i = 0; i <= minorLength; i++) {
+            int skipColumn = 0;
+
+            for (int j = 0; j <= minorLength; j++) {
+                if (i == 0) {
+                    skipRow = 1;
+                } else {
+                    if (j == column) {
+                        skipColumn = 1;
+                    } else {
+                        minor[i - skipRow][j - skipColumn] = matrix.rows[i].getComponentByIndex(j);
+                    }
+                }
+            }
+        }
+
+        return new Matrix(minor);
     }
 }
 

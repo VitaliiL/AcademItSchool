@@ -32,8 +32,8 @@ public class Main {
             Matrix matrix6 = new Matrix(vector);
             matrix6.setRowByIndex(1, vector3);
             System.out.println(matrix6);
-            System.out.println(matrix6.getRowByIndex(1));
-            System.out.println(matrix6.getColumnByIndex(3));
+            System.out.println("Get row by index: " + matrix6.getRowByIndex(1));
+            System.out.println("Get columns by index: " + matrix6.getColumnByIndex(3));
 
             Matrix matrix7 = matrix6.transpose();
             System.out.println("Transpose:" + matrix7);
@@ -53,7 +53,6 @@ public class Main {
             Matrix matrix10 = new Matrix(array3);
             Vector vector4 = new Vector(new double[]{1, 1, 1, 1, 1});
             System.out.println("Multiplication by vector: " + matrix10.multiplyByVector(vector4));
-
             System.out.println();
 
             //to check static methods:
@@ -63,6 +62,9 @@ public class Main {
             Matrix matrix11 = new Matrix(new double[][]{{1, 2, 3}, {4, 5, 6}});
             Matrix matrix12 = new Matrix(new double[][]{{1, 2}, {4, 5}, {7, 8}});
             System.out.println("Matrix's multiplication: " + Matrix.mult(matrix11, matrix12));
+
+            Matrix matrix13 = new Matrix(new double[][]{{1, 2, 5}, {4, 5, 6}, {1, 7, 10}});
+            System.out.println("Determinant: " + matrix13.getDeterminant());
 
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             System.out.println("Error during the program executing by cause: " + e.getMessage());

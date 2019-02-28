@@ -46,5 +46,11 @@ class Verification {
             throw new IllegalArgumentException("Amount columns of the first matrix must be equal amount rows of the second matrix.");
         }
     }
+
+    static void verifyQuadraticMatrix(Matrix matrix){
+        if (matrix.getColumnsCount() != matrix.getRowsCount()) {
+            throw new IllegalArgumentException("Check, need square matrix.");
+        }
+    }
 }
 
