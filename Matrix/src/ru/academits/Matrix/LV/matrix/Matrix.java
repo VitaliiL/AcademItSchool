@@ -196,10 +196,10 @@ public class Matrix {
 
     //determinant:
     public double getDeterminant() {
-        return getDeterminant(this);
+        return calculateDeterminant(this);
     }
 
-    private double getDeterminant(Matrix matrix) {
+    private double calculateDeterminant(Matrix matrix) {
         verifyQuadraticMatrix(matrix);
 
         double result = 0;
@@ -216,7 +216,7 @@ public class Matrix {
                     element = 1;
                 }
 
-                result += element * matrix.rows[0].getComponentByIndex(i) * getDeterminant(getMinor(matrix, i));
+                result += element * matrix.rows[0].getComponentByIndex(i) * calculateDeterminant(getMinor(matrix, i));
             }
         }
 
