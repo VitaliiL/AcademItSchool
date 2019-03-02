@@ -2,7 +2,7 @@ package ru.academits.CSV.LV.Main;
 
 import ru.academits.CSV.LV.FileReader.FileReader;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Main {
     private static final String DOCTYPE = "<!DOCTYPE html>";
@@ -25,7 +25,7 @@ public class Main {
     private static final char QUOTE = '"';
 
     public static void main(String[] args) {
-        List<String> list = FileReader.readFile();
+        ArrayList<String> list = FileReader.readFile();
 
         StringBuilder tableToHtml = new StringBuilder();
         tableToHtml.append(DOCTYPE).append(HTMLLANG).append(HEAD).append(META).append(TITLE).append(HEAD_CLOSE).append(BODY)
