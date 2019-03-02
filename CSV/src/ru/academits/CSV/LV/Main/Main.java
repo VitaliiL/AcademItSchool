@@ -31,7 +31,7 @@ public class Main {
         tableToHtml.append(DOCTYPE).append(HTMLLANG).append(HEAD).append(META).append(TITLE).append(HEAD_CLOSE).append(BODY)
                 .append(TABLE).append(ROW).append(System.lineSeparator());
 
-        System.out.println(list);
+        System.out.println(list); // for test
 
         for (String element : list) {
 
