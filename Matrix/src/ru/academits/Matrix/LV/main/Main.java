@@ -63,7 +63,7 @@ public class Main {
             Matrix matrix12 = new Matrix(new double[][]{{1, 2}, {4, 5}, {7, 8}});
             System.out.println("Matrix's multiplication: " + Matrix.mult(matrix11, matrix12));
 
-            Matrix matrix13 = new Matrix(new double[][]{{1, 2, 5}, {4, 5, 6}, {1, 7, 10}});
+            Matrix matrix13 = new Matrix(new double[][]{{5}});
             System.out.println("Determinant: " + matrix13.getDeterminant());
 
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {

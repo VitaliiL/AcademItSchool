@@ -81,18 +81,18 @@ public class Matrix {
     }
 
     public void setRowByIndex(int index, Vector vector) {
-        if (index >= getColumnsCount() || index < 0) {
-            verifyIndex();
+        if (index >= getRowsCount() || index < 0) {
+            catchExceptionByIndex();
         } else if (getColumnsCount() != vector.getSize()) {
-            verifySize();
+            catchExceptionBySize();
         }
 
         rows[index] = new Vector(vector);
     }
 
     public Vector getRowByIndex(int index) {
-        if (index >= getColumnsCount() || index < 0) {
-            verifyIndex();
+        if (index >= getRowsCount() || index < 0) {
+            catchExceptionByIndex();
         }
 
         return new Vector(rows[index]);
@@ -100,7 +100,7 @@ public class Matrix {
 
     public Vector getColumnByIndex(int index) {
         if (index >= getColumnsCount() || index < 0) {
-            verifyIndex();
+            catchExceptionByIndex();
         }
 
         Vector vector = new Vector(rows.length);
@@ -154,7 +154,7 @@ public class Matrix {
 
     public Vector multiplyByVector(Vector vector) {
         if (getColumnsCount() != vector.getSize()) {
-            verifySize();
+            catchExceptionBySize();
         }
 
         Vector vectorResult = new Vector(this.getRowsCount());
@@ -199,12 +199,14 @@ public class Matrix {
         return calculateDeterminant(this);
     }
 
-    private double calculateDeterminant(Matrix matrix) {
+    private static double calculateDeterminant(Matrix matrix) {
         verifyQuadraticMatrix(matrix);
 
         double result = 0;
 
-        if (matrix.rows.length == 2) {
+        if (matrix.getRowsCount() == 1) {
+            return matrix.rows[0].getComponentByIndex(0);
+        } else if (matrix.rows.length == 2) {
             result = matrix.rows[0].getComponentByIndex(0) * matrix.rows[1].getComponentByIndex(1) - matrix.rows[1].getComponentByIndex(0) * matrix.rows[0].getComponentByIndex(1);
         } else {
             int element;
@@ -223,7 +225,7 @@ public class Matrix {
         return result;
     }
 
-    private Matrix getMinor(Matrix matrix, int column) {
+    private static Matrix getMinor(Matrix matrix, int column) {
         int minorLength = matrix.rows.length - 1;
 
         double[][] minor = new double[minorLength][minorLength];
