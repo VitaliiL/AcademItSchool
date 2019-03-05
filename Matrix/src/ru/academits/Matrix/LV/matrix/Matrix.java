@@ -82,9 +82,9 @@ public class Matrix {
 
     public void setRowByIndex(int index, Vector vector) {
         if (index >= getRowsCount() || index < 0) {
-            catchExceptionByIndex();
+            throwExceptionByIndex();
         } else if (getColumnsCount() != vector.getSize()) {
-            catchExceptionBySize();
+            throwExceptionBySize();
         }
 
         rows[index] = new Vector(vector);
@@ -92,7 +92,7 @@ public class Matrix {
 
     public Vector getRowByIndex(int index) {
         if (index >= getRowsCount() || index < 0) {
-            catchExceptionByIndex();
+            throwExceptionByIndex();
         }
 
         return new Vector(rows[index]);
@@ -100,7 +100,7 @@ public class Matrix {
 
     public Vector getColumnByIndex(int index) {
         if (index >= getColumnsCount() || index < 0) {
-            catchExceptionByIndex();
+            throwExceptionByIndex();
         }
 
         Vector vector = new Vector(rows.length);
@@ -154,7 +154,7 @@ public class Matrix {
 
     public Vector multiplyByVector(Vector vector) {
         if (getColumnsCount() != vector.getSize()) {
-            catchExceptionBySize();
+            throwExceptionBySize();
         }
 
         Vector vectorResult = new Vector(this.getRowsCount());

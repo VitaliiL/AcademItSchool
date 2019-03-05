@@ -3,11 +3,11 @@ package ru.academits.Matrix.LV.matrix;
 import ru.academits.Vector.LV.vector.Vector;
 
 class Verification {
-    static void catchExceptionByIndex() {
+    static void throwExceptionByIndex() {
         throw new IndexOutOfBoundsException("Value with this index isn't existing in the matrix.");
     }
 
-    static void catchExceptionBySize() {
+    static void throwExceptionBySize() {
         throw new IllegalArgumentException("Matrix column numbers must equals the vector size.");
     }
 
