@@ -53,3 +53,43 @@ public class Main {
         }
     }
 }
+
+    /*    //determinant:
+    public double getDeterminant() {
+        if (rows.length != getColumnsCount()) {
+            throw new IllegalArgumentException("Матрица должна быть квадратной.");
+        }
+
+        Matrix copyOfMatrix = new Matrix(this);
+
+        for (int i = 0; i < copyOfMatrix.getColumnsCount(); i++) {
+            boolean isNullColumn = false;
+            int j = i;
+            while (copyOfMatrix.rows[j].getComponentByIndex(i) == 0) {
+                if (j == copyOfMatrix.rows.length - 1) {
+                    isNullColumn = true;
+                    break;
+                }
+                j++;
+            }
+            if (isNullColumn) {
+                continue;
+            }
+
+            Vector tempVector = copyOfMatrix.rows[j];
+            copyOfMatrix.rows[j] = copyOfMatrix.rows[i];
+            copyOfMatrix.rows[i] = tempVector;
+
+            for (int k = i + 1; k < copyOfMatrix.rows.length; k++) {
+                double coefficient = copyOfMatrix.rows[k].getComponentByIndex(i) / copyOfMatrix.rows[i].getComponentByIndex(i);
+                Vector tempRaw = new Vector(copyOfMatrix.rows[i]);
+                tempRaw.multiplyByScalar(coefficient);
+                copyOfMatrix.rows[k].subtractFromVector(tempRaw);
+            }
+        }
+        double determinant = 1;
+        for (int i = 0; i < copyOfMatrix.rows.length; i++) {
+            determinant *= copyOfMatrix.rows[i].getComponentByIndex(i);
+        }
+        return determinant;
+    */
