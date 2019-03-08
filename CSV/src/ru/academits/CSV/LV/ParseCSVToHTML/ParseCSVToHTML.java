@@ -70,7 +70,7 @@ public class ParseCSVToHTML {
                 if (isQuote) {
                     tableToHtml.append(BREAK);
                 } else {
-                    tableToHtml.append(CELL_CLOSE).append(ROW_CLOSE);
+                    tableToHtml.append(CELL_CLOSE).append(ROW_CLOSE).append(System.lineSeparator());
                 }
             }
 
