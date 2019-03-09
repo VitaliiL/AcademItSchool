@@ -25,9 +25,9 @@ public class ParseCSVToHTML {
     private static final char SEPARATE = ',';
     private static final char QUOTE = '"';
 
-    public static void parseCSV(String fileOut, String fileIn) {
-        try (Scanner scanner = new Scanner(new FileInputStream(fileOut));
-             PrintWriter writer = new PrintWriter(fileIn)) {
+    public static void parseCSV(String fileCSV, String HTMLfile) {
+        try (Scanner scanner = new Scanner(new FileInputStream(fileCSV));
+             PrintWriter writer = new PrintWriter(HTMLfile)) {
 
             if (!scanner.hasNextLine()) {
                 System.out.println("File is empty.");
@@ -64,6 +64,14 @@ public class ParseCSVToHTML {
                         } else {
                             tableToHtml.append(CELL_CLOSE).append(CELL);
                         }
+                    } else if (symbol == '<') {
+                        tableToHtml.append("&lt;");
+                    } else if (symbol == '>') {
+                        tableToHtml.append("&gt;");
+                    } else if (symbol == '&') {
+                        tableToHtml.append("&amp;");
+                    } else {
+                        tableToHtml.append(symbol);
                     }
                 }
 
