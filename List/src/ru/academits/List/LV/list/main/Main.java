@@ -6,22 +6,30 @@ import ru.academits.List.LV.list.list.SinglyLinkedList;
 public class Main {
     public static void main(String[] args) {
         SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
-        list.addByIndex(0, 5);
-        list.addToTop(7);
-        //list.removeByIndex(1);
-        list.addByIndex(1, 6);
-       // list.addByIndex(2, 6);
-       // list.addByIndex(0, 7);
-
-        //list.addToTop(9);
-
-
-        System.out.println(list);
-        System.out.println(list.getSize());
-        System.out.println(list.getByIndex(0));
-        System.out.println(list.getFirstElement());
-        System.out.println(list.removeFirstElement());
+        list.addByIndex(0, 1);
+        list.addByIndex(1, 2);
+        list.addByIndex(2, 3);
+        list.addByIndex(3, 4);
+        list.addByIndex(4, 5);
         System.out.println(list);
 
+        System.out.println("Size list is: " + list.getSize());
+        System.out.println("The first element of the list is: " + list.getFirstElement());
+        System.out.println("Get element by index: " + list.getByIndex(2));
+
+        list.setByIndex(1, 10);
+        System.out.println("The element was changed by index: " + list);
+
+        list.removeByIndex(3);
+        System.out.println("The element was removed from the list: " + list);
+
+        list.addToTop(1);
+        System.out.println("The element was added in the top: " + list);
+
+        System.out.print("The first element was removed: " + list.removeFirstElement() + "->");
+        System.out.println(list);
+
+        System.out.print(list.removeNodeByData(3));
+        System.out.println(" <- The lement by index was removed: " + list);
     }
 }

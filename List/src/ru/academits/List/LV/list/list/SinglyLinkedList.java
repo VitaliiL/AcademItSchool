@@ -2,6 +2,7 @@ package ru.academits.List.LV.list.list;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SinglyLinkedList<T> {
     private ListItem<T> head;
@@ -23,6 +24,11 @@ public class SinglyLinkedList<T> {
         return Arrays.toString(result);
     }
 
+    private void checkElementIndex(int index) {
+        if (index < 0 && index >= size)
+            throw new IndexOutOfBoundsException("Check index. Index out of bounds.");
+    }
+
     public int getSize() {
         return size;
     }
@@ -31,9 +37,11 @@ public class SinglyLinkedList<T> {
         return getByIndex(0);
     }
 
-    public void addByIndex(int index, T value) {
+    public void addByIndex(int index, T data) {
+        checkElementIndex(index);
+
         if (index == 0) {
-            addToTop(value);
+            addToTop(data);
 
             return;
         }
@@ -43,8 +51,8 @@ public class SinglyLinkedList<T> {
 
         while (temp != null) {
             if (currentIndex == index - 1) {
-                ListItem<T> newElement = new ListItem<T>(value, temp.getNext());
-                temp.setNext(newElement);
+                ListItem<T> newList = new ListItem<>(data, temp.getNext());
+                temp.setNext(newList);
                 size++;
 
                 return;
@@ -55,21 +63,34 @@ public class SinglyLinkedList<T> {
         }
     }
 
-    public void addToTop(T value) {
-        head = new ListItem<T>(value, head);
+    public void addToTop(T data) {
+        head = new ListItem<>(data, head);
 
         size++;
     }
 
-    public void setByIndex(int index, T element){
+    public void setByIndex(int index, T data) {
+        checkElementIndex(index);
 
-            //checkElementIndex(index);
+        int currentIndex = 0;
+        ListItem<T> temp = head;
 
+        while (temp != null) {
+            if (currentIndex == index - 1) {
+                ListItem<T> newList = temp.getNext();
+                newList.setValue(data);
 
-
+                return;
+            } else {
+                temp = temp.getNext();
+                currentIndex++;
+            }
+        }
     }
 
     public T getByIndex(int index) {
+        checkElementIndex(index);
+
         if (head == null) {
             throw new NoSuchElementException("List is empty");
         }
@@ -85,13 +106,17 @@ public class SinglyLinkedList<T> {
                 currentIndex++;
             }
         }
+
         throw new IllegalArgumentException("The index isn't correct");
     }
 
     public void removeByIndex(int index) {
+        checkElementIndex(index);
+
         if (index == 0) {
             head = head.getNext();
             size--;
+
             return;
         }
 
@@ -102,6 +127,7 @@ public class SinglyLinkedList<T> {
             if (currentIndex == index - 1) {
                 temp.setNext(temp.getNext().getNext());
                 size--;
+
                 return;
             } else {
                 temp = temp.getNext();
@@ -110,29 +136,46 @@ public class SinglyLinkedList<T> {
         }
     }
 
-    public T removeFirstElement(){
+    public T removeFirstElement() {
         T temp = head.getData();
         head = head.getNext();
 
-        size --;
+        size--;
 
         return temp;
+    }
+
+    public boolean removeNodeByData(T data) {
+        ListItem<T> temp = head;
+        boolean isCheck = false;
+
+        while (temp != null) {
+            if (temp.getNext() != null && Objects.equals(temp.getNext().getData(), data)) {
+                temp.setNext(temp.getNext().getNext());
+                size--;
+                isCheck = true;
+            } else {
+                temp = temp.getNext();
+            }
+        }
+
+        if (!isCheck) {
+            throw new IllegalArgumentException("The data isn't existing in the list.");
+        }
+
+        return true;
     }
 
     private static class ListItem<T> {
         T data;
         ListItem<T> next;
 
-        private ListItem(T data) {
-            this.data = data;
-        }
-
         private ListItem(T data, ListItem<T> next) {
             this.data = data;
             this.next = next;
         }
 
-        T getData() {
+        private T getData() {
             if (data == null) {
                 throw new NullPointerException("Data is empty");
             }
@@ -140,35 +183,18 @@ public class SinglyLinkedList<T> {
             return data;
         }
 
-        void setValue(T data) {
+        private void setValue(T data) {
             this.data = data;
         }
 
-        ListItem<T> getNext() {
+        private ListItem<T> getNext() {
             return next;
         }
 
-        void setNext(ListItem<T> next) {
+        private void setNext(ListItem<T> next) {
             this.next = next;
         }
     }
 }
 
 
-//private boolean isElementIndex(int index) {
-//    return index >= 0 && index < size;
-//}
-
-// private boolean isPositionIndex(int index) {
-//     return index >= 0 && index <= size;
-// }
-//
-// private void checkElementIndex(int index) {
-//     if (!isElementIndex(index))
-//         throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
-// }
-//
-// private void checkPositionIndex(int index) {
-//     if (!isPositionIndex(index))
-//         throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
-// }
