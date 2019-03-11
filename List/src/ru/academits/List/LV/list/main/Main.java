@@ -11,6 +11,8 @@ public class Main {
         list.addByIndex(2, 3);
         list.addByIndex(3, 4);
         list.addByIndex(4, 5);
+        list.addByIndex(5, 6);
+        list.addByIndex(6, 7);
         System.out.println(list);
 
         System.out.println("Size list is: " + list.getSize());
@@ -30,6 +32,11 @@ public class Main {
         System.out.println(list);
 
         System.out.print(list.removeNodeByData(3));
-        System.out.println(" <- The lement by index was removed: " + list);
+        System.out.println(" <- The element by index was removed: " + list);
+
+        list.reverse();
+        System.out.println("Reverse list result: " + list);
+
+        System.out.println("Clone list: " + list.copyList());
     }
 }
