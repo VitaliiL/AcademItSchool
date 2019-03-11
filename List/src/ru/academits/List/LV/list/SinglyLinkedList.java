@@ -1,4 +1,4 @@
-package ru.academits.List.LV.list.list;
+package ru.academits.List.LV.list;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;

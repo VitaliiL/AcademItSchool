@@ -1,7 +1,7 @@
-package ru.academits.List.LV.list.main;
+package ru.academits.List.LV.main;
 
 
-import ru.academits.List.LV.list.list.SinglyLinkedList;
+import ru.academits.List.LV.list.SinglyLinkedList;
 
 public class Main {
     public static void main(String[] args) {

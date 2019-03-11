@@ -1,4 +1,4 @@
-package ru.academits.List.LV.list.list;
+package ru.academits.List.LV.list;
 
 class ListItem<T> {
     private T data;
