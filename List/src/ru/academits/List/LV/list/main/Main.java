@@ -32,7 +32,7 @@ public class Main {
         System.out.println(list);
 
         System.out.print(list.removeNodeByData(3));
-        System.out.println(" <- The element by index was removed: " + list);
+        System.out.println(" <- The element by data was removed: " + list);
 
         list.reverse();
         System.out.println("Reverse list result: " + list);

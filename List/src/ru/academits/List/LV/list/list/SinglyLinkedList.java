@@ -33,7 +33,6 @@ public class SinglyLinkedList<T> {
         return sb.toString();
     }
 
-
     public int getSize() {
         return size;
     }
@@ -48,30 +47,26 @@ public class SinglyLinkedList<T> {
 
     public void addByIndex(int index, T data) {
         checkElementIndex(index);
+        int currentIndex = 0;
 
         if (index == 0) {
             addToTop(data);
             return;
         }
 
-        int currentIndex = 0;
-
-        for (ListItem<T> temp = head; temp != null; temp = temp.getNext()) {
+        for (ListItem<T> temp = head; temp != null; temp = temp.getNext(), currentIndex++) {
             if (isEqualIndex(currentIndex, index)) {
                 ListItem<T> newList = new ListItem<>(data, temp.getNext());
                 temp.setNext(newList);
                 size++;
 
                 return;
-            } else {
-                currentIndex++;
             }
         }
     }
 
     public void addToTop(T data) {
         head = new ListItem<>(data, head);
-
         size++;
     }
 
@@ -79,14 +74,12 @@ public class SinglyLinkedList<T> {
         checkElementIndex(index);
         int currentIndex = 0;
 
-        for (ListItem<T> temp = head; temp != null; temp = temp.getNext()) {
+        for (ListItem<T> temp = head; temp != null; temp = temp.getNext(), currentIndex++) {
             if (isEqualIndex(currentIndex, index)) {
                 ListItem<T> newList = temp.getNext();
                 newList.setValue(data);
 
                 return;
-            } else {
-                currentIndex++;
             }
         }
     }
@@ -97,11 +90,9 @@ public class SinglyLinkedList<T> {
 
         int currentIndex = 0;
 
-        for (ListItem<T> temp = head; temp != null; temp = temp.getNext()) {
+        for (ListItem<T> temp = head; temp != null; temp = temp.getNext(), currentIndex++) {
             if (currentIndex == index) {
                 return temp.getData();
-            } else {
-                currentIndex++;
             }
         }
 
@@ -120,14 +111,11 @@ public class SinglyLinkedList<T> {
 
         int currentIndex = 0;
 
-        for (ListItem<T> temp = head; temp != null; temp = temp.getNext()) {
+        for (ListItem<T> temp = head; temp != null; temp = temp.getNext(), currentIndex++) {
             if (isEqualIndex(currentIndex, index)) {
                 temp.setNext(temp.getNext().getNext());
                 size--;
                 return;
-            } else {
-
-                currentIndex++;
             }
         }
     }
