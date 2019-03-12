@@ -25,23 +25,29 @@ public class ParseCSVToHTML {
     private static final char SEPARATE = ',';
     private static final char QUOTE = '"';
 
-    public static void parseCSV(String fileCSV, String HTMLfile) {
+    public static void parseCSV(String fileCSV, String fileHTML) {
         try (Scanner scanner = new Scanner(new FileInputStream(fileCSV));
-             PrintWriter writer = new PrintWriter(HTMLfile)) {
+             PrintWriter writer = new PrintWriter(fileHTML)) {
 
             if (!scanner.hasNextLine()) {
                 System.out.println("File is empty.");
             }
 
-            StringBuilder tableToHtml = new StringBuilder();
-            tableToHtml.append(DOCTYPE).append(HTMLLANG).append(HEAD).append(META).append(TITLE).append(HEAD_CLOSE).append(BODY)
-                    .append(TABLE).append(System.lineSeparator());
+            writer.println(DOCTYPE);
+            writer.println(HTMLLANG);
+            writer.println(HEAD);
+            writer.println(META);
+            writer.println(TITLE);
+            writer.println(HEAD_CLOSE);
+            writer.println(BODY);
+            writer.println(TABLE);
 
             boolean isQuote = false;
 
             while (scanner.hasNextLine()) {
                 if (!isQuote) {
-                    tableToHtml.append(ROW).append(CELL);
+                    writer.println(ROW);
+                    writer.print(CELL);
                 }
 
                 String line = scanner.nextLine();
@@ -53,38 +59,40 @@ public class ParseCSVToHTML {
                         if (i == line.length() - 1) {
                             isQuote = !isQuote;
                         } else if (line.charAt(i + 1) == QUOTE && isQuote) {
-                            tableToHtml.append(symbol);
+                            writer.print(symbol);
                             i++;
                         } else {
                             isQuote = !isQuote;
                         }
                     } else if (symbol == SEPARATE) {
                         if (isQuote) {
-                            tableToHtml.append(SEPARATE);
+                            writer.print(SEPARATE);
                         } else {
-                            tableToHtml.append(CELL_CLOSE).append(CELL);
+                            writer.print(CELL_CLOSE);
+                            writer.print(CELL);
                         }
                     } else if (symbol == '<') {
-                        tableToHtml.append("&lt;");
+                        writer.print("&lt;");
                     } else if (symbol == '>') {
-                        tableToHtml.append("&gt;");
+                        writer.print("&gt;");
                     } else if (symbol == '&') {
-                        tableToHtml.append("&amp;");
+                        writer.print("&amp;");
                     } else {
-                        tableToHtml.append(symbol);
+                        writer.print(symbol);
                     }
                 }
 
                 if (isQuote) {
-                    tableToHtml.append(BREAK);
+                    writer.print(BREAK);
                 } else {
-                    tableToHtml.append(CELL_CLOSE).append(ROW_CLOSE).append(System.lineSeparator());
+                    writer.println(CELL_CLOSE);
+                    writer.println(ROW_CLOSE);
                 }
             }
 
-            tableToHtml.append(TABLE_CLOSE).append(BODY_CLOSE).append(HTML_CLOSE);
-            writer.print(tableToHtml.toString());
-
+            writer.println(TABLE_CLOSE);
+            writer.println(BODY_CLOSE);
+            writer.println(HTML_CLOSE);
         } catch (FileNotFoundException e) {
             System.out.println("Your file not found.");
         }
