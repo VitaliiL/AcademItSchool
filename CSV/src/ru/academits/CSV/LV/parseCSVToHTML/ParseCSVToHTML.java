@@ -1,4 +1,4 @@
-package ru.academits.CSV.LV.ParseCSVToHTML;
+package ru.academits.CSV.LV.parseCSVToHTML;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ParseCSVToHTML {
     private static final String DOCTYPE = "<!DOCTYPE html>";
-    private static final String HTMLLANG = "<html lang=\"en\">";
+    private static final String HTML_LANG = "<html lang=\"en\">";
     private static final String HEAD = "<head>";
     private static final String HEAD_CLOSE = "</head>";
     private static final String META = "<meta charset=\"UTF-8\">";
@@ -34,7 +34,7 @@ public class ParseCSVToHTML {
             }
 
             writer.println(DOCTYPE);
-            writer.println(HTMLLANG);
+            writer.println(HTML_LANG);
             writer.println(HEAD);
             writer.println(META);
             writer.println(TITLE);
