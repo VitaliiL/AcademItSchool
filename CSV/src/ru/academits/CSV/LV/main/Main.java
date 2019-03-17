@@ -8,7 +8,6 @@ public class Main {
             if (args.length != 2) {
                 throw new IllegalArgumentException("You should input 2 paths in the program arguments: source is CSV file and destination is HTML file.");
             }
-
             ParseCSVToHTML.parseCSV(args[0], args[1]);
         } catch (IllegalArgumentException e) {
             System.out.println("Check please. " + e.getMessage());
