@@ -14,10 +14,6 @@ class ListItem<T> {
     }
 
     T getData() {
-        if (data == null) {
-            throw new NullPointerException("Data is empty");
-        }
-
         return data;
     }
 
