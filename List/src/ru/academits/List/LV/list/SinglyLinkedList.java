@@ -7,14 +7,6 @@ public class SinglyLinkedList<T> {
     private ListItem<T> head;
     private int size;
 
-    //constructor is empty for using by default.
-    public SinglyLinkedList() {
-    }
-
-    private SinglyLinkedList(T data) {
-        this.head = new ListItem<>(data);
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -38,7 +30,7 @@ public class SinglyLinkedList<T> {
     }
 
     public T getFirstElement() {
-        checkList();
+        checkEmptyList();
         return head.getData();
     }
 
@@ -50,9 +42,14 @@ public class SinglyLinkedList<T> {
             return;
         }
 
-        ListItem<T> temp = getDataByIndex(index - 1);
-        temp.setNext(new ListItem<>(data, temp.getNext()));
-        size++;
+        ListItem<T> temp = getItemByIndex(index - 1);
+
+        if (index == size) {
+            temp.setNext(new ListItem<>(data, null));
+        } else {
+            temp.setNext(new ListItem<>(data, temp.getNext()));
+            size++;
+        }
     }
 
     public void addToTop(T data) {
@@ -63,7 +60,7 @@ public class SinglyLinkedList<T> {
     public T setByIndex(int index, T data) {
         checkElementIndex(index);
 
-        ListItem<T> temp = getDataByIndex(index);
+        ListItem<T> temp = getItemByIndex(index);
         T oldTemp = temp.getData();
         temp.setValue(data);
 
@@ -71,27 +68,25 @@ public class SinglyLinkedList<T> {
     }
 
     public T getByIndex(int index) {
-        return getDataByIndex(index).getData();
+        return getItemByIndex(index).getData();
     }
 
     public void removeByIndex(int index) {
         checkElementIndex(index);
 
         if (index == 0) {
-            head = head.getNext();
-            checkList();
-            size--;
+            removeFirstElement();
             return;
         }
 
-        ListItem<T> temp = getDataByIndex(index - 1);
+        ListItem<T> temp = getItemByIndex(index - 1);
         ListItem<T> temp1 = temp.getNext();
         temp.setNext(temp1.getNext());
         size--;
     }
 
     public T removeFirstElement() {
-        checkList();
+        checkEmptyList();
 
         T temp = head.getData();
         head = head.getNext();
@@ -101,15 +96,17 @@ public class SinglyLinkedList<T> {
     }
 
     public boolean removeNodeByData(T data) {
-        for (ListItem<T> temp = head; temp != null; temp = temp.getNext()) {
-            if (temp.getNext() != null && Objects.equals(temp.getNext().getData(), data)) {
-                temp.setNext(temp.getNext().getNext());
+        int counter = 0;
+
+        for (ListItem<T> temp = head; temp != null; temp = temp.getNext(), counter++) {
+            if (Objects.equals(temp.getData(), data)) {
+                removeByIndex(counter);
                 size--;
 
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -133,14 +130,20 @@ public class SinglyLinkedList<T> {
     }
 
     public SinglyLinkedList<T> copyList() {
-        SinglyLinkedList<T> newList = new SinglyLinkedList<>(head.getData());
-        ListItem<T> temp1 = newList.head;
+        SinglyLinkedList<T> newList = new SinglyLinkedList<>();
 
-        for (ListItem<T> temp2 = head.getNext(); temp2 != null; temp2 = temp2.getNext()) {
-            ListItem<T> temp3 = new ListItem<>(temp2.getData());
+        if (head == null) {
+            return newList;
+        }
 
-            temp1.setNext(temp3);
-            temp1 = temp3;
+        newList.head = new ListItem<>(head.getData());
+        ListItem<T> copyResult = newList.head;
+
+        for (ListItem<T> originItem = head.getNext(); originItem != null; originItem = originItem.getNext()) {
+            ListItem<T> temp = new ListItem<>(originItem.getData());
+
+            copyResult.setNext(temp);
+            copyResult = temp;
         }
 
         newList.size = this.getSize();
@@ -153,14 +156,14 @@ public class SinglyLinkedList<T> {
         }
     }
 
-    private void checkList() {
-        if (head == null || size == 0) {
+    private void checkEmptyList() {
+        if (head == null) {
             throw new NoSuchElementException("List is empty");
         }
     }
 
     //counter by index
-    private ListItem<T> getDataByIndex(int index) {
+    private ListItem<T> getItemByIndex(int index) {
         checkElementIndex(index);
 
         ListItem<T> temp = head;

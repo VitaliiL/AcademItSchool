@@ -13,6 +13,7 @@ public class Main {
         list.addByIndex(5, 4);
         list.addByIndex(6, 5);
         list.addByIndex(7, 6);
+        list.addByIndex(9, 6);
 
         System.out.println(list);
 
@@ -31,7 +32,7 @@ public class Main {
         System.out.print("The first element was removed: " + list.removeFirstElement() + "->");
         System.out.println(list);
 
-        System.out.print(list.removeNodeByData(3));
+        System.out.print(list.removeNodeByData(10));
         System.out.println(" <- The element by data was removed: " + list);
 
         list.reverse();
