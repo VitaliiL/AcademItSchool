@@ -3,9 +3,12 @@ package ru.academits.List.LV.main;
 
 import ru.academits.List.LV.list.SinglyLinkedList;
 
+import java.util.LinkedList;
+
 public class Main {
     public static void main(String[] args) {
         SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
+
         list.addByIndex(1, 0);
         list.addByIndex(2, 1);
         list.addByIndex(3, 2);
@@ -14,6 +17,7 @@ public class Main {
         list.addByIndex(6, 5);
         list.addByIndex(7, 6);
         list.addByIndex(9, 6);
+        list.addByIndex(11, 7);
 
         System.out.println(list);
 
@@ -39,5 +43,21 @@ public class Main {
         System.out.println("Reverse list result: " + list);
 
         System.out.println("Clone list: " + list.copyList());
+
+        //to compare:
+        LinkedList<Integer> list5 = new LinkedList<>();
+
+        list5.add(0, 1);
+        list5.add(1, 2);
+        list5.add(2, 3);
+        list5.add(3, 4);
+        list5.add(4, 5);
+        list5.add(5, 6);
+        list5.add(6, 7);
+        list5.add(6, 9);
+        list5.add(7, 11);
+
+        System.out.println(list5);
+
     }
 }

@@ -40,16 +40,18 @@ public class SinglyLinkedList<T> {
         if (index == 0) {
             addToTop(data);
             return;
-        }
-
-        ListItem<T> temp = getItemByIndex(index - 1);
-
-        if (index == size) {
-            temp.setNext(new ListItem<>(data, null));
         } else {
-            temp.setNext(new ListItem<>(data, temp.getNext()));
-            size++;
+
+            ListItem<T> temp = getItemByIndex(index - 1);
+
+            if (index == size) {
+                temp.setNext(new ListItem<>(data, null));
+            } else {
+                temp.setNext(new ListItem<>(data, temp.getNext()));
+            }
         }
+
+        size++;
     }
 
     public void addToTop(T data) {
@@ -80,8 +82,8 @@ public class SinglyLinkedList<T> {
         }
 
         ListItem<T> temp = getItemByIndex(index - 1);
-        ListItem<T> temp1 = temp.getNext();
-        temp.setNext(temp1.getNext());
+        ListItem<T> tempNode = temp.getNext();
+        temp.setNext(tempNode.getNext());
         size--;
     }
 
@@ -96,11 +98,19 @@ public class SinglyLinkedList<T> {
     }
 
     public boolean removeNodeByData(T data) {
-        int counter = 0;
+        if (Objects.equals(data, head.getData())) {
+            removeFirstElement();
 
-        for (ListItem<T> temp = head; temp != null; temp = temp.getNext(), counter++) {
+            return true;
+        }
+
+        for (ListItem<T> temp = head, prev = null; temp != null; prev = temp, temp = temp.getNext()) {
             if (Objects.equals(temp.getData(), data)) {
-                removeByIndex(counter);
+                if (prev == null) {
+                    head = temp.getNext();
+                } else {
+                    prev.setNext(temp.getNext());
+                }
                 size--;
 
                 return true;
@@ -111,21 +121,21 @@ public class SinglyLinkedList<T> {
     }
 
     public void reverse() {
-        ListItem<T> temp1 = null;
-        ListItem<T> temp2;
+        ListItem<T> element = null;
+        ListItem<T> newElement;
 
-        for (ListItem<T> temp3 = head; temp3 != null; temp3 = temp2) {
-            temp2 = temp3.getNext();
+        for (ListItem<T> temp = head; temp != null; temp = newElement) {
+            newElement = temp.getNext();
 
-            if (temp3 == head) {
-                temp3.setNext(null);
-                temp1 = temp3;
+            if (temp == head) {
+                temp.setNext(null);
+                element = temp;
             } else {
-                temp3.setNext(temp1);
-                temp1 = temp3;
+                temp.setNext(element);
+                element = temp;
             }
 
-            head = temp1;
+            head = element;
         }
     }
 
