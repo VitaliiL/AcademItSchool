@@ -9,15 +9,15 @@ public class Main {
     public static void main(String[] args) {
         SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
 
-        list.addByIndex(1, 0);
-        list.addByIndex(2, 1);
-        list.addByIndex(3, 2);
-        list.addByIndex(4, 3);
-        list.addByIndex(5, 4);
-        list.addByIndex(6, 5);
-        list.addByIndex(7, 6);
-        list.addByIndex(7, 6);
-        list.addByIndex(11, 7);
+        list.addByIndex(0, 1);
+        list.addByIndex(1, 2);
+        list.addByIndex(2, 3);
+        list.addByIndex(3, 4);
+        list.addByIndex(4, 5);
+        list.addByIndex(5, 6);
+        list.addByIndex(6, 7);
+        list.addByIndex(6, 7);
+        list.addByIndex(7, 11);
 
         System.out.println(list);
 
@@ -58,6 +58,7 @@ public class Main {
         list5.add(7, 11);
 
         System.out.println(list5);
+        System.out.println(list5.size());
 
     }
 }

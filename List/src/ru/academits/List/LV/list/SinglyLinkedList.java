@@ -34,7 +34,7 @@ public class SinglyLinkedList<T> {
         return head.getData();
     }
 
-    public void addByIndex(T data, int index) {
+    public void addByIndex(int index, T data) {
         checkElementIndex(index);
 
         if (index == 0) {
