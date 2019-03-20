@@ -16,7 +16,7 @@ public class Main {
         list.addByIndex(5, 4);
         list.addByIndex(6, 5);
         list.addByIndex(7, 6);
-        list.addByIndex(9, 6);
+        list.addByIndex(7, 6);
         list.addByIndex(11, 7);
 
         System.out.println(list);
@@ -54,7 +54,7 @@ public class Main {
         list5.add(4, 5);
         list5.add(5, 6);
         list5.add(6, 7);
-        list5.add(6, 9);
+        list5.add(6, 7);
         list5.add(7, 11);
 
         System.out.println(list5);

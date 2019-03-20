@@ -41,7 +41,6 @@ public class SinglyLinkedList<T> {
             addToTop(data);
             return;
         } else {
-
             ListItem<T> temp = getItemByIndex(index - 1);
 
             if (index == size) {
