@@ -1,4 +1,4 @@
-package main;
+package ru.academits.CSV.LV.main;
 
 import ru.academits.CSV.LV.parseCSVToHTML.ParseCSVToHTML;
 
