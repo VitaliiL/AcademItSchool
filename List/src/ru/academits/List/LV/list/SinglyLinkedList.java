@@ -35,7 +35,9 @@ public class SinglyLinkedList<T> {
     }
 
     public void addByIndex(int index, T data) {
-        checkElementIndex(index);
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Check index. Index out of bounds.");
+        }
 
         if (index == 0) {
             addToTop(data);
@@ -160,7 +162,7 @@ public class SinglyLinkedList<T> {
     }
 
     private void checkElementIndex(int index) {
-        if (index < 0 && index >= size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Check index. Index out of bounds.");
         }
     }
