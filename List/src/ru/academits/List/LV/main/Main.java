@@ -35,7 +35,7 @@ public class Main {
         System.out.print("The first element was removed: " + list.removeFirstElement() + "->");
         System.out.println(list);
 
-        System.out.print(list.removeNodeByData(1));
+        System.out.print(list.removeNodeByData(10));
         System.out.println(" <- The element by data was removed: " + list);
 
         list.reverse();
