@@ -3,7 +3,7 @@ package ru.academits.Lambda.LV.main;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-public class MainTwoTask {
+public class MainSecondTask {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input the value:");
