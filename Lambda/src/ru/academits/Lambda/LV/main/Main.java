@@ -50,7 +50,6 @@ public class Main {
 
         System.out.println("Average age of person list less 18 years: " + averageAge);
 
-
         Map<String, Double> personsByAverAge = person
                 .stream()
                 .collect(Collectors.groupingBy(Person::getName, Collectors.averagingDouble(Person::getAge)));
