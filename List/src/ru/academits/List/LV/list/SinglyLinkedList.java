@@ -12,13 +12,17 @@ public class SinglyLinkedList<T> {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
 
-        for (ListItem<T> temp = head; temp != null; temp = temp.getNext()) {
-            sb.append(temp.getData());
+        if (head == null) {
+            sb.append("}");
+        } else {
+            for (ListItem<T> temp = head; temp != null; temp = temp.getNext()) {
+                sb.append(temp.getData());
 
-            if (temp.getNext() != null) {
-                sb.append(", ");
-            } else {
-                sb.append("}");
+                if (temp.getNext() != null) {
+                    sb.append(", ");
+                } else {
+                    sb.append("}");
+                }
             }
         }
 
@@ -41,18 +45,11 @@ public class SinglyLinkedList<T> {
 
         if (index == 0) {
             addToTop(data);
-            return;
         } else {
             ListItem<T> temp = getItemByIndex(index - 1);
-
-            if (index == size) {
-                temp.setNext(new ListItem<>(data, null));
-            } else {
-                temp.setNext(new ListItem<>(data, temp.getNext()));
-            }
+            temp.setNext(new ListItem<>(data, temp.getNext()));
+            size++;
         }
-
-        size++;
     }
 
     public void addToTop(T data) {
@@ -99,12 +96,6 @@ public class SinglyLinkedList<T> {
     }
 
     public boolean removeNodeByData(T data) {
-        if (Objects.equals(data, head.getData())) {
-            removeFirstElement();
-
-            return true;
-        }
-
         for (ListItem<T> temp = head, prev = null; temp != null; prev = temp, temp = temp.getNext()) {
             if (Objects.equals(temp.getData(), data)) {
                 if (prev == null) {
@@ -128,16 +119,11 @@ public class SinglyLinkedList<T> {
         for (ListItem<T> temp = head; temp != null; temp = newElement) {
             newElement = temp.getNext();
 
-            if (temp == head) {
-                temp.setNext(null);
-                element = temp;
-            } else {
-                temp.setNext(element);
-                element = temp;
-            }
-
-            head = element;
+            temp.setNext(element);
+            element = temp;
         }
+
+        head = element;
     }
 
     public SinglyLinkedList<T> copyList() {
