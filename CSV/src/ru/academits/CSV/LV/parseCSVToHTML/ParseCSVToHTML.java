@@ -25,6 +25,7 @@ public class ParseCSVToHTML {
     private static final char SEPARATE = ',';
     private static final char QUOTE = '"';
 
+
     public static void parseCSV(String fileCSV, String fileHTML) {
         try (Scanner scanner = new Scanner(new FileInputStream(fileCSV));
              PrintWriter writer = new PrintWriter(fileHTML)) {
