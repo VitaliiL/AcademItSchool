@@ -5,6 +5,7 @@ import ru.academits.Lambda.LV.person.Person;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -22,7 +23,8 @@ public class Main {
 
         List<String> nameList = person
                 .stream()
-                .map(Person::getName).distinct()
+                .map(Person::getName)
+                .distinct()
                 .collect(Collectors.toList());
 
         System.out.println("Unique name list: " + nameList);
@@ -41,14 +43,15 @@ public class Main {
 
         System.out.println("Person list less 18 years: " + personLess18);
 
-        double averageAge = person
+        OptionalDouble averageAge = person
                 .stream()
-                .mapToInt(Person::getAge)
+                .mapToDouble(Person::getAge)
                 .filter(age -> age < 18)
-                .average()
-                .getAsDouble();
+                .average();
 
-        System.out.println("Average age of person list less 18 years: " + averageAge);
+        if (averageAge.isPresent()) {
+            System.out.println("Average age of person list less 18 years: " + averageAge.getAsDouble());
+        }
 
         Map<String, Double> personsByAverAge = person
                 .stream()

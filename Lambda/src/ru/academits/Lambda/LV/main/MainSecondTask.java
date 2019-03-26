@@ -11,8 +11,8 @@ public class MainSecondTask {
 
         IntStream
                 .iterate(1, element -> element + 1)
-                .takeWhile(element -> element <= value)
-                .mapToDouble(element -> Math.pow(element, 0.5))
+                .mapToDouble(Math::sqrt)
+                .limit(value)
                 .forEach(System.out::println);
     }
 }
