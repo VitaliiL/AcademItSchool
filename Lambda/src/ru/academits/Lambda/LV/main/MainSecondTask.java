@@ -1,7 +1,7 @@
 package ru.academits.Lambda.LV.main;
 
 import java.util.Scanner;
-import java.util.stream.IntStream;
+import java.util.stream.DoubleStream;
 
 public class MainSecondTask {
     public static void main(String[] args) {
@@ -9,9 +9,9 @@ public class MainSecondTask {
         System.out.println("Input the value:");
         int value = scanner.nextInt();
 
-        IntStream
+        DoubleStream
                 .iterate(1, element -> element + 1)
-                .mapToDouble(Math::sqrt)
+                .map(Math::sqrt)
                 .limit(value)
                 .forEach(System.out::println);
     }
