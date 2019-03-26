@@ -9,20 +9,20 @@ public class SinglyLinkedList<T> {
 
     @Override
     public String toString() {
+        if (head == null) {
+            System.out.println("List is empty: {}");
+        }
+
         StringBuilder sb = new StringBuilder();
         sb.append("{");
 
-        if (head == null) {
-            sb.append("}");
-        } else {
-            for (ListItem<T> temp = head; temp != null; temp = temp.getNext()) {
-                sb.append(temp.getData());
+        for (ListItem<T> temp = head; temp != null; temp = temp.getNext()) {
+            sb.append(temp.getData());
 
-                if (temp.getNext() != null) {
-                    sb.append(", ");
-                } else {
-                    sb.append("}");
-                }
+            if (temp.getNext() != null) {
+                sb.append(", ");
+            } else {
+                sb.append("}");
             }
         }
 
@@ -113,17 +113,17 @@ public class SinglyLinkedList<T> {
     }
 
     public void reverse() {
-        ListItem<T> element = null;
-        ListItem<T> newElement;
+        ListItem<T> prev = null;
+        ListItem<T> next;
 
-        for (ListItem<T> temp = head; temp != null; temp = newElement) {
-            newElement = temp.getNext();
+        for (ListItem<T> current = head; current != null; current = next) {
+            next = current.getNext();
 
-            temp.setNext(element);
-            element = temp;
+            current.setNext(prev);
+            prev = current;
         }
 
-        head = element;
+        head = prev;
     }
 
     public SinglyLinkedList<T> copyList() {
