@@ -13,12 +13,12 @@ public class MyArrayList<E> implements List<E> {
         return Arrays.toString(Arrays.copyOf(items, size));
     }
 
-    public MyArrayList(int size) {
-        if (size < 0) {
-            throw new IllegalArgumentException("Capacity isn't corrected" + size);
+    public MyArrayList(int capacity) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("Capacity isn't corrected" + capacity);
         }
 
-        items = new Object[size];
+        items = new Object[capacity];
     }
 
     public MyArrayList() {
