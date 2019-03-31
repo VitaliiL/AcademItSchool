@@ -9,7 +9,6 @@ public class MainSecondTask {
         System.out.println("Input the value:");
         int value = scanner.nextInt();
 
-
         DoubleStream
                 .iterate(1, element -> element + 1)
                 .map(Math::sqrt)
