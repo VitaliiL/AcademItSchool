@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 public class MyArrayListTest {
     private MyArrayList<Object> list;
-    private static final int DEFAULT_CAPACITY = 3;
+    private static final int DEFAULT_CAPACITY = 10;
     private MyArrayList<Object> list2;
     private MyArrayList<Object> list3;
 
@@ -36,7 +36,7 @@ public class MyArrayListTest {
 
     @Test
     public void getCapacityTest() {
-        Assert.assertEquals(DEFAULT_CAPACITY, list3.getCapacity());
+        Assert.assertEquals(DEFAULT_CAPACITY, list.getCapacity());
     }
 
     @Test
