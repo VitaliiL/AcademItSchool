@@ -141,17 +141,22 @@ public class MyArrayListTest {
     @Test
     public void removeAllTest() {
         MyArrayList<Integer> listAddition = new MyArrayList<>();
-        listAddition.add(100);
-        listAddition.add(200);
+        listAddition.add(1);
+        listAddition.add(2);
 
-        Assert.assertTrue(list3.addAll(listAddition));
-        Assert.assertTrue(list3.contains(100) && list3.contains(200));
         Assert.assertTrue(list3.removeAll(listAddition));
-        Assert.assertFalse(list3.contains(100) && list3.contains(200));
+        Assert.assertTrue(list3.contains(3) && list3.size() == 1);
     }
 
     @Test
     public void retainAllTest() {
+        MyArrayList<Integer> listAddition = new MyArrayList<>();
+        listAddition.add(1);
+        listAddition.add(2);
+
+        Assert.assertTrue(list3.retainAll(listAddition));
+        Assert.assertFalse(list3.contains(3));
+        Assert.assertTrue(list3.contains(1) && list3.contains(2) && list3.size() == 2);
     }
 
     @Test

@@ -55,7 +55,7 @@ public class Main {
 
         System.out.println(list1);
         System.out.println(list2);
-        System.out.println("Check retainAll: " + list2.retainAll(list1) + "->" + list2);
+        System.out.println("Check retainAll: " + list1.retainAll(list2) + "->" + list1);
         System.out.println("Check removeAll: " + list2.removeAll(list1) + "->" + list2 + "\n");
 
         list1.clear();
