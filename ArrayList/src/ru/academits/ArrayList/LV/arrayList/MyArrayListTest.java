@@ -24,6 +24,22 @@ public class MyArrayListTest {
     }
 
     @Test
+    public void getTest() {
+        Assert.assertTrue((int) list3.get(0) == 1 && (int) list3.get(1) == 2 && (int) list3.get(2) == 3);
+    }
+
+    @Test
+    public void setTest() {
+        list3.set(2, 101);
+        Assert.assertEquals(101, (int) list3.get(2));
+    }
+
+    @Test
+    public void getCapacityTest() {
+        Assert.assertEquals(DEFAULT_CAPACITY, list3.getCapacity());
+    }
+
+    @Test
     public void add() {
         Assert.assertTrue((int) list3.get(0) == 1 && (int) list3.get(1) == 2 && (int) list3.get(2) == 3 && list3.size() == 3);
     }
@@ -105,45 +121,43 @@ public class MyArrayListTest {
 
     @Test
     public void containsAllTest() {
-        MyArrayList<Integer> listComparison = new MyArrayList<>();
-        listComparison.add(1);
-        listComparison.add(2);
+        MyArrayList<Integer> listAddition = new MyArrayList<>();
+        listAddition.add(1);
+        listAddition.add(2);
 
-        Assert.assertTrue(list3.containsAll(listComparison));
+        Assert.assertTrue(list3.containsAll(listAddition));
     }
 
     @Test
-    public void addAll() {
+    public void addAllTest() {
+        MyArrayList<Integer> listAddition = new MyArrayList<>();
+        listAddition.add(1);
+        listAddition.add(2);
+
+        Assert.assertTrue(list3.addAll(listAddition));
+        Assert.assertTrue(list3.size() == 5 && (int) list3.get(3) == 1 && (int) list3.get(4) == 2);
     }
 
     @Test
-    public void addAll1() {
+    public void removeAllTest() {
+        MyArrayList<Integer> listAddition = new MyArrayList<>();
+        listAddition.add(100);
+        listAddition.add(200);
+
+        Assert.assertTrue(list3.addAll(listAddition));
+        Assert.assertTrue(list3.contains(100) && list3.contains(200));
+        Assert.assertTrue(list3.removeAll(listAddition));
+        Assert.assertFalse(list3.contains(100) && list3.contains(200));
     }
 
     @Test
-    public void removeAll() {
-    }
-
-    @Test
-    public void retainAll() {
+    public void retainAllTest() {
     }
 
     @Test
     public void clearListTest() {
         list3.clear();
         Assert.assertEquals(0, list3.size());
-    }
-
-    @Test
-    public void get() {
-    }
-
-    @Test
-    public void set() {
-    }
-
-    @Test
-    public void getCapacity() {
     }
 
     @Test
