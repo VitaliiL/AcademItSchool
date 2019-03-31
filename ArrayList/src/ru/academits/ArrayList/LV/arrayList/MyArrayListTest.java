@@ -166,26 +166,18 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void add1() {
+    public void indexOfTest() {
     }
 
     @Test
-    public void remove1() {
+    public void lastIndexOfTest() {
     }
 
     @Test
-    public void indexOf() {
+    public void ensureCapacityTest() {
     }
 
     @Test
-    public void lastIndexOf() {
-    }
-
-    @Test
-    public void ensureCapacity() {
-    }
-
-    @Test
-    public void trimToSize() {
+    public void trimToSizeTest() {
     }
 }
