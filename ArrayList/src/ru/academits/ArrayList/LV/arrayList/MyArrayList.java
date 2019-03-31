@@ -61,8 +61,8 @@ public class MyArrayList<E> implements List<E> {
         if (a.length > size) {
             a[size] = null;
         }
-        return a;
 
+        return a;
     }
 
     @Override
@@ -85,6 +85,7 @@ public class MyArrayList<E> implements List<E> {
             System.arraycopy(items, index + 1, items, index, size - index - 1);
             --size;
             modCount++;
+
             return true;
         }
 
