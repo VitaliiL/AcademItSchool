@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
 import java.util.Iterator;
 
 public class MyArrayListTest {
@@ -22,6 +21,7 @@ public class MyArrayListTest {
         list3.add(1);
         list3.add(2);
         list3.add(3);
+        list3.add(2);
     }
 
     @Test
@@ -168,17 +168,29 @@ public class MyArrayListTest {
 
     @Test
     public void indexOfTest() {
+        Assert.assertEquals(1, list3.indexOf(2));
     }
 
     @Test
     public void lastIndexOfTest() {
+        Assert.assertEquals(3, list3.lastIndexOf(2));
     }
 
     @Test
     public void ensureCapacityTest() {
+        MyArrayList<Integer> list = new MyArrayList<>(20);
+        list.ensureCapacity(30);
+
+        Assert.assertEquals(30, list.getCapacity());
     }
 
     @Test
     public void trimToSizeTest() {
+        MyArrayList<Integer> list = new MyArrayList<>(20);
+        list.add(1);
+        list.add(2);
+        list.trimToSize();
+
+        Assert.assertEquals(2, list.getCapacity());
     }
 }

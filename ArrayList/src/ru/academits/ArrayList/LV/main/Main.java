@@ -34,9 +34,9 @@ public class Main {
         System.out.println("Check remove by element: " + list1.remove(Integer.valueOf(5)) + " -> " + list1);
 
         list1.trimToSize();
-        System.out.println("Check capacity after trimToSize: " + list1.getCapacity());
+        System.out.println("Check capacity after trimToSize list1: " + list1.getCapacity());
         list1.ensureCapacity(20);
-        System.out.println("Check capacity after ensureCapacity: " + list1.getCapacity() + "\n");
+        System.out.println("Check capacity after ensureCapacity list1: " + list1.getCapacity() + "\n");
         System.out.println("Check contains: " + list1.contains(3));
 
         Object[] array = list1.toArray();
