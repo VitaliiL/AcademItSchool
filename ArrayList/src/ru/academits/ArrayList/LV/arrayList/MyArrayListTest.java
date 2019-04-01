@@ -21,7 +21,6 @@ public class MyArrayListTest {
         list3.add(1);
         list3.add(2);
         list3.add(3);
-        list3.add(2);
     }
 
     @Test
@@ -173,7 +172,13 @@ public class MyArrayListTest {
 
     @Test
     public void lastIndexOfTest() {
-        Assert.assertEquals(3, list3.lastIndexOf(2));
+        MyArrayList<Integer> list = new MyArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(2);
+
+        Assert.assertEquals(3, list.lastIndexOf(2));
     }
 
     @Test
