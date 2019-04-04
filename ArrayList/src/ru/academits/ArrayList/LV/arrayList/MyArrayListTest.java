@@ -40,8 +40,16 @@ public class MyArrayListTest {
     }
 
     @Test
-    public void add() {
+    public void addTest() {
         Assert.assertTrue((int) list3.get(0) == 1 && (int) list3.get(1) == 2 && (int) list3.get(2) == 3 && list3.size() == 3);
+    }
+
+    @Test
+    public void addNullTest(){
+        list3.add(null);
+        list3.add(4, null);
+
+        Assert.assertTrue(list3.get(3) == null && list3.get(4) == null);
     }
 
     @Test

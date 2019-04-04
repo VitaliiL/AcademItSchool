@@ -22,6 +22,9 @@ public class Main {
         list1.add(11, 3);
         list1.add(5);
 
+        System.out.println(list1);
+        System.out.println(list2);
+
         System.out.println("Check size list1: " + list1.size());
         System.out.println("Check array if it is empty list1: " + list1.isEmpty());
 
@@ -60,5 +63,14 @@ public class Main {
 
         list1.clear();
         System.out.println("Clear list1: " + list1);
+
+        //addition check with null:
+        MyArrayList<Integer> list5 = new MyArrayList<>();
+        list5.add(null);
+        list5.add(null);
+        list5.add(2, null);
+
+        System.out.println("\"null\" are added: " + list5);
+
     }
 }
