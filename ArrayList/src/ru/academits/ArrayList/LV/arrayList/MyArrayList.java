@@ -36,9 +36,9 @@ public class MyArrayList<E> implements List<E> {
 
             if (i == (size - 1)) {
                 break;
+            } else {
+                sb.append(", ");
             }
-
-            sb.append(", ");
         }
 
         return sb.append("]").toString();
