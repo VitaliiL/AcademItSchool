@@ -11,7 +11,7 @@ public class MyArrayList<E> implements List<E> {
     @SuppressWarnings("unchecked")
     public MyArrayList(int capacity) {
         if (capacity <= 0) {
-            throw new IllegalArgumentException("Capacity isn't corrected" + capacity);
+            throw new IllegalArgumentException("Capacity isn't correct " + capacity);
         }
 
         items = (E[]) new Object[capacity];
@@ -130,7 +130,11 @@ public class MyArrayList<E> implements List<E> {
     @SuppressWarnings("unchecked")
     public boolean addAll(int index, Collection<? extends E> c) {
         if (index > size() || index < 0) {
-            throw new IndexOutOfBoundsException("Index isn't corrected.");
+            throw new IndexOutOfBoundsException("Index isn't correct.");
+        }
+
+        if (c.size() == 0) {
+            return false;
         }
 
         modCount++;
@@ -139,9 +143,10 @@ public class MyArrayList<E> implements List<E> {
         ensureCapacity(size + collectionLength);
         System.arraycopy(items, index, items, index + collectionLength, size - index);
 
+        int count = index;
         for (E element : c) {
-            items[index] = element;
-            index++;
+            items[count] = element;
+            count++;
         }
 
         size += collectionLength;
@@ -157,8 +162,11 @@ public class MyArrayList<E> implements List<E> {
                 remove(i);
                 i--;
                 modified = true;
-                modCount++;
             }
+        }
+
+        if (modified) {
+            modCount++;
         }
 
         return modified;
@@ -173,8 +181,11 @@ public class MyArrayList<E> implements List<E> {
                 remove(i);
                 i--;
                 modified = true;
-                modCount++;
             }
+        }
+
+        if (modified) {
+            modCount++;
         }
 
         return modified;
@@ -193,7 +204,7 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public E get(int index) {
         if (index >= size() || index < 0) {
-            throw new IndexOutOfBoundsException("Index isn't corrected.");
+            throw new IndexOutOfBoundsException("Index isn't correct.");
         }
 
         return items[index];
@@ -202,7 +213,7 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public E set(int index, E element) {
         if (index >= size() || index < 0) {
-            throw new IndexOutOfBoundsException("Index isn't corrected.");
+            throw new IndexOutOfBoundsException("Index isn't correct.");
         }
 
         E item = items[index];
@@ -222,7 +233,7 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public void add(int index, E element) {
         if (index > size || index < 0) {
-            throw new IndexOutOfBoundsException("Index isn't corrected.");
+            throw new IndexOutOfBoundsException("Index isn't correct.");
         }
 
         if (items.length <= size) {
@@ -241,8 +252,8 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public E remove(int index) {
-        if (index >= size()) {
-            throw new IndexOutOfBoundsException("Index isn't corrected.");
+        if (index >= size() || index < 0) {
+            throw new IndexOutOfBoundsException("Index isn't correct .");
         }
 
         E item = items[index];
@@ -250,6 +261,7 @@ public class MyArrayList<E> implements List<E> {
         if (index < size - 1) {
             System.arraycopy(items, index + 1, items, index, size - index - 1);
         }
+
         size--;
         modCount++;
 
