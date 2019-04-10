@@ -121,7 +121,6 @@ public class MyArrayList<E> implements List<E> {
         return true;
     }
 
-
     @Override
     public boolean addAll(Collection<? extends E> c) {
         return addAll(size, c);
