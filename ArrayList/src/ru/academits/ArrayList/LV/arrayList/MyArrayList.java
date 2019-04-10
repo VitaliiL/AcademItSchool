@@ -143,10 +143,10 @@ public class MyArrayList<E> implements List<E> {
         ensureCapacity(size + collectionLength);
         System.arraycopy(items, index, items, index + collectionLength, size - index);
 
-        int count = index;
+        int i = index;
         for (E element : c) {
-            items[count] = element;
-            count++;
+            items[i] = element;
+            i++;
         }
 
         size += collectionLength;
