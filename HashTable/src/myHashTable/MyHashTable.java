@@ -1,8 +1,6 @@
 package myHashTable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 
 public class MyHashTable<E> implements Collection<E> {
     private ArrayList<E>[] table;
@@ -33,9 +31,9 @@ public class MyHashTable<E> implements Collection<E> {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
 
-        for (int i = 0; i < table.length; i++) {
-            if (table[i] != null) {
-                sb.append("hash=").append(i).append("->").append(table[i]).append(", ");
+        for (ArrayList<E> element : table) {
+            if (element != null) {
+                sb.append(element).append(", ");
             }
         }
         sb.setLength(sb.length() - 2);
@@ -43,7 +41,7 @@ public class MyHashTable<E> implements Collection<E> {
         return sb.append("}").toString();
     }
 
-    int getCapacity() {
+    public int getCapacity() {
         return table.length;
     }
 
@@ -60,7 +58,7 @@ public class MyHashTable<E> implements Collection<E> {
     @SuppressWarnings("all")
     @Override
     public boolean contains(Object o) {
-        if(size == 0){
+        if (size == 0) {
             throw new IllegalArgumentException("Hash table is empty.");
         }
 
@@ -68,6 +66,7 @@ public class MyHashTable<E> implements Collection<E> {
         return table[i] != null && table[i].contains(o);
     }
 
+    //todo
     @Override
     public Iterator<E> iterator() {
         return null;
@@ -75,21 +74,30 @@ public class MyHashTable<E> implements Collection<E> {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return Arrays.copyOf(table, table.length);
     }
 
+    @SuppressWarnings("all")
     @Override
-    public <T> T[] toArray(T[] a) {
-        return null;
+    public <E> E[] toArray(E[] a) {
+        if (a.length < size) {
+            return (E[]) Arrays.copyOf(table, size, a.getClass());
+        }
+
+        System.arraycopy(table, 0, a, 0, size);
+        if (a.length > size) {
+            a[size] = null;
+        }
+
+        return a;
     }
 
-    private int getIndex(Object o) {
+    int getIndex(Object o) {
         if (o == null) {
             throw new NullPointerException("Hash code from null. Check data to add.");
         }
 
         return Math.abs(o.hashCode() % table.length);
-
     }
 
     @SuppressWarnings("all")
@@ -110,6 +118,16 @@ public class MyHashTable<E> implements Collection<E> {
 
     @Override
     public boolean remove(Object o) {
+        int i = getIndex(o);
+
+        if (contains(o)) {
+            table[i].remove(o);
+            size--;
+            modCount++;
+
+            return true;
+        }
+
         return false;
     }
 
