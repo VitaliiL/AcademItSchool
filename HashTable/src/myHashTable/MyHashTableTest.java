@@ -5,6 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
@@ -66,7 +69,8 @@ public class MyHashTableTest {
 
     @Test
     public void isEmptyTest() {
-        assertEquals(table1.size(), 0);
+        assertEquals(0, table1.size());
+        assertTrue(table1.isEmpty());
     }
 
     @Test
@@ -86,7 +90,7 @@ public class MyHashTableTest {
     @Test(expected = NullPointerException.class)
     public void containsNpeExceptionTest() {
         table2.add(null);
-        assertTrue(table2.contains(null));
+        table2.contains(null);
     }
 
     @SuppressWarnings("all")
@@ -94,11 +98,7 @@ public class MyHashTableTest {
     public void false2ContainsTest() {
         MyHashTable<Integer> table3 = new MyHashTable<>();
 
-        assertTrue(table3.contains(3));
-    }
-
-    @Test
-    public void iterator() {
+        table3.contains(3);
     }
 
     @Test
@@ -156,22 +156,137 @@ public class MyHashTableTest {
     }
 
     @Test
-    public void containsAll() {
+    public void containsAllTrueTest() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(3);
+
+        assertTrue(table3.containsAll(list));
     }
 
     @Test
-    public void addAll() {
+    public void containsAllFalseTest() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(4);
+        list.add(5);
+
+        assertFalse(table3.containsAll(list));
     }
 
     @Test
-    public void removeAll() {
+    public void addAllTrueTest() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(4);
+        list.add(5);
+
+        assertTrue(table3.addAll(list));
+        assertEquals(5, table3.size());
+    }
+
+    @SuppressWarnings("all")
+    @Test
+    public void addAllFalseTest() {
+        ArrayList<Integer> list = new ArrayList<>();
+
+        assertFalse(table3.addAll(list));
+        assertEquals(3, table3.size());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void addAllExceptionTest() {
+        table3.addAll(null);
     }
 
     @Test
-    public void retainAll() {
+    public void removeAllTrueTest() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(3);
+
+        assertTrue(table3.removeAll(list));
+        assertEquals(1, table3.size());
+    }
+
+    @Test
+    public void removeAllFalseTest() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(4);
+        list.add(5);
+
+        assertFalse(table3.removeAll(list));
+        assertEquals(3, table3.size());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void removeAllExceptionTest() {
+        table3.removeAll(null);
+    }
+
+    @Test
+    public void retainAllTrueTest() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+
+        assertTrue(table3.retainAll(list));
+        assertEquals(2, table3.size());
+        assertFalse(table3.contains(3));
+    }
+
+    @Test
+    public void retainAllTest() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(4);
+        list.add(5);
+
+        table3.retainAll(list);
+        assertEquals(0, table3.size());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void retainAllExceptionTest() {
+        table3.retainAll(null);
     }
 
     @Test
     public void clear() {
+        table3.clear();
+        assertEquals(0, table3.size());
+    }
+
+    @Test
+    public void iteratorTest() {
+        table1.add(1);
+        table1.add(2);
+        table1.add(3);
+
+        Iterator<Integer> iterator = table1.iterator();
+        StringBuilder sb = new StringBuilder();
+
+        while (iterator.hasNext()) {
+            sb.append(iterator.next()).append(",");
+        }
+        sb.setLength(sb.length() - 1);
+
+        Assert.assertEquals(sb.toString(), "1,2,3");
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void iteratorNoSuchElementExceptionTest(){
+        table1.add(5);
+
+        Iterator<Integer> iterator = table1.iterator();
+        iterator.next();
+        iterator.next();
+    }
+
+    @Test(expected = ConcurrentModificationException.class)
+    public void iteratorConcurrentModificationExceptionTest(){
+        table1.add(1);
+        table1.add(2);
+
+        for (Integer element : table1) {
+            table1.add(3);
+        }
     }
 }

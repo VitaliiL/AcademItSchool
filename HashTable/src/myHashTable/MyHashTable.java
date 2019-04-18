@@ -55,7 +55,6 @@ public class MyHashTable<E> implements Collection<E> {
         return size == 0;
     }
 
-    @SuppressWarnings("all")
     @Override
     public boolean contains(Object o) {
         if (size == 0) {
@@ -64,12 +63,6 @@ public class MyHashTable<E> implements Collection<E> {
 
         int i = getIndex(o);
         return table[i] != null && table[i].contains(o);
-    }
-
-    //todo
-    @Override
-    public Iterator<E> iterator() {
-        return null;
     }
 
     @Override
@@ -94,13 +87,12 @@ public class MyHashTable<E> implements Collection<E> {
 
     int getIndex(Object o) {
         if (o == null) {
-            throw new NullPointerException("Hash code from null. Check data to add.");
+            throw new NullPointerException("Object is null. Check data to add.");
         }
 
         return Math.abs(o.hashCode() % table.length);
     }
 
-    @SuppressWarnings("all")
     @Override
     public boolean add(E e) {
         int i = getIndex(e);
@@ -133,26 +125,142 @@ public class MyHashTable<E> implements Collection<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        for (Object element : c) {
+            if (!contains(element)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
+    @SuppressWarnings("all")
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        return false;
+        if (c == null) {
+            throw new NullPointerException("Argument is null. Check data.");
+        }
+
+        if (c.size() == 0) {
+            return false;
+        }
+
+        for (E element : c) {
+            add(element);
+        }
+
+        return true;
     }
 
+    @SuppressWarnings("all")
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        if (c == null) {
+            throw new NullPointerException("Argument is null. Check data.");
+        }
+
+        boolean modified = false;
+        int newSize = 0;
+
+        for (ArrayList<E> e : table) {
+            if (e != null) {
+                e.removeAll(c);
+                newSize += e.size();
+            }
+        }
+
+        if (size != newSize) {
+            size = newSize;
+            modified = true;
+        }
+
+        modCount = modCount + (size - newSize);
+
+        return modified;
     }
 
+    @SuppressWarnings("all")
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        if (c == null) {
+            throw new NullPointerException("Argument is null. Check data.");
+        }
+
+        boolean modified = false;
+        int newSize = 0;
+
+        for (ArrayList<E> e : table) {
+            if (e != null) {
+                e.retainAll(c);
+                newSize += e.size();
+            }
+        }
+
+        if (size != newSize) {
+            size = newSize;
+            modified = true;
+        }
+
+        modCount = modCount + (size - newSize);
+
+        return modified;
     }
 
     @Override
     public void clear() {
+        for (int i = 0; i < size; i++) {
+            table[i] = null;
+        }
 
+        size = 0;
+        modCount++;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new MyIterator();
+    }
+
+    private class MyIterator implements Iterator<E> {
+        private int currentHash = 0;
+        private int currentIndex = -1;
+        private int modCountForIterator = modCount;
+        private int counter = 0;
+
+        private MyIterator() {
+            while (table[currentHash] == null) {
+                currentHash++;
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            return counter < size;
+        }
+
+        @Override
+        public E next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException("There is no next element.");
+            }
+
+            if (modCount != modCountForIterator) {
+                throw new ConcurrentModificationException("Collection was changed.");
+            }
+
+            if (currentIndex < table[currentHash].size() - 1) {
+                ++currentIndex;
+            } else {
+                currentHash++;
+
+                while (table[currentHash] == null) {
+                    currentHash++;
+                }
+                currentIndex = 0;
+            }
+            counter++;
+
+            return table[currentHash].get(currentIndex);
+        }
     }
 }
