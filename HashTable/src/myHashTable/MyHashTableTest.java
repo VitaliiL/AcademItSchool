@@ -4,10 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -54,11 +51,6 @@ public class MyHashTableTest {
         table2 = new MyHashTable<>(0);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void hashCodeFromNullRest() {
-        table1.add(null);
-    }
-
     @Test
     public void sizeTest() {
         table1.add(3);
@@ -75,44 +67,39 @@ public class MyHashTableTest {
 
     @Test
     public void trueContainsTest() {
-        table1.add(3);
-
-        assertTrue(table1.contains(3));
+        assertTrue(table3.contains(3));
     }
 
     @Test
     public void falseContainsTest() {
-        table1.add(3);
-
-        assertFalse(table1.contains(4));
+        assertFalse(table3.contains(4));
     }
 
-    @Test(expected = NullPointerException.class)
-    public void containsNpeExceptionTest() {
-        table2.add(null);
-        table2.contains(null);
+    @Test
+    public void containsNullTest() {
+        table3.add(null);
+        assertTrue(table3.contains(null));
     }
 
-    @SuppressWarnings("all")
-    @Test(expected = IllegalArgumentException.class)
-    public void false2ContainsTest() {
-        MyHashTable<Integer> table3 = new MyHashTable<>();
+    @Test
+    public void toArrayTest() {
+        table1.add(0);
+        table1.add(1);
+        table1.add(2);
+        table1.add(null);
 
-        table3.contains(3);
+        Object[] hashToArray = table1.toArray();
+
+        assertEquals(4, table1.size());
+        assertEquals(0, hashToArray[0]);
+        assertNull(hashToArray[1]);
+        assertEquals(1, hashToArray[2]);
+        assertEquals(2, hashToArray[3]);
     }
 
     @Test
     public void toArray() {
-        table1.add(0);
-        table1.add(1);
-        table1.add(2);
-        table1.add(3);
-
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(0);
-        Object[] hashToArray = table1.toArray();
-
-        Assert.assertEquals(list, hashToArray[0]);
+        assertEquals(0, table1.toArray().length);
     }
 
     @Test
@@ -129,9 +116,12 @@ public class MyHashTableTest {
         assertEquals(table1.getIndex(2), 2);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void addNullTest() {
+    @Test
+    public void addTestNull() {
         table1.add(null);
+        table1.add(null);
+
+        assertEquals(2, table1.size());
     }
 
     @Test
@@ -150,9 +140,10 @@ public class MyHashTableTest {
 
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void removeNullTest() {
-        table3.remove(null);
+        table3.add(null);
+        assertTrue(table3.remove(null));
     }
 
     @Test
@@ -272,7 +263,7 @@ public class MyHashTableTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void iteratorNoSuchElementExceptionTest(){
+    public void iteratorNoSuchElementExceptionTest() {
         table1.add(5);
 
         Iterator<Integer> iterator = table1.iterator();
@@ -281,7 +272,7 @@ public class MyHashTableTest {
     }
 
     @Test(expected = ConcurrentModificationException.class)
-    public void iteratorConcurrentModificationExceptionTest(){
+    public void iteratorConcurrentModificationExceptionTest() {
         table1.add(1);
         table1.add(2);
 
