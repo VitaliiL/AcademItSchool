@@ -25,7 +25,7 @@ public class MyHashTable<E> implements Collection<E> {
     @Override
     public String toString() {
         if (size == 0) {
-            return ("{}");
+            return "{}";
         }
 
         StringBuilder sb = new StringBuilder();
@@ -90,10 +90,10 @@ public class MyHashTable<E> implements Collection<E> {
         }
 
         if (a.length < size) {
-            return (E[]) Arrays.copyOf(table, size, a.getClass());
+            return (E[]) Arrays.copyOf(toArray(), size, a.getClass());
         }
 
-        System.arraycopy(table, 0, a, 0, size);
+        System.arraycopy(toArray(), 0, a, 0, size);
         if (a.length > size) {
             a[size] = null;
         }
@@ -152,7 +152,7 @@ public class MyHashTable<E> implements Collection<E> {
     @SuppressWarnings("all")
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        checkCollectionSizeNull(c);
+        checkArgumentNull(c);
 
         if (c.size() == 0) {
             return false;
@@ -168,7 +168,7 @@ public class MyHashTable<E> implements Collection<E> {
     @SuppressWarnings("all")
     @Override
     public boolean removeAll(Collection<?> c) {
-        checkCollectionSizeNull(c);
+        checkArgumentNull(c);
 
         int newSize = 0;
 
@@ -181,10 +181,10 @@ public class MyHashTable<E> implements Collection<E> {
 
         if (size != newSize) {
             size = newSize;
+            modCount++;
+
             return true;
         }
-
-        modCount++;
 
         return false;
     }
@@ -192,7 +192,7 @@ public class MyHashTable<E> implements Collection<E> {
     @SuppressWarnings("all")
     @Override
     public boolean retainAll(Collection<?> c) {
-        checkCollectionSizeNull(c);
+        checkArgumentNull(c);
 
         int newSize = 0;
 
@@ -205,15 +205,15 @@ public class MyHashTable<E> implements Collection<E> {
 
         if (size != newSize) {
             size = newSize;
+            modCount++;
+
             return true;
         }
-
-        modCount++;
 
         return false;
     }
 
-    private void checkCollectionSizeNull(Collection<?> c) {
+    private static void checkArgumentNull(Collection<?> c) {
         if (c == null) {
             throw new NullPointerException("Argument is null. Check data.");
         }
@@ -221,6 +221,7 @@ public class MyHashTable<E> implements Collection<E> {
 
     @Override
     public void clear() {
+
         for (int i = 0; i < size; i++) {
             table[i] = null;
         }
@@ -255,19 +256,22 @@ public class MyHashTable<E> implements Collection<E> {
                 throw new ConcurrentModificationException("Collection was changed.");
             }
 
-            while (table[currentHashIndex] == null || table[currentHashIndex].size() == 0) {
-                currentHashIndex++;
-            }
+            while (true) {
+                if (table[currentHashIndex] == null) {
+                    currentHashIndex++;
+                    continue;
+                }
 
-            if (currentIndex < table[currentHashIndex].size() - 1) {
-                currentIndex++;
-            } else {
-                currentHashIndex++;
-                currentIndex = 0;
-            }
-            counter++;
+                if (currentIndex < table[currentHashIndex].size() - 1) {
+                    currentIndex++;
+                    counter++;
 
-            return table[currentHashIndex].get(currentIndex);
+                    return table[currentHashIndex].get(currentIndex);
+                } else {
+                    currentHashIndex++;
+                    currentIndex = -1;
+                }
+            }
         }
     }
 }

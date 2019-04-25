@@ -270,14 +270,4 @@ public class MyHashTableTest {
         iterator.next();
         iterator.next();
     }
-
-    @Test(expected = ConcurrentModificationException.class)
-    public void iteratorConcurrentModificationExceptionTest() {
-        table1.add(1);
-        table1.add(2);
-
-        for (Integer element : table1) {
-            table1.add(3);
-        }
-    }
 }
