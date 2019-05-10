@@ -41,7 +41,7 @@ public class MyHashTable<E> implements Collection<E> {
         return sb.append("}").toString();
     }
 
-    public int getCapacity() {
+     int getCapacity() {
         return table.length;
     }
 
@@ -165,7 +165,6 @@ public class MyHashTable<E> implements Collection<E> {
         return true;
     }
 
-    @SuppressWarnings("all")
     @Override
     public boolean removeAll(Collection<?> c) {
         checkArgumentNull(c);
@@ -189,7 +188,6 @@ public class MyHashTable<E> implements Collection<E> {
         return false;
     }
 
-    @SuppressWarnings("all")
     @Override
     public boolean retainAll(Collection<?> c) {
         checkArgumentNull(c);
@@ -221,7 +219,6 @@ public class MyHashTable<E> implements Collection<E> {
 
     @Override
     public void clear() {
-
         for (int i = 0; i < size; i++) {
             table[i] = null;
         }
