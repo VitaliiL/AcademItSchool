@@ -1,6 +1,6 @@
 package controller;
 
-import model.TempConversion;
+import model.Model;
 import view.View;
 
 import java.awt.event.ActionEvent;
@@ -8,11 +8,11 @@ import java.awt.event.ActionListener;
 
 public class Controller {
     private View view;
-    private TempConversion tempConversion;
+    private Model model;
 
-    public Controller(View view, TempConversion tempConversion) {
+    public Controller(View view, Model model) {
         this.view = view;
-        this.tempConversion = tempConversion;
+        this.model = model;
 
         this.view.addListener(new Listener());
     }
@@ -25,10 +25,12 @@ public class Controller {
                 String inputScale = view.getInputScale();
                 String outputScale = view.getOutputScale();
 
-                tempConversion.convertTemp(temperature, inputScale, outputScale);
-                view.setSolutionValue(tempConversion.getTempValue());
+                model.convertTemp(temperature, inputScale, outputScale);
+                view.setSolutionValue(model.getTempValue());
             } catch (NumberFormatException ex) {
-                view.displayErrorMessage("Check input the temperature value. (Max amount 10.)");
+                view.displayErrorMessage("Check input the temperature value.");
+            } catch (IllegalArgumentException ex) {
+                view.displayErrorMessage(ex.getMessage());
             } catch (NullPointerException ex) {
                 view.displayErrorMessage("Check input data. Scale isn't selected.");
             }
