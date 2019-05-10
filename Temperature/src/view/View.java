@@ -25,26 +25,22 @@ public class View extends JFrame {
         setLayout(new GridBagLayout());
 
         JRadioButton buttonFromCelsius = new JRadioButton("Celsius");
+        JRadioButton buttonFromKelvin = new JRadioButton("Kelvin");
+        JRadioButton buttonFromFahrenheit = new JRadioButton("Fahrenheit");
+        JRadioButton buttonToCelsius = new JRadioButton("Celsius");
+        JRadioButton buttonToKelvin = new JRadioButton("Kelvin");
+        JRadioButton buttonToFahrenheit = new JRadioButton("Fahrenheit");
+
         add(buttonFromCelsius, new GridBagConstraints(0, 2, 1, 1, 1, 1,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
-
-        JRadioButton buttonFromKelvin = new JRadioButton("Kelvin");
         add(buttonFromKelvin, new GridBagConstraints(0, 3, 1, 1, 1, 1,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
-
-        JRadioButton buttonFromFahrenheit = new JRadioButton("Fahrenheit");
         add(buttonFromFahrenheit, new GridBagConstraints(0, 4, 1, 1, 1, 1,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
-
-        JRadioButton buttonToCelsius = new JRadioButton("Celsius");
         add(buttonToCelsius, new GridBagConstraints(1, 2, 1, 1, 1, 1,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
-
-        JRadioButton buttonToKelvin = new JRadioButton("Kelvin");
         add(buttonToKelvin, new GridBagConstraints(1, 3, 1, 1, 1, 1,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
-
-        JRadioButton buttonToFahrenheit = new JRadioButton("Fahrenheit");
         add(buttonToFahrenheit, new GridBagConstraints(1, 4, 1, 1, 1, 1,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
 
@@ -57,23 +53,19 @@ public class View extends JFrame {
         bg2.add(buttonToFahrenheit);
 
         JLabel jLabelStart = new JLabel("Input the temperature value:");
+        JLabel jLabelFrom = new JLabel("Select the temperature scale from:");
+        JLabel jLabelTo = new JLabel("Select the temperature scale to:");
+
         add(jLabelStart, new GridBagConstraints(0, 0, 1, 1, 0.5, 0.5,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 10, 5, 5), 0, 0));
-
-        JLabel jLabelFrom = new JLabel("Select the temperature scale from:");
         add(jLabelFrom, new GridBagConstraints(0, 1, 1, 1, 0.5, 0.5,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(5, 10, 5, 5), 0, 0));
-
         add(jTextFieldResult, new GridBagConstraints(0, 5, 1, 1, 0.5, 0.5,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(5, 5, 10, 5), 0, 0));
-
         add(jTextFieldInputData, new GridBagConstraints(1, 0, 1, 1, 0.5, 0.5,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
-
-        JLabel jLabelTo = new JLabel("Select the temperature scale to:");
         add(jLabelTo, new GridBagConstraints(1, 1, 1, 1, 0.5, 0.5,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(5, 5, 5, 5), 0, 0));
-
         add(jButtonConvert, new GridBagConstraints(1, 5, 1, 1, 0.5, 0.5,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(5, 5, 10, 5), 0, 0));
     }
@@ -84,7 +76,6 @@ public class View extends JFrame {
 
     public void setSolutionValue(double value) {
         jTextFieldResult.setText(String.format("%.20s", Double.toString(value)));
-
     }
 
     public void addListener(ActionListener listenerForConvertButton) {
