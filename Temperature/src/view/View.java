@@ -17,6 +17,7 @@ public class View extends JFrame {
         super("Temperatures");
         jTextFieldResult.setEditable(false);
         jTextFieldResult.setHorizontalAlignment(JTextField.CENTER);
+        jTextFieldInputData.setHorizontalAlignment(JTextField.CENTER);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(500, 250));
@@ -82,7 +83,7 @@ public class View extends JFrame {
     }
 
     public void setSolutionValue(double value) {
-        jTextFieldResult.setText(String.format("%.10s", Double.toString(value)));
+        jTextFieldResult.setText(String.format("%.20s", Double.toString(value)));
 
     }
 
