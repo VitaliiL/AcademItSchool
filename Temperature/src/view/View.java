@@ -15,6 +15,7 @@ public class View extends JFrame {
 
     public View() {
         super("Temperatures");
+
         jTextFieldResult.setEditable(false);
         jTextFieldResult.setHorizontalAlignment(JTextField.CENTER);
         jTextFieldInputData.setHorizontalAlignment(JTextField.CENTER);
@@ -30,6 +31,10 @@ public class View extends JFrame {
         JRadioButton buttonToCelsius = new JRadioButton("Celsius");
         JRadioButton buttonToKelvin = new JRadioButton("Kelvin");
         JRadioButton buttonToFahrenheit = new JRadioButton("Fahrenheit");
+
+        JLabel jLabelStart = new JLabel("Input the temperature value:");
+        JLabel jLabelFrom = new JLabel("Select the temperature scale from:");
+        JLabel jLabelTo = new JLabel("Select the temperature scale to:");
 
         add(buttonFromCelsius, new GridBagConstraints(0, 2, 1, 1, 1, 1,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
@@ -51,10 +56,6 @@ public class View extends JFrame {
         bg2.add(buttonToCelsius);
         bg2.add(buttonToKelvin);
         bg2.add(buttonToFahrenheit);
-
-        JLabel jLabelStart = new JLabel("Input the temperature value:");
-        JLabel jLabelFrom = new JLabel("Select the temperature scale from:");
-        JLabel jLabelTo = new JLabel("Select the temperature scale to:");
 
         add(jLabelStart, new GridBagConstraints(0, 0, 1, 1, 0.5, 0.5,
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 10, 5, 5), 0, 0));
@@ -78,7 +79,7 @@ public class View extends JFrame {
         jTextFieldResult.setText(String.format("%.20s", Double.toString(value)));
     }
 
-    public void addListener(ActionListener listenerForConvertButton) {
+    public void addJButtonConvertListener(ActionListener listenerForConvertButton) {
         jButtonConvert.addActionListener(listenerForConvertButton);
     }
 

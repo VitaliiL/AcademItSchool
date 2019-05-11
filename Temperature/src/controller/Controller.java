@@ -14,10 +14,10 @@ public class Controller {
         this.view = view;
         this.model = model;
 
-        this.view.addListener(new Listener());
+        this.view.addJButtonConvertListener(new JButtonConvertListener());
     }
 
-    class Listener implements ActionListener {
+    class JButtonConvertListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -32,7 +32,7 @@ public class Controller {
             } catch (IllegalArgumentException ex) {
                 view.displayErrorMessage(ex.getMessage());
             } catch (NullPointerException ex) {
-                view.displayErrorMessage("Check input data. Scale isn't selected.");
+                view.displayErrorMessage("Scale isn't selected.");
             }
         }
     }
