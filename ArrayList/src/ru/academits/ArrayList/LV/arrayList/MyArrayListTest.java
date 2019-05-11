@@ -153,7 +153,9 @@ public class MyArrayListTest {
         listAddition.add(2);
 
         Assert.assertTrue(list3.removeAll(listAddition));
-        Assert.assertTrue(list3.contains(3) && list3.size() == 1);
+        Assert.assertTrue(list3.contains(3));
+        Assert.assertEquals(1, list3.size());
+
     }
 
     @Test
