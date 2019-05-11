@@ -8,6 +8,10 @@ public class Model {
     }
 
     public void convertTemp(double value, String inputScale, String outputScale) {
+        if (inputScale.equals(outputScale)) {
+            tempValue = value;
+        }
+
         switch (inputScale) {
             case "Celsius":
                 if (value < -273.15) {
@@ -42,10 +46,6 @@ public class Model {
                     tempValue = (value - 32) * ((double) 5 / 9) + 273.15;
                 }
                 break;
-        }
-
-        if (inputScale.equals(outputScale)) {
-            tempValue = value;
         }
     }
 }
