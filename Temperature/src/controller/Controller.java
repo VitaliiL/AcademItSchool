@@ -3,23 +3,15 @@ package controller;
 import model.Model;
 import view.View;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class Controller {
     private View view;
     private Model model;
 
-    public Controller(View view, Model model) {
-        this.view = view;
-        this.model = model;
+    public Controller(View v, Model m) {
+        this.view = v;
+        this.model = m;
 
-        this.view.addJButtonConvertListener(new JButtonConvertListener());
-    }
-
-    class JButtonConvertListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
+        this.view.addJButtonConvertListener(e -> {
             try {
                 double temperature = view.getInputValue();
                 String inputScale = view.getInputScale();
@@ -34,7 +26,7 @@ public class Controller {
             } catch (NullPointerException ex) {
                 view.displayErrorMessage("Scale isn't selected.");
             }
-        }
+        });
     }
 }
 
