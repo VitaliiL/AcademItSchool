@@ -1,32 +1,46 @@
 package controller;
 
-import model.Model;
+import model.Celsius;
+import model.Fahrenheit;
+import model.Kelvin;
+import model.Scale;
 import view.View;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Controller {
     private View view;
-    private Model model;
+    private ArrayList<Scale> listOfTemperature = new ArrayList<>(Arrays.asList(new Celsius(), new Kelvin(), new Fahrenheit()));
+    private Scale scale;
 
-    public Controller(View v, Model m) {
-        view = v;
-        model = m;
+    public Controller(View view) {
+        this.view = view;
 
         view.addJButtonConvertListener(e -> {
             try {
-                double temperature = view.getInputValue();
-                String inputScale = view.getInputScale();
-                String outputScale = view.getOutputScale();
+                scale = searchScaleForConvert(this.view.getInputScale());
+                scale.convertTemp(this.view.getInputValue(), this.view.getOutputScale());
 
-                model.convertTemp(temperature, inputScale, outputScale);
-                view.setSolutionValue(model.getTempValue());
+                this.view.setSolutionValue(scale.getTempValue());
             } catch (NumberFormatException ex) {
-                view.displayErrorMessage("Check input the temperature value.");
+                this.view.displayErrorMessage("Check input the temperature value.");
             } catch (IllegalArgumentException ex) {
-                view.displayErrorMessage(ex.getMessage());
+                this.view.displayErrorMessage(ex.getMessage());
             } catch (NullPointerException ex) {
-                view.displayErrorMessage("Scale isn't selected.");
+                this.view.displayErrorMessage("Scale isn't selected.");
             }
         });
+    }
+
+    private Scale searchScaleForConvert(String scaleName) {
+        for (Scale element : listOfTemperature) {
+            if (element.getScaleName().equals(scaleName)) {
+                return element;
+            }
+        }
+
+        return null;
     }
 }
 

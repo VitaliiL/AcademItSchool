@@ -1,7 +1,6 @@
 package main;
 
 import controller.Controller;
-import model.Model;
 import view.View;
 
 import javax.swing.*;
@@ -16,8 +15,7 @@ public class Main {
 
         SwingUtilities.invokeLater(() -> {
             View view = new View();
-            Model model = new Model();
-            Controller controller = new Controller(view, model);
+            Controller controller = new Controller(view);
             view.setVisible(true);
         });
     }
