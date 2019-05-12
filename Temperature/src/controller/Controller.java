@@ -11,8 +11,8 @@ import java.util.Arrays;
 
 public class Controller {
     private View view;
-    private ArrayList<Scale> listOfTemperature = new ArrayList<>(Arrays.asList(new Celsius(), new Kelvin(), new Fahrenheit()));
     private Scale scale;
+    private ArrayList<Scale> temperatureList = new ArrayList<>(Arrays.asList(new Celsius(), new Kelvin(), new Fahrenheit()));
 
     public Controller(View view) {
         this.view = view;
@@ -34,7 +34,7 @@ public class Controller {
     }
 
     private Scale searchScaleForConvert(String scaleName) {
-        for (Scale element : listOfTemperature) {
+        for (Scale element : temperatureList) {
             if (element.getScaleName().equals(scaleName)) {
                 return element;
             }
