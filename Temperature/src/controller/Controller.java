@@ -8,10 +8,10 @@ public class Controller {
     private Model model;
 
     public Controller(View v, Model m) {
-        this.view = v;
-        this.model = m;
+        view = v;
+        model = m;
 
-        this.view.addJButtonConvertListener(e -> {
+        view.addJButtonConvertListener(e -> {
             try {
                 double temperature = view.getInputValue();
                 String inputScale = view.getInputScale();

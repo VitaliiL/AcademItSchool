@@ -23,6 +23,7 @@ public class Model {
                         tempValue = value * ((double) 9 / 5) + 32;
                     }
                     break;
+
                 case "Kelvin":
                     if (value < 0) {
                         throw new IllegalArgumentException("Kelvin can't be less 0.");
@@ -34,6 +35,7 @@ public class Model {
                         tempValue = (value - 273.15) * ((double) 9 / 5) + 32;
                     }
                     break;
+
                 case "Fahrenheit":
                     if (value < -459.67) {
                         throw new IllegalArgumentException("Fahrenheit can't be less 459.67.");
