@@ -4,11 +4,6 @@ public class Celsius implements Scale {
     private double tempCelsiusValue;
 
     @Override
-    public String getScaleName() {
-        return "Celsius";
-    }
-
-    @Override
     public double getTempValue() {
         return tempCelsiusValue;
     }

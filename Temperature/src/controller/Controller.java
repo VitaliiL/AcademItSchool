@@ -6,22 +6,20 @@ import model.Kelvin;
 import model.Scale;
 import view.View;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class Controller {
     private View view;
     private Scale scale;
-    private ArrayList<Scale> temperatureList = new ArrayList<>(Arrays.asList(new Celsius(), new Kelvin(), new Fahrenheit()));
+    private Map<String, Scale> myMap = createMap();
 
     public Controller(View view) {
         this.view = view;
 
         view.addJButtonConvertListener(e -> {
             try {
-                scale = searchScaleForConvert(this.view.getInputScale());
+                scale = searchScaleForConvert();
                 scale.convertTemp(this.view.getInputValue(), this.view.getOutputScale());
-
                 this.view.setSolutionValue(scale.getTempValue());
             } catch (NumberFormatException ex) {
                 this.view.displayErrorMessage("Check input the temperature value.");
@@ -33,14 +31,18 @@ public class Controller {
         });
     }
 
-    private Scale searchScaleForConvert(String scaleName) {
-        for (Scale element : temperatureList) {
-            if (element.getScaleName().equals(scaleName)) {
-                return element;
-            }
-        }
+    private Scale searchScaleForConvert() {
+        return myMap.get(this.view.getInputScale());
+    }
 
-        return null;
+    private static Map<String, Scale> createMap() {
+        Map<String, Scale> myMap = new HashMap<>();
+
+        myMap.put("Celsius", new Celsius());
+        myMap.put("Kelvin", new Kelvin());
+        myMap.put("Fahrenheit", new Fahrenheit());
+
+        return myMap;
     }
 }
 

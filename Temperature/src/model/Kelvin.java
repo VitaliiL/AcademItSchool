@@ -4,11 +4,6 @@ public class Kelvin implements Scale {
     private double tempKelvinValue;
 
     @Override
-    public String getScaleName() {
-        return "Kelvin";
-    }
-
-    @Override
     public double getTempValue() {
         return tempKelvinValue;
     }

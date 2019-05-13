@@ -4,11 +4,6 @@ public class Fahrenheit implements Scale {
     private double tempFahrenheitValue;
 
     @Override
-    public String getScaleName() {
-        return "Fahrenheit";
-    }
-
-    @Override
     public double getTempValue() {
         return tempFahrenheitValue;
     }
