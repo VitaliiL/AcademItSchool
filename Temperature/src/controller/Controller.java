@@ -11,7 +11,7 @@ import java.util.*;
 public class Controller {
     private View view;
     private Scale scale;
-    private Map<String, Scale> myMap = createMap();
+    private Map<String, Scale> scaleMap = createMap();
 
     public Controller(View view) {
         this.view = view;
@@ -32,17 +32,17 @@ public class Controller {
     }
 
     private Scale searchScaleForConvert() {
-        return myMap.get(this.view.getInputScale());
+        return scaleMap.get(this.view.getInputScale());
     }
 
     private static Map<String, Scale> createMap() {
-        Map<String, Scale> myMap = new HashMap<>();
+        Map<String, Scale> scaleMap = new HashMap<>();
 
-        myMap.put("Celsius", new Celsius());
-        myMap.put("Kelvin", new Kelvin());
-        myMap.put("Fahrenheit", new Fahrenheit());
+        scaleMap.put("Celsius", new Celsius());
+        scaleMap.put("Kelvin", new Kelvin());
+        scaleMap.put("Fahrenheit", new Fahrenheit());
 
-        return myMap;
+        return scaleMap;
     }
 }
 
