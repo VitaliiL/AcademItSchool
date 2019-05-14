@@ -1,7 +1,7 @@
 package model;
 
 public interface Scale {
-    double getTempValue();
+    double convertToCelsius(double value);
 
-    void convertTemp(double value, String outputScale);
+    double convertFromCelsius(double value);
 }

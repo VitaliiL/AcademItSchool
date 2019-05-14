@@ -10,17 +10,20 @@ import java.util.*;
 
 public class Controller {
     private View view;
-    private Scale scale;
-    private Map<String, Scale> scaleMap = createMap();
+    private Map<String, Scale> scaleMap = createScaleMap();
 
     public Controller(View view) {
         this.view = view;
 
-        view.addJButtonConvertListener(e -> {
+        view.getConvertTemperature(e -> {
             try {
-                scale = searchScaleForConvert();
-                scale.convertTemp(this.view.getInputValue(), this.view.getOutputScale());
-                this.view.setSolutionValue(scale.getTempValue());
+                Scale inputScale = getInputScaleObject();
+                double inputValue = inputScale.convertToCelsius(this.view.getInputValue());
+
+                Scale outputScale = getOutputScaleObject();
+                double outputValue = outputScale.convertFromCelsius(inputValue);
+
+                this.view.setSolutionValue(outputValue);
             } catch (NumberFormatException ex) {
                 this.view.displayErrorMessage("Check input the temperature value.");
             } catch (IllegalArgumentException ex) {
@@ -31,11 +34,15 @@ public class Controller {
         });
     }
 
-    private Scale searchScaleForConvert() {
+    private Scale getInputScaleObject() {
         return scaleMap.get(this.view.getInputScale());
     }
 
-    private static Map<String, Scale> createMap() {
+    private Scale getOutputScaleObject() {
+        return scaleMap.get(this.view.getOutputScale());
+    }
+
+    private static Map<String, Scale> createScaleMap() {
         Map<String, Scale> scaleMap = new HashMap<>();
 
         scaleMap.put("Celsius", new Celsius());
