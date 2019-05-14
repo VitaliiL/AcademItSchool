@@ -14,7 +14,6 @@ public class MyHashTableTest {
     private MyHashTable<Integer> table2;
     private MyHashTable<Integer> table3;
 
-
     @Before
     public void createNewTableAndSetSizeViaConstructor() {
         table1 = new MyHashTable<>();

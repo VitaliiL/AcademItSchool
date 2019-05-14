@@ -64,7 +64,6 @@ public class Main {
         list1.clear();
         System.out.println("Clear list1: " + list1);
 
-        //addition check with null:
         MyArrayList<Integer> list5 = new MyArrayList<>();
         list5.add(null);
         list5.add(null);
