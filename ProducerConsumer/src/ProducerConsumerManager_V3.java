@@ -9,10 +9,10 @@ public class ProducerConsumerManager_V3 {
     private static final int THREAD_COUNT = 2;
 
     public static void main(String[] args) {
-        new ProducerConsumerManager_V3().startThread();
+        new ProducerConsumerManager_V3().startThreads();
     }
 
-    private void startThread() {
+    private void startThreads() {
         for (int i = 0; i < THREAD_COUNT; i++) {
             Thread threadProducer = new Thread(() -> {
                 try {
@@ -20,7 +20,6 @@ public class ProducerConsumerManager_V3 {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
             });
 
             threadProducer.start();
@@ -42,7 +41,7 @@ public class ProducerConsumerManager_V3 {
 
         while (true) {
             synchronized (LOCK) {
-                if (queue.size() == QUEUE_CAPACITY) {
+                while (queue.size() >= QUEUE_CAPACITY) {
                     LOCK.wait();
                 }
 
@@ -56,7 +55,7 @@ public class ProducerConsumerManager_V3 {
     private void takeValue() throws InterruptedException {
         while (true) {
             synchronized (LOCK) {
-                if (queue.size() == 0) {
+                while (queue.size() == 0) {
                     LOCK.wait();
                 }
 

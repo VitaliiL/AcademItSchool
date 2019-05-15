@@ -16,7 +16,7 @@ public class ProducerConsumerManager_V2 {
 
         threadPoolProducer.submit(() -> {
             try {
-                WorkProducerConsumer.producer();
+                WorkProducerConsumer.workProducer();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -24,7 +24,7 @@ public class ProducerConsumerManager_V2 {
 
         threadPoolConsumer.submit(() -> {
             try {
-                WorkProducerConsumer.consumer();
+                WorkProducerConsumer.workConsumer();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -40,12 +40,12 @@ class WorkProducerConsumer {
     private static final Object LOCK = new Object();
     private static final int QUEUE_CAPACITY = 5;
 
-    static void producer() throws InterruptedException {
+    static void workProducer() throws InterruptedException {
         Random random = new Random();
 
         while (true) {
             synchronized (LOCK) {
-                if (queue.size() == QUEUE_CAPACITY) {
+                while (queue.size() >= QUEUE_CAPACITY) {
                     LOCK.wait();
                 }
 
@@ -56,10 +56,10 @@ class WorkProducerConsumer {
         }
     }
 
-    static void consumer() throws InterruptedException {
+    static void workConsumer() throws InterruptedException {
         while (true) {
             synchronized (LOCK) {
-                if (queue.size() == 0) {
+                while (queue.size() == 0) {
                     LOCK.wait();
                 }
 
