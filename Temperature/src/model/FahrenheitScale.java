@@ -1,6 +1,6 @@
 package model;
 
-public class Fahrenheit implements Scale {
+public class FahrenheitScale implements Scale {
     @Override
     public double convertToCelsius(double value) {
         return (value - 32) * ((double) 5 / 9);

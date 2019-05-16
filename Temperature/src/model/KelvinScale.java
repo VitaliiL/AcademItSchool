@@ -1,6 +1,6 @@
 package model;
 
-public class Kelvin implements Scale {
+public class KelvinScale implements Scale {
     @Override
     public double convertToCelsius(double value) {
         return value + 273.15;

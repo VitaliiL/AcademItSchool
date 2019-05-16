@@ -1,12 +1,13 @@
 package controller;
 
-import model.Celsius;
-import model.Fahrenheit;
-import model.Kelvin;
+import model.CelsiusScale;
+import model.FahrenheitScale;
+import model.KelvinScale;
 import model.Scale;
 import view.View;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Controller {
     private View view;
@@ -17,11 +18,8 @@ public class Controller {
 
         view.getConvertTemperature(e -> {
             try {
-                Scale inputScale = getInputScaleObject();
-                double inputValue = inputScale.convertToCelsius(this.view.getInputValue());
-
-                Scale outputScale = getOutputScaleObject();
-                double outputValue = outputScale.convertFromCelsius(inputValue);
+                double inputValue = getInputScaleObject().convertToCelsius(this.view.getInputValue());
+                double outputValue = getOutputScaleObject().convertFromCelsius(inputValue);
 
                 this.view.setSolutionValue(outputValue);
             } catch (NumberFormatException ex) {
@@ -45,9 +43,9 @@ public class Controller {
     private static Map<String, Scale> createScaleMap() {
         Map<String, Scale> scaleMap = new HashMap<>();
 
-        scaleMap.put("Celsius", new Celsius());
-        scaleMap.put("Kelvin", new Kelvin());
-        scaleMap.put("Fahrenheit", new Fahrenheit());
+        scaleMap.put("Celsius", new CelsiusScale());
+        scaleMap.put("Kelvin", new KelvinScale());
+        scaleMap.put("Fahrenheit", new FahrenheitScale());
 
         return scaleMap;
     }
