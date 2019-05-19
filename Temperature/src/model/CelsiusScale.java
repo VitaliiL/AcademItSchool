@@ -10,4 +10,11 @@ public class CelsiusScale implements Scale {
     public double convertFromCelsius(double value) {
         return value;
     }
+
+    @Override
+    public void checkScaleValue(double value) {
+        if (value < -273.15) {
+            throw new IllegalArgumentException("Celsius can't be less -273.15.");
+        }
+    }
 }

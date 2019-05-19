@@ -10,4 +10,11 @@ public class FahrenheitScale implements Scale {
     public double convertFromCelsius(double value) {
         return value * ((double) 9 / 5) + 32;
     }
+
+    @Override
+    public void checkScaleValue(double value) {
+        if (value < -459.67) {
+            throw new IllegalArgumentException("Fahrenheit can't be less -459.67.");
+        }
+    }
 }

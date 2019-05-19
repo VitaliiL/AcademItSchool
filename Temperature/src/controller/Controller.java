@@ -18,10 +18,12 @@ public class Controller {
 
         view.getConvertTemperature(e -> {
             try {
+                getInputScaleObject().checkScaleValue(this.view.getInputValue());
                 double inputValue = getInputScaleObject().convertToCelsius(this.view.getInputValue());
                 double outputValue = getOutputScaleObject().convertFromCelsius(inputValue);
 
                 this.view.setSolutionValue(outputValue);
+                getOutputScaleObject().checkScaleValue(outputValue);
             } catch (NumberFormatException ex) {
                 this.view.displayErrorMessage("Check input the temperature value.");
             } catch (IllegalArgumentException ex) {

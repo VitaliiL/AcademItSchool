@@ -67,27 +67,23 @@ public class View {
     }
 
     private void createJRadioButtons() {
-        for (int i = 0; i < 3; i++) {
-            JRadioButton inputScaleJRadioButton = new JRadioButton(getScaleName(i));
-            JRadioButton outputScaleJRadioButton = new JRadioButton(getScaleName(i));
+        String[] scaleNameArray = {"Celsius", "Kelvin", "Fahrenheit"};
+
+        for (int i = 0; i < scaleNameArray.length; i++) {
+            JRadioButton inputScaleJRadioButton = new JRadioButton(scaleNameArray[i]);
+            JRadioButton outputScaleJRadioButton = new JRadioButton(scaleNameArray[i]);
 
             inputScaleButtonGroup.add(inputScaleJRadioButton);
             outputScaleButtonGroup.add(outputScaleJRadioButton);
 
-            inputScaleJRadioButton.setActionCommand(getScaleName(i));
-            outputScaleJRadioButton.setActionCommand(getScaleName(i));
+            inputScaleJRadioButton.setActionCommand(scaleNameArray[i]);
+            outputScaleJRadioButton.setActionCommand(scaleNameArray[i]);
 
             jFrame.add(inputScaleJRadioButton, new GridBagConstraints(0, i + 2, 1, 1, 1, 1,
                     GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
             jFrame.add(outputScaleJRadioButton, new GridBagConstraints(1, i + 2, 1, 1, 1, 1,
                     GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
         }
-    }
-
-    private String getScaleName(int index) {
-        String[] scaleName = {"Celsius", "Kelvin", "Fahrenheit"};
-
-        return scaleName[index];
     }
 
     public double getInputValue() {
