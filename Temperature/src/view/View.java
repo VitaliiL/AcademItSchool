@@ -1,5 +1,7 @@
 package view;
 
+import Common.ScaleNames;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -67,22 +69,24 @@ public class View {
     }
 
     private void createJRadioButtons() {
-        String[] scaleNameArray = {"Celsius", "Kelvin", "Fahrenheit"};
+        int gridYjButton = 0;
 
-        for (int i = 0; i < scaleNameArray.length; i++) {
-            JRadioButton inputScaleJRadioButton = new JRadioButton(scaleNameArray[i]);
-            JRadioButton outputScaleJRadioButton = new JRadioButton(scaleNameArray[i]);
+        for (ScaleNames scaleName : ScaleNames.values()) {
+            JRadioButton inputScaleJRadioButton = new JRadioButton(scaleName.getScaleName());
+            JRadioButton outputScaleJRadioButton = new JRadioButton(scaleName.getScaleName());
 
             inputScaleButtonGroup.add(inputScaleJRadioButton);
             outputScaleButtonGroup.add(outputScaleJRadioButton);
 
-            inputScaleJRadioButton.setActionCommand(scaleNameArray[i]);
-            outputScaleJRadioButton.setActionCommand(scaleNameArray[i]);
+            inputScaleJRadioButton.setActionCommand(scaleName.getScaleName());
+            outputScaleJRadioButton.setActionCommand(scaleName.getScaleName());
 
-            jFrame.add(inputScaleJRadioButton, new GridBagConstraints(0, i + 2, 1, 1, 1, 1,
+            jFrame.add(inputScaleJRadioButton, new GridBagConstraints(0, gridYjButton + 2, 1, 1, 1, 1,
                     GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
-            jFrame.add(outputScaleJRadioButton, new GridBagConstraints(1, i + 2, 1, 1, 1, 1,
+            jFrame.add(outputScaleJRadioButton, new GridBagConstraints(1, gridYjButton + 2, 1, 1, 1, 1,
                     GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
+
+            gridYjButton++;
         }
     }
 

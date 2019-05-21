@@ -1,17 +1,13 @@
 package controller;
 
-import model.CelsiusScale;
-import model.FahrenheitScale;
-import model.KelvinScale;
+import Common.ScaleNames;
 import model.Scale;
 import view.View;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 
 public class Controller {
     private View view;
-    private Map<String, Scale> scaleMap = createScaleMap();
 
     public Controller(View view) {
         this.view = view;
@@ -34,22 +30,32 @@ public class Controller {
         });
     }
 
+    /*
+    * the first variant as input scale works:
+    *
+    * */
+
     private Scale getInputScaleObject() {
-        return scaleMap.get(this.view.getInputScale());
+        return ScaleNames.valueOf(this.view.getInputScale().toUpperCase()).getScale();
     }
+
+    /*
+     * Or the second variant as input scale works:
+     *
+     * */
 
     private Scale getOutputScaleObject() {
-        return scaleMap.get(this.view.getOutputScale());
+        return Objects.requireNonNull(getScaleByName(this.view.getOutputScale())).getScale();
     }
 
-    private static Map<String, Scale> createScaleMap() {
-        Map<String, Scale> scaleMap = new HashMap<>();
+    private static ScaleNames getScaleByName(String name) {
+        for (ScaleNames scaleName : ScaleNames.values()) {
+            if (scaleName.getScaleName().equals(name)) {
+                return scaleName;
+            }
+        }
 
-        scaleMap.put("Celsius", new CelsiusScale());
-        scaleMap.put("Kelvin", new KelvinScale());
-        scaleMap.put("Fahrenheit", new FahrenheitScale());
-
-        return scaleMap;
+        return null;
     }
 }
 
