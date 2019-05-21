@@ -1,7 +1,7 @@
 package controller;
 
 import Common.ScaleNames;
-import model.Scale;
+import Common.Scale;
 import view.View;
 
 import java.util.Objects;

@@ -3,7 +3,6 @@ package Common;
 import model.CelsiusScale;
 import model.FahrenheitScale;
 import model.KelvinScale;
-import model.Scale;
 
 public enum ScaleNames {
     CELSIUS("Celsius", new CelsiusScale()),

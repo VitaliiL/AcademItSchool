@@ -1,5 +1,7 @@
 package model;
 
+import Common.Scale;
+
 public class CelsiusScale implements Scale {
     @Override
     public double convertToCelsius(double value) {

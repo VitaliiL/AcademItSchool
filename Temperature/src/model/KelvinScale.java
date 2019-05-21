@@ -1,5 +1,7 @@
 package model;
 
+import Common.Scale;
+
 public class KelvinScale implements Scale {
     @Override
     public double convertToCelsius(double value) {

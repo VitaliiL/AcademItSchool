@@ -1,4 +1,4 @@
-package model;
+package Common;
 
 public interface Scale {
     double convertToCelsius(double value);
