@@ -1,6 +1,6 @@
 package view;
 
-import Common.ScaleNames;
+import common.ScaleNames;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +13,7 @@ public class View {
     private JTextField jTextFieldResult = new JTextField(10);
     private ButtonGroup inputScaleButtonGroup = new ButtonGroup();
     private ButtonGroup outputScaleButtonGroup = new ButtonGroup();
+    private ScaleNames scaleNames;
 
     public View() {
         SwingUtilities.invokeLater(() -> {
@@ -56,7 +57,6 @@ public class View {
                 GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(5, 5, 10, 5), 0, 0));
     }
 
-
     private void createJTextField() {
         jTextFieldResult.setEditable(false);
         jTextFieldResult.setHorizontalAlignment(JTextField.CENTER);
@@ -69,25 +69,27 @@ public class View {
     }
 
     private void createJRadioButtons() {
-        int gridYjButton = 0;
+        String[] scaleName = scaleNames.getScaleNames();
 
-        for (ScaleNames scaleName : ScaleNames.values()) {
-            JRadioButton inputScaleJRadioButton = new JRadioButton(scaleName.getScaleName());
-            JRadioButton outputScaleJRadioButton = new JRadioButton(scaleName.getScaleName());
+        for (int i = 0; i < scaleName.length; i++) {
+            JRadioButton inputScaleJRadioButton = new JRadioButton(scaleName[i]);
+            JRadioButton outputScaleJRadioButton = new JRadioButton(scaleName[i]);
 
             inputScaleButtonGroup.add(inputScaleJRadioButton);
             outputScaleButtonGroup.add(outputScaleJRadioButton);
 
-            inputScaleJRadioButton.setActionCommand(scaleName.getScaleName());
-            outputScaleJRadioButton.setActionCommand(scaleName.getScaleName());
+            inputScaleJRadioButton.setActionCommand(scaleName[i]);
+            outputScaleJRadioButton.setActionCommand(scaleName[i]);
 
-            jFrame.add(inputScaleJRadioButton, new GridBagConstraints(0, gridYjButton + 2, 1, 1, 1, 1,
+            jFrame.add(inputScaleJRadioButton, new GridBagConstraints(0, i + 2, 1, 1, 1, 1,
                     GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
-            jFrame.add(outputScaleJRadioButton, new GridBagConstraints(1, gridYjButton + 2, 1, 1, 1, 1,
+            jFrame.add(outputScaleJRadioButton, new GridBagConstraints(1, i + 2, 1, 1, 1, 1,
                     GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, new Insets(10, 5, 5, 5), 0, 0));
-
-            gridYjButton++;
         }
+    }
+
+    public void setScaleNames(ScaleNames scaleNames) {
+        this.scaleNames = scaleNames;
     }
 
     public double getInputValue() {
@@ -103,11 +105,19 @@ public class View {
     }
 
     public String getInputScale() {
-        return inputScaleButtonGroup.getSelection().getActionCommand();
+        if (inputScaleButtonGroup.getSelection() == null) {
+            throw new IllegalArgumentException("Input scale isn't selected!");
+        } else {
+            return inputScaleButtonGroup.getSelection().getActionCommand();
+        }
     }
 
     public String getOutputScale() {
-        return outputScaleButtonGroup.getSelection().getActionCommand();
+        if (outputScaleButtonGroup.getSelection() == null) {
+            throw new IllegalArgumentException("Output scale isn't selected!");
+        } else {
+            return outputScaleButtonGroup.getSelection().getActionCommand();
+        }
     }
 
     public void displayErrorMessage(String errorMessage) {

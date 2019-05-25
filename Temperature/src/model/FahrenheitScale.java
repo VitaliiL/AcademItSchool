@@ -1,6 +1,6 @@
 package model;
 
-import Common.Scale;
+import common.Scale;
 
 public class FahrenheitScale implements Scale {
     @Override
@@ -18,5 +18,10 @@ public class FahrenheitScale implements Scale {
         if (value < -459.67) {
             throw new IllegalArgumentException("Fahrenheit can't be less -459.67.");
         }
+    }
+
+    @Override
+    public String getScaleName() {
+        return "Fahrenheit";
     }
 }

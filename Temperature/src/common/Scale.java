@@ -1,4 +1,4 @@
-package Common;
+package common;
 
 public interface Scale {
     double convertToCelsius(double value);
@@ -6,4 +6,6 @@ public interface Scale {
     double convertFromCelsius(double value);
 
     void checkScaleValue(double value);
+
+    String getScaleName();
 }

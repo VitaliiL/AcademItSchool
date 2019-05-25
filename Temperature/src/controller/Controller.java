@@ -1,61 +1,59 @@
 package controller;
 
-import Common.ScaleNames;
-import Common.Scale;
+import common.Scale;
+import common.ScaleNames;
+import model.CelsiusScale;
+import model.FahrenheitScale;
+import model.KelvinScale;
 import view.View;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-public class Controller {
+public class Controller implements ScaleNames {
     private View view;
+    private ArrayList<Scale> scaleList = new ArrayList<>(Arrays.asList(new CelsiusScale(), new KelvinScale(), new FahrenheitScale()));
 
     public Controller(View view) {
         this.view = view;
 
         view.getConvertTemperature(e -> {
             try {
-                getInputScaleObject().checkScaleValue(this.view.getInputValue());
-                double inputValue = getInputScaleObject().convertToCelsius(this.view.getInputValue());
-                double outputValue = getOutputScaleObject().convertFromCelsius(inputValue);
+                double inputScaleValue = this.view.getInputValue();
+                String inputScaleName = this.view.getInputScale();
+                String outputScaleName = this.view.getOutputScale();
 
-                this.view.setSolutionValue(outputValue);
-                getOutputScaleObject().checkScaleValue(outputValue);
+                Scale inputScale = getScaleObject(inputScaleName);
+                Scale outputScale = getScaleObject(outputScaleName);
+
+                inputScale.checkScaleValue(inputScaleValue);
+                double inputValueToCelsius = inputScale.convertToCelsius(inputScaleValue);
+                double outputValueFromCelsius = outputScale.convertFromCelsius(inputValueToCelsius);
+
+                this.view.setSolutionValue(outputValueFromCelsius);
             } catch (NumberFormatException ex) {
                 this.view.displayErrorMessage("Check input the temperature value.");
             } catch (IllegalArgumentException ex) {
                 this.view.displayErrorMessage(ex.getMessage());
-            } catch (NullPointerException ex) {
-                this.view.displayErrorMessage("Scale isn't selected.");
             }
         });
     }
 
-    /*
-    * the first variant as input scale works:
-    *
-    * */
+    private Scale getScaleObject(String name) {
+        Scale scaleObject = null;
 
-    private Scale getInputScaleObject() {
-        return ScaleNames.valueOf(this.view.getInputScale().toUpperCase()).getScale();
-    }
-
-    /*
-     * Or the second variant as input scale works:
-     *
-     * */
-
-    private Scale getOutputScaleObject() {
-        return Objects.requireNonNull(getScaleByName(this.view.getOutputScale())).getScale();
-    }
-
-    private static ScaleNames getScaleByName(String name) {
-        for (ScaleNames scaleName : ScaleNames.values()) {
-            if (scaleName.getScaleName().equals(name)) {
-                return scaleName;
+        for (Scale scale : scaleList) {
+            if (scale.getScaleName().equals(name)) {
+                scaleObject = scale;
             }
         }
 
-        return null;
+        return scaleObject;
+    }
+
+    @Override
+    public String[] getScaleNames() {
+        return scaleList.stream().map(Scale::getScaleName).toArray(String[]::new);
     }
 }
 

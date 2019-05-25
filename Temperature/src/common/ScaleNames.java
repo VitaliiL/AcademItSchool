@@ -1,5 +1,5 @@
 package common;
 
-public interface ScaleNames {
+public interface ConvertListToName {
     String[] getScaleNames();
 }
